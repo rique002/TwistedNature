@@ -1,4 +1,0 @@
-repository "Twisted Nature@N4ZGULX@cloud"
-  path "/"
-    br "/main"
-    co "/main"
