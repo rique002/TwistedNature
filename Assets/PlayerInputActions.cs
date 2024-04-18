@@ -35,6 +35,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Swap"",
+                    ""type"": ""Button"",
+                    ""id"": ""86276bef-cdec-40cc-a24c-82c3e99a4f0b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -114,6 +123,65 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""675e2412-b02e-47e5-a5c5-685afa2ea193"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Swap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Camera"",
+            ""id"": ""eba8f575-0447-4e68-bbe0-6d58113f2f0d"",
+            ""actions"": [
+                {
+                    ""name"": ""RotateRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""7bdc853e-c45e-41c5-95c3-891b9424f692"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RotateLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""0420cf63-7cfe-4e6f-9d6a-d8ad5132250d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""ee33db94-d12d-4f80-8ce9-530ac05a66b0"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f49ed0a3-7389-410a-bec0-223d3ac8d5e0"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -123,6 +191,11 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+        m_Player_Swap = m_Player.FindAction("Swap", throwIfNotFound: true);
+        // Camera
+        m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
+        m_Camera_RotateRight = m_Camera.FindAction("RotateRight", throwIfNotFound: true);
+        m_Camera_RotateLeft = m_Camera.FindAction("RotateLeft", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -185,11 +258,13 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
+    private readonly InputAction m_Player_Swap;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
         public PlayerActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
+        public InputAction @Swap => m_Wrapper.m_Player_Swap;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -202,6 +277,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @Swap.started += instance.OnSwap;
+            @Swap.performed += instance.OnSwap;
+            @Swap.canceled += instance.OnSwap;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -209,6 +287,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @Swap.started -= instance.OnSwap;
+            @Swap.performed -= instance.OnSwap;
+            @Swap.canceled -= instance.OnSwap;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -226,8 +307,68 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Camera
+    private readonly InputActionMap m_Camera;
+    private List<ICameraActions> m_CameraActionsCallbackInterfaces = new List<ICameraActions>();
+    private readonly InputAction m_Camera_RotateRight;
+    private readonly InputAction m_Camera_RotateLeft;
+    public struct CameraActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public CameraActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @RotateRight => m_Wrapper.m_Camera_RotateRight;
+        public InputAction @RotateLeft => m_Wrapper.m_Camera_RotateLeft;
+        public InputActionMap Get() { return m_Wrapper.m_Camera; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CameraActions set) { return set.Get(); }
+        public void AddCallbacks(ICameraActions instance)
+        {
+            if (instance == null || m_Wrapper.m_CameraActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CameraActionsCallbackInterfaces.Add(instance);
+            @RotateRight.started += instance.OnRotateRight;
+            @RotateRight.performed += instance.OnRotateRight;
+            @RotateRight.canceled += instance.OnRotateRight;
+            @RotateLeft.started += instance.OnRotateLeft;
+            @RotateLeft.performed += instance.OnRotateLeft;
+            @RotateLeft.canceled += instance.OnRotateLeft;
+        }
+
+        private void UnregisterCallbacks(ICameraActions instance)
+        {
+            @RotateRight.started -= instance.OnRotateRight;
+            @RotateRight.performed -= instance.OnRotateRight;
+            @RotateRight.canceled -= instance.OnRotateRight;
+            @RotateLeft.started -= instance.OnRotateLeft;
+            @RotateLeft.performed -= instance.OnRotateLeft;
+            @RotateLeft.canceled -= instance.OnRotateLeft;
+        }
+
+        public void RemoveCallbacks(ICameraActions instance)
+        {
+            if (m_Wrapper.m_CameraActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ICameraActions instance)
+        {
+            foreach (var item in m_Wrapper.m_CameraActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_CameraActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public CameraActions @Camera => new CameraActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnSwap(InputAction.CallbackContext context);
+    }
+    public interface ICameraActions
+    {
+        void OnRotateRight(InputAction.CallbackContext context);
+        void OnRotateLeft(InputAction.CallbackContext context);
     }
 }
