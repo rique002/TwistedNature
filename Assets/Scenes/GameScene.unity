@@ -427,7 +427,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameInput: {fileID: 992735291}
-  healthPoints: 10
+  maxHealthPoints: 30
   attackDamage: 10
   moveSpeed: 10
   rotationSpeed: 10
@@ -716,7 +716,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameInput: {fileID: 992735291}
-  healthPoints: 10
+  maxHealthPoints: 30
   attackDamage: 10
   moveSpeed: 10
   rotationSpeed: 10
