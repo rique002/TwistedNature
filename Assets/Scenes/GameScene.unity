@@ -898,9 +898,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab11a60719a30914c9a493c77e678c73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playableCharactersGameObjects:
-  - {fileID: 1211453837}
-  - {fileID: 304993306}
+  playableCharacters:
+  - {fileID: 1211453838}
+  - {fileID: 304993308}
   gameInput: {fileID: 992735291}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

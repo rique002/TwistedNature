@@ -1,28 +1,36 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace PlayableCharacters {
-    public abstract class PlayableCharacter<T> : MonoBehaviour, IPlayableCharacter where T : PlayableCharacter<T> {
+    public abstract class PlayableCharacter : MonoBehaviour {
         [SerializeField] protected GameInput gameInput;
         [SerializeField] protected int healthPoints;
         [SerializeField] protected float attackDamage;
         [SerializeField] protected float moveSpeed;
         [SerializeField] protected float rotationSpeed;
+        
+        private static Dictionary<Type, PlayableCharacter> instances = new Dictionary<Type, PlayableCharacter>();
 
         protected enum State { 
             Idle,
             Dead,
         }
 
-        public static T Instance { get; private set; }
+        protected State state;
+
         public event EventHandler OnPlayableCharacterKilled;
 
         private void Awake() {
-            if (Instance != null) {
-                Debug.LogError("There is more than one Instance of " + GetType());
+            Type type = GetType();
+
+            if (instances.ContainsKey(type)) {
+                Debug.LogError("There is more than one instance of " + type);
+            } else {
+                instances.Add(type, this);
             }
 
-            Instance = (T) this;
+            state = State.Idle;
         }
 
         private void Update() {
@@ -45,6 +53,7 @@ namespace PlayableCharacters {
 
             if (healthPoints < 0) {
                 healthPoints = 0;
+                state = State.Dead;
 
                 OnPlayableCharacterKilled?.Invoke(this, EventArgs.Empty);
             }
@@ -66,6 +75,10 @@ namespace PlayableCharacters {
 
         public void SetForward(Vector3 forward) {
             transform.forward = forward;
+        }
+
+        public bool IsDead() {
+            return state == State.Dead;
         }
 
         protected abstract void HandleInteractions();

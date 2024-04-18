@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 public class SmoothCameraFollow : MonoBehaviour {
-    [SerializeField] private GameManager gameManager;
+    [SerializeField] private PlayerManager gameManager;
     [SerializeField] private Transform target;
     [SerializeField] private float smoothTime;
 
@@ -22,7 +22,7 @@ public class SmoothCameraFollow : MonoBehaviour {
         transform.position = Vector3.SmoothDamp(transform.position, followPosition, ref currentVelocity, smoothTime);
     }
 
-    private void GameManager_OnActivePlayerChaged(object sender, GameManager.OnActivePlayerChangedEventArgs e) {
+    private void GameManager_OnActivePlayerChaged(object sender, PlayerManager.OnActivePlayerChangedEventArgs e) {
         target = e.activeCharacter.GetTransform();
     }
 }
