@@ -92,7 +92,7 @@ namespace PlayableCharacters {
                 AddStatusEffect(StatusEffectType.Fire, 10.0f);
             }
 
-            Debug.Log("Current Health: " + healthPoints);
+            //Debug.Log("Current Health: " + healthPoints);
         }
 
         private void HandleStatusEffects() {
