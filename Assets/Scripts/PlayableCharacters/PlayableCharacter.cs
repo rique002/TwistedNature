@@ -52,6 +52,11 @@ namespace PlayableCharacters {
         protected float healthPoints;
 
         public event EventHandler OnPlayableCharacterKilled;
+        public event EventHandler<OnPlayableCharacterHealthChangeArgs> OnPlayableCharacterHealthChange;
+        public class OnPlayableCharacterHealthChangeArgs : EventArgs
+        {
+            public float healthPercentage;
+        }
 
         private void Awake() {
             Type type = GetType();
@@ -136,6 +141,10 @@ namespace PlayableCharacters {
 
         public void ReceiveDamage(float damage) {
             healthPoints -= damage;
+            OnPlayableCharacterHealthChange?.Invoke(this, new OnPlayableCharacterHealthChangeArgs
+            {
+                healthPercentage = GetHealthPercentage()
+            });
 
             if (healthPoints < 0.0f) {
                 healthPoints = 0.0f;
@@ -149,6 +158,11 @@ namespace PlayableCharacters {
             if (gameObject != null) {
                 gameObject.SetActive(active);
             }
+        }
+
+        public float GetHealthPercentage()
+        {
+            return healthPoints / maxHealthPoints;
         }
 
         public Transform GetTransform() {

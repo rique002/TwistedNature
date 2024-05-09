@@ -1,10 +1,12 @@
 using UnityEngine;
 using System;
 using PlayableCharacters;
+using UI;
 
 public class PlayerManager : MonoBehaviour {
     [SerializeField] private PlayableCharacter[] playableCharacters;
     [SerializeField] private GameInput gameInput;
+    [SerializeField] private HealthBar healthBar;
 
     private PlayableCharacter activeCharacter;
     private int indexActiveCharacter;
@@ -16,7 +18,9 @@ public class PlayerManager : MonoBehaviour {
     }
 
     private void Start() {
-        foreach (PlayableCharacter playableCharacter in playableCharacters) {
+        foreach (PlayableCharacter playableCharacter in playableCharacters)
+        {
+            playableCharacter.OnPlayableCharacterHealthChange += PlayerManager_OnPlayableCharacterHealthChange;
             playableCharacter.OnPlayableCharacterKilled += PlayerManager_OnPlayableCharacterKilled;
             playableCharacter.SetActive(false);
         }
@@ -27,6 +31,10 @@ public class PlayerManager : MonoBehaviour {
         activeCharacter.SetActive(true);
 
         gameInput.OnSwapAction += GameInput_OnSwapAction;
+    }
+    
+    private void PlayerManager_OnPlayableCharacterHealthChange(object sender, PlayableCharacter.OnPlayableCharacterHealthChangeArgs e) {
+        healthBar.SetValue(e.healthPercentage);
     }
 
     private void PlayerManager_OnPlayableCharacterKilled(object sender, EventArgs e) {
@@ -54,6 +62,8 @@ public class PlayerManager : MonoBehaviour {
         activeCharacter.SetPosition(currentTransform.position);
         activeCharacter.SetForward(currentTransform.forward);
         activeCharacter.SetActive(true);
+        
+        healthBar.SetValue(activeCharacter.GetHealthPercentage());
 
         OnActivePlayerChaged?.Invoke(this, new OnActivePlayerChangedEventArgs {
             activeCharacter = activeCharacter,
