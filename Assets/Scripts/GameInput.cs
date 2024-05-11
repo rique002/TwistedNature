@@ -5,16 +5,22 @@ public class GameInput : MonoBehaviour {
     private PlayerInputActions playerInputActions;
 
     public event EventHandler OnSwapAction;
+    public event EventHandler OnAttackAction;
 
     private void Awake() {
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
 
         playerInputActions.Player.Swap.performed += Swap_performed;
+        playerInputActions.Player.Attack.performed += Attack_performed;
     }
 
     private void Swap_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
         OnSwapAction?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void Attack_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
+        OnAttackAction?.Invoke(this, EventArgs.Empty);
     }
 
     public Vector2 GetMovementVectorNormalized() {

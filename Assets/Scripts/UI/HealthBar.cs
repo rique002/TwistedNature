@@ -11,5 +11,10 @@ namespace UI
         {
             slider.value = value;
         }
+
+        public void SetName(string name)
+        {
+            slider.gameObject.transform.Find("EnemyName").GetComponent<Text>().text = name;
+        }
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -9,10 +10,19 @@ public class Enemy : MonoBehaviour
     public List<Transform> waypoints; 
     private int waypointIndex = 0;
     private Boolean playerDetected = false;
+    
+    private Boolean closeToPlayer = false;
     public Transform player;
     public float fieldOfView = 90f; 
     public float viewDistance = 10.0f;
     public LayerMask viewMask; 
+    [SerializeField] private HealthBar healthBar;
+    [SerializeField] protected float maxHealthPoints;
+    protected float healthPoints;
+    public string enemyName;
+
+
+
 
     void Start()
     {
@@ -22,6 +32,8 @@ public class Enemy : MonoBehaviour
         {
             transform.position = waypoints[waypointIndex].position;
         }
+        healthPoints = maxHealthPoints;
+
     }
 
     void Update(){
@@ -36,7 +48,20 @@ public class Enemy : MonoBehaviour
                 break;
             }
         }
-    }   
+    }
+    closeToPlayer = Vector3.Distance(player.position, transform.position) < 5.0f;
+    if (closeToPlayer)
+    {
+        healthBar.SetName(enemyName);
+        healthBar.gameObject.SetActive(true);
+        healthBar.SetValue(healthPoints / maxHealthPoints);
+
+    }
+    else
+    {
+        healthBar.gameObject.SetActive(false);
+    }
+
     playerDetected = PlayerInFieldOfView();
         if(!playerDetected){
             MoveEnemy();
@@ -90,4 +115,11 @@ public class Enemy : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, speed * Time.deltaTime);
         }
     }
+    public void ReceiveDamage(float damage) {
+            healthPoints -= damage;
+            Debug.Log(healthPoints);
+            if (healthPoints < 0.0f) {
+                healthPoints = 0.0f;
+            }
+        }
 }

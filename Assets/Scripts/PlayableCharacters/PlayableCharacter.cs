@@ -6,9 +6,13 @@ namespace PlayableCharacters {
     public abstract class PlayableCharacter : MonoBehaviour {
         [SerializeField] protected GameInput gameInput;
         [SerializeField] protected float maxHealthPoints;
-        [SerializeField] protected float attackDamage;
+        [SerializeField] public float attackDamage;
+        [SerializeField] public float attackRange;
         [SerializeField] protected float moveSpeed;
         [SerializeField] protected float rotationSpeed;
+
+        [SerializeField] public ParticleSystem attackParticles;
+        [SerializeField] public float attackCooldown;
 
         private static readonly Dictionary<Type, PlayableCharacter> instances = new();
         private readonly List<StatusEffect> statusEffects = new();
@@ -168,6 +172,8 @@ namespace PlayableCharacters {
         public Transform GetTransform() {
             return transform;
         }
+
+
 
         public void SetPosition(Vector3 position) {
             transform.position = position;
