@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
     public LayerMask viewMask; 
     [SerializeField] private HealthBar healthBar;
     [SerializeField] protected float maxHealthPoints;
+    [SerializeField] private Canvas canvas;
     protected float healthPoints;
     public string enemyName;
 
@@ -49,13 +50,19 @@ public class Enemy : MonoBehaviour
             }
         }
     }
+
     closeToPlayer = Vector3.Distance(player.position, transform.position) < 5.0f;
+    
+
     if (closeToPlayer)
     {
         healthBar.SetName(enemyName);
         healthBar.gameObject.SetActive(true);
         healthBar.SetValue(healthPoints / maxHealthPoints);
-
+        Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
+        screenPosition.y += 200;
+        healthBar.transform.position = screenPosition;
+   
     }
     else
     {
@@ -120,6 +127,11 @@ public class Enemy : MonoBehaviour
             Debug.Log(healthPoints);
             if (healthPoints < 0.0f) {
                 healthPoints = 0.0f;
+                Die();
             }
         }
+    public void Die() {
+        Destroy(gameObject);
+        healthBar.gameObject.SetActive(false);
+    }
 }

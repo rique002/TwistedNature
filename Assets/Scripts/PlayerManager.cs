@@ -10,6 +10,9 @@ public class PlayerManager : MonoBehaviour {
     [SerializeField] private GameInput gameInput;
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private Image cooldownImage;
+
+    [SerializeField] private float dashForce;
+
     private ParticleSystem attackParticles;
 
     private PlayableCharacter activeCharacter;
@@ -40,6 +43,7 @@ public class PlayerManager : MonoBehaviour {
 
         gameInput.OnSwapAction += GameInput_OnSwapAction;
         gameInput.OnAttackAction += GameInput_OnAttackAction;
+        gameInput.OnDashAction += GameInput_OnDashAction;
     }
     
     private void PlayerManager_OnPlayableCharacterHealthChange(object sender, PlayableCharacter.OnPlayableCharacterHealthChangeArgs e) {
@@ -99,9 +103,17 @@ public class PlayerManager : MonoBehaviour {
         attackParticles.transform.position = activeCharacter.transform.position;
         attackParticles.Play();
         StartCoroutine(StartAttackCooldown());
-
-
     }
+
+    private void GameInput_OnDashAction(object sender, EventArgs e){
+        Rigidbody rb = activeCharacter.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            Vector3 dashDirection = activeCharacter.transform.forward;
+            rb.AddForce(dashDirection * dashForce, ForceMode.Impulse);
+        }
+    }
+
     void OnDrawGizmos()
 {
     // Draw a red wire sphere representing the attack range
