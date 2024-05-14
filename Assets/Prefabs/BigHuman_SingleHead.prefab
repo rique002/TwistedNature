@@ -9,9 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5648437705163397282}
-  m_Layer: 0
+  - component: {fileID: 3145506271325844883}
+  - component: {fileID: 8578462013226212665}
+  m_Layer: 6
   m_Name: BigHuman_SingleHead
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,6 +34,60 @@ Transform:
   - {fileID: 236730945310534544}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3145506271325844883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7074586672617017747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bcdda6a640be4442ab8b859e53c193b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoints:
+  - {fileID: 5648437705163397282}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  healthBar: {fileID: 0}
+  maxHealthPoints: 100
+  speed: 1
+  player: {fileID: 0}
+  fieldOfView: 90
+  viewDistance: 10
+  viewMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  enemyName: HUMAN
+--- !u!136 &8578462013226212665
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7074586672617017747}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.2
+  m_Height: 1.5
+  m_Direction: 1
+  m_Center: {x: 0.3, y: 0.7, z: 0}
 --- !u!1001 &343312572053638267
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -93,7 +149,12 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6f372a3deef4df746bd4dd9f26944121,
         type: 3}
       propertyPath: m_Name
-      value: BigHuman_SingleHead_Visual
+      value: BigHuman_Visual
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6f372a3deef4df746bd4dd9f26944121,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
