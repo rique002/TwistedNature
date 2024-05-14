@@ -1,52 +1,64 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Image = UnityEngine.UI.Image;
 
-namespace PlayableCharacters {
-    public abstract class PlayableCharacter : MonoBehaviour {
+namespace PlayableCharacters
+{
+    public abstract class PlayableCharacter : MonoBehaviour
+    {
         [SerializeField] protected GameInput gameInput;
         [SerializeField] protected float maxHealthPoints;
         [SerializeField] public float attackDamage;
         [SerializeField] public float attackRange;
         [SerializeField] protected float moveSpeed;
         [SerializeField] protected float rotationSpeed;
-
-        [SerializeField] public ParticleSystem attackParticles;
-        [SerializeField] public float attackCooldown;
+        [SerializeField] private Image cooldownImage;
+        [SerializeField] private ParticleSystem attackParticles;
+        [SerializeField] private float attackCooldown;
+        private bool isAttackOnCooldown = false;
 
         private static readonly Dictionary<Type, PlayableCharacter> instances = new();
         private readonly List<StatusEffect> statusEffects = new();
 
-        protected enum State {
+        protected enum State
+        {
             Idle,
             Dead,
         }
 
-        public enum StatusEffectType {
+        public enum StatusEffectType
+        {
             Haste,
             Poison,
             Fire,
             // Other status effects...
         }
 
-        public struct StatusEffect {
+        public struct StatusEffect
+        {
             public StatusEffectType Type { get; private set; }
             public float Duration { get; private set; }
 
-            public StatusEffect(StatusEffectType type, float duration = 0.0f) {
+            public StatusEffect(StatusEffectType type, float duration = 0.0f)
+            {
                 Type = type;
                 Duration = duration;
             }
 
-            public void SetDuration(float duration) {
+            public void SetDuration(float duration)
+            {
                 Duration = duration;
             }
 
-            public void UpdateDuration(float elapsedTime) {
+            public void UpdateDuration(float elapsedTime)
+            {
                 Duration -= elapsedTime;
                 Debug.Log("Poison Duration: " + Duration);
 
-                if (Duration <= 0.0f) {
+                if (Duration <= 0.0f)
+                {
                     Duration = 0.0f;
                 }
             }
@@ -62,12 +74,16 @@ namespace PlayableCharacters {
             public float healthPercentage;
         }
 
-        private void Awake() {
+        private void Awake()
+        {
             Type type = GetType();
 
-            if (instances.ContainsKey(type)) {
+            if (instances.ContainsKey(type))
+            {
                 Debug.LogError("There is more than one instance of " + type);
-            } else {
+            }
+            else
+            {
                 instances.Add(type, this);
             }
 
@@ -75,13 +91,21 @@ namespace PlayableCharacters {
             healthPoints = maxHealthPoints;
         }
 
-        private void Update() {
+        private void Start()
+        {
+            attackParticles.Stop();
+            gameInput.OnAttackAction += GameInput_OnAttackAction;
+        }
+
+        private void Update()
+        {
             HandleMovement();
             HandleInteractions();
             HandleStatusEffects();
         }
 
-        private void HandleMovement() {
+        private void HandleMovement()
+        {
             Vector2 inputVector = gameInput.GetMovementVectorNormalized();
             Vector3 moveDirection = new Vector3(inputVector.x, 0f, inputVector.y);
 
@@ -91,31 +115,38 @@ namespace PlayableCharacters {
             transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * rotationSpeed);
         }
 
-        private void HandleInteractions() { 
+        private void HandleInteractions()
+        {
             // Test For Applying Status Effects
-            if (Input.GetKey(KeyCode.DownArrow)) {
+            if (Input.GetKey(KeyCode.DownArrow))
+            {
                 AddStatusEffect(StatusEffectType.Poison, 5.0f);
             }
 
-            if (Input.GetKey(KeyCode.UpArrow)) {
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
                 AddStatusEffect(StatusEffectType.Fire, 10.0f);
             }
 
             //Debug.Log("Current Health: " + healthPoints);
         }
 
-        private void HandleStatusEffects() {
-            for (int i = statusEffects.Count - 1; i >= 0; i--) {
+        private void HandleStatusEffects()
+        {
+            for (int i = statusEffects.Count - 1; i >= 0; i--)
+            {
                 StatusEffect statusEffect = statusEffects[i];
                 statusEffect.UpdateDuration(Time.deltaTime);
                 statusEffects[i] = statusEffect;
 
-                if (statusEffect.Duration == 0.0f) {
+                if (statusEffect.Duration == 0.0f)
+                {
                     statusEffects.RemoveAt(i);
                     continue;
                 }
 
-                switch (statusEffect.Type) {
+                switch (statusEffect.Type)
+                {
                     case StatusEffectType.Poison:
                         float poisonDamagePerSecond = 1.0f;
                         ReceiveDamage(poisonDamagePerSecond * Time.deltaTime);
@@ -130,9 +161,12 @@ namespace PlayableCharacters {
             }
         }
 
-        public void AddStatusEffect(StatusEffectType statusEffectType, float duration = 0.0f) {
-            foreach (StatusEffect statusEffect in statusEffects) {
-                if (statusEffect.Type == statusEffectType) {
+        public void AddStatusEffect(StatusEffectType statusEffectType, float duration = 0.0f)
+        {
+            foreach (StatusEffect statusEffect in statusEffects)
+            {
+                if (statusEffect.Type == statusEffectType)
+                {
                     // If yes, set its duration
                     statusEffect.SetDuration(duration);
                     return;
@@ -143,14 +177,16 @@ namespace PlayableCharacters {
             statusEffects.Add(new StatusEffect(statusEffectType, duration));
         }
 
-        public void ReceiveDamage(float damage) {
+        public void ReceiveDamage(float damage)
+        {
             healthPoints -= damage;
             OnPlayableCharacterHealthChange?.Invoke(this, new OnPlayableCharacterHealthChangeArgs
             {
                 healthPercentage = GetHealthPercentage()
             });
 
-            if (healthPoints < 0.0f) {
+            if (healthPoints < 0.0f)
+            {
                 healthPoints = 0.0f;
                 state = State.Dead;
 
@@ -158,8 +194,51 @@ namespace PlayableCharacters {
             }
         }
 
-        public void SetActive(bool active) {
-            if (gameObject != null) {
+        private void GameInput_OnAttackAction(object sender, EventArgs e)
+        {
+            if (isAttackOnCooldown)
+            {
+                return;
+            }
+            Collider[] hitEnemies = Physics.OverlapSphere(transform.position, attackRange, LayerMask.GetMask("Enemy"));
+            foreach (Collider enemy in hitEnemies)
+            {
+                Enemy enemyScript = enemy.GetComponent<Enemy>();
+                if (enemyScript != null)
+                {
+                    enemyScript.ReceiveDamage(attackDamage);
+                }
+            }
+            attackParticles.transform.position = transform.position;
+            attackParticles.Play();
+            StartCoroutine(StartAttackCooldown());
+        }
+
+        void OnDrawGizmos()
+        {
+            Gizmos.DrawWireSphere(transform.position, attackRange);
+        }
+
+        private IEnumerator StartAttackCooldown()
+        {
+            isAttackOnCooldown = true;
+            float cooldownRemaining = attackCooldown;
+
+            while (cooldownRemaining > 0)
+            {
+                cooldownRemaining -= Time.deltaTime;
+                cooldownImage.fillAmount = cooldownRemaining / attackCooldown;
+                yield return null;
+            }
+
+            cooldownImage.fillAmount = 0;
+            isAttackOnCooldown = false;
+        }
+
+        public void SetActive(bool active)
+        {
+            if (gameObject != null)
+            {
                 gameObject.SetActive(active);
             }
         }
@@ -169,21 +248,25 @@ namespace PlayableCharacters {
             return healthPoints / maxHealthPoints;
         }
 
-        public Transform GetTransform() {
+        public Transform GetTransform()
+        {
             return transform;
         }
 
 
 
-        public void SetPosition(Vector3 position) {
+        public void SetPosition(Vector3 position)
+        {
             transform.position = position;
         }
 
-        public void SetForward(Vector3 forward) {
+        public void SetForward(Vector3 forward)
+        {
             transform.forward = forward;
         }
 
-        public bool IsDead() {
+        public bool IsDead()
+        {
             return state == State.Dead;
         }
     }
