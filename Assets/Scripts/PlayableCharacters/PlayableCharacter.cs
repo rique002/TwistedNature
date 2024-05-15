@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Image = UnityEngine.UI.Image;
+using UnityEngine.UI;
+using Interactables;
+using UI;
 
 namespace PlayableCharacters
 {
@@ -12,11 +15,21 @@ namespace PlayableCharacters
         [SerializeField] protected float maxHealthPoints;
         [SerializeField] public float attackDamage;
         [SerializeField] public float attackRange;
+
+        [SerializeField] protected float interactionDistance = 1.0f;
         [SerializeField] protected float moveSpeed;
         [SerializeField] protected float rotationSpeed;
         [SerializeField] private Image cooldownImage;
         [SerializeField] private ParticleSystem attackParticles;
         [SerializeField] private float attackCooldown;
+
+        [SerializeField] private float dashForce;
+        [SerializeField] private float dashDuration = 0.2f;
+        [SerializeField] private Text interactTextUI;
+
+        [SerializeField] private InteractionBar interactionBar;
+
+        private bool isDashing = false;
         private bool isAttackOnCooldown = false;
 
         private static readonly Dictionary<Type, PlayableCharacter> instances = new();
@@ -95,6 +108,8 @@ namespace PlayableCharacters
         {
             attackParticles.Stop();
             gameInput.OnAttackAction += GameInput_OnAttackAction;
+            gameInput.OnDashAction += GameInput_OnDashAction;
+            gameInput.OnInteractAction += GameInput_OnInteractAction;
         }
 
         private void Update()
@@ -128,7 +143,15 @@ namespace PlayableCharacters
                 AddStatusEffect(StatusEffectType.Fire, 10.0f);
             }
 
-            //Debug.Log("Current Health: " + healthPoints);
+            if(Physics.OverlapSphere(transform.position, interactionDistance, LayerMask.GetMask("Interactable")).Length > 0)
+            {
+                interactTextUI.gameObject.SetActive(true);
+            }
+            else
+            {
+                interactionBar.SetActive(false);
+                interactTextUI.gameObject.SetActive(false);
+            }
         }
 
         private void HandleStatusEffects()
@@ -214,6 +237,52 @@ namespace PlayableCharacters
             StartCoroutine(StartAttackCooldown());
         }
 
+        private void GameInput_OnInteractAction(object sender, EventArgs e)
+        {    
+            Collider[] hitInteractables = Physics.OverlapSphere(transform.position,interactionDistance, LayerMask.GetMask("Interactable"));
+            if(hitInteractables.Length > 0){
+                print("Interacting with " + hitInteractables[0].name);
+                Interactable interactable = hitInteractables[0].GetComponent<Interactable>();
+                if(interactable != null){
+                    interactable.Interact();
+                }
+            }
+        }
+
+
+        private void GameInput_OnDashAction(object sender, EventArgs e)
+        {
+            if (!isDashing)
+            {
+                StartCoroutine(Dash());
+            }
+        }
+
+        private IEnumerator Dash()
+        {
+            isDashing = true;
+
+            Rigidbody rb = GetComponent<Rigidbody>();
+
+            if (rb != null)
+            {
+                Vector3 dashDirection = transform.forward;
+                dashDirection.y = 0;
+                rb.AddForce(dashDirection * dashForce, ForceMode.VelocityChange);
+            }
+
+            yield return new WaitForSeconds(dashDuration);
+
+            if (rb != null)
+            {
+
+                 float yVelocity = rb.velocity.y;
+                rb.velocity = new Vector3(0, yVelocity, 0);
+                }
+
+            isDashing = false;
+
+        }
         void OnDrawGizmos()
         {
             Gizmos.DrawWireSphere(transform.position, attackRange);

@@ -2,15 +2,19 @@ using UnityEngine;
 using System;
 using PlayableCharacters;
 using UI;
+using System.Collections.Generic;
 
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] private PlayableCharacter[] playableCharacters;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private HealthBar healthBar;
+    [SerializeField] private Inventory inventory;
 
     private PlayableCharacter activeCharacter;
     private int indexActiveCharacter;
+
+    private List<int> keys = new List<int>();
 
     public event EventHandler OnPlayerGameOver;
     public event EventHandler<OnActivePlayerChangedEventArgs> OnActivePlayerChaged;
