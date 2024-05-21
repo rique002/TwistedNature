@@ -6,6 +6,9 @@ public class GameInput : MonoBehaviour {
 
     public event EventHandler OnSwapAction;
     public event EventHandler OnAttackAction;
+    public event EventHandler OnDashAction;
+
+    public event EventHandler OnInteractAction;
 
     private void Awake() {
         playerInputActions = new PlayerInputActions();
@@ -13,6 +16,9 @@ public class GameInput : MonoBehaviour {
 
         playerInputActions.Player.Swap.performed += Swap_performed;
         playerInputActions.Player.Attack.performed += Attack_performed;
+        playerInputActions.Player.Dash.performed += Dash_performed;
+        playerInputActions.Player.Interact.performed += Interact_performed;
+
     }
 
     private void Swap_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
@@ -23,6 +29,13 @@ public class GameInput : MonoBehaviour {
         OnAttackAction?.Invoke(this, EventArgs.Empty);
     }
 
+    private void Dash_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
+        OnDashAction?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
+        OnInteractAction?.Invoke(this, EventArgs.Empty);
+    }
     public Vector2 GetMovementVectorNormalized() {
         Vector2 inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
 

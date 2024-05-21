@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private List<Transform> waypoints;
     [SerializeField] private HealthBar healthBar;
     [SerializeField] protected float maxHealthPoints;
+    [SerializeField] private Canvas canvas;
     [SerializeField] private float speed = 1.0f;
     [SerializeField] private Transform player;
     [SerializeField] private float fieldOfView = 90f;
@@ -53,12 +54,18 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
+
         closeToPlayer = Vector3.Distance(player.position, transform.position) < 5.0f;
+
+
         if (closeToPlayer)
         {
             healthBar.SetName(enemyName);
             healthBar.gameObject.SetActive(true);
             healthBar.SetValue(healthPoints / maxHealthPoints);
+            Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
+            screenPosition.y += 200;
+            healthBar.transform.position = screenPosition;
 
         }
         else
@@ -162,5 +169,9 @@ public class Enemy : MonoBehaviour
         {
             healthPoints = 0.0f;
         }
+        public void Die()
+        {
+            Destroy(gameObject);
+            healthBar.gameObject.SetActive(false);
+        }
     }
-}
