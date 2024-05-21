@@ -23,7 +23,7 @@ namespace Interactables
             }
         }
 
-        private void OpenDoor()
+        public void OpenDoor()
         {
             if (!isOpen)
             {

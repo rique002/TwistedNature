@@ -169,9 +169,5 @@ public class Enemy : MonoBehaviour
         {
             healthPoints = 0.0f;
         }
-        public void Die()
-        {
-            Destroy(gameObject);
-            healthBar.gameObject.SetActive(false);
-        }
+    }
     }
