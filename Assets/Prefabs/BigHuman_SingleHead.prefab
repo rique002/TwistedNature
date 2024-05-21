@@ -65,6 +65,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   enemyName: HUMAN
+  attackParticles: {fileID: 0}
+  attackCooldown: 5
+  attackDamage: 1
 --- !u!136 &8578462013226212665
 CapsuleCollider:
   m_ObjectHideFlags: 0

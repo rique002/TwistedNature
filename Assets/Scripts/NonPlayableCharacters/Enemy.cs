@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UI;
+using UnityEngine.Playables;
+using PlayableCharacters;
 
 public class Enemy : MonoBehaviour
 {
@@ -16,6 +18,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float viewDistance = 10.0f;
     [SerializeField] private LayerMask viewMask;
     [SerializeField] private string enemyName;
+    [SerializeField] private ParticleSystem attackParticles;
+    [SerializeField] private float attackCooldown;
+    [SerializeField] private float attackDamage;
+    private bool isAttackOnCooldown = false;
 
     private int waypointIndex = 0;
     private bool playerDetected = false;
@@ -49,23 +55,23 @@ public class Enemy : MonoBehaviour
             }
         }
 
-    closeToPlayer = Vector3.Distance(player.position, transform.position) < 5.0f;
-    
+        closeToPlayer = Vector3.Distance(player.position, transform.position) < 5.0f;
 
-    if (closeToPlayer)
-    {
-        healthBar.SetName(enemyName);
-        healthBar.gameObject.SetActive(true);
-        healthBar.SetValue(healthPoints / maxHealthPoints);
-        Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
-        screenPosition.y += 200;
-        healthBar.transform.position = screenPosition;
-   
-    }
-    else
-    {
-        healthBar.gameObject.SetActive(false);
-    }
+
+        if (closeToPlayer)
+        {
+            healthBar.SetName(enemyName);
+            healthBar.gameObject.SetActive(true);
+            healthBar.SetValue(healthPoints / maxHealthPoints);
+            Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
+            screenPosition.y += 200;
+            healthBar.transform.position = screenPosition;
+
+        }
+        else
+        {
+            healthBar.gameObject.SetActive(false);
+        }
 
         playerDetected = PlayerInFieldOfView();
         if (!playerDetected)
@@ -75,6 +81,7 @@ public class Enemy : MonoBehaviour
         else
         {
             ChasePlayer();
+            Attack();
         }
     }
 
@@ -126,16 +133,45 @@ public class Enemy : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, speed * Time.deltaTime);
         }
     }
-    public void ReceiveDamage(float damage) {
-            healthPoints -= damage;
-            Debug.Log(healthPoints);
-            if (healthPoints < 0.0f) {
-                healthPoints = 0.0f;
-                Die();
-            }
+
+    private void Attack()
+    {
+        if (isAttackOnCooldown) return;
+
+        float distance = Vector3.Distance(player.position, transform.position);
+        if (distance < 2.0f)
+        {
+            player.GetComponent<PlayableCharacter>().ReceiveDamage(attackDamage);
         }
-    public void Die() {
-        Destroy(gameObject);
-        healthBar.gameObject.SetActive(false);
+
+        StartCoroutine(StartAttackCooldown());
     }
-}
+
+    private IEnumerator StartAttackCooldown()
+    {
+        isAttackOnCooldown = true;
+        float cooldownRemaining = attackCooldown;
+
+        while (cooldownRemaining > 0)
+        {
+            cooldownRemaining -= Time.deltaTime;
+            yield return null;
+        }
+
+        isAttackOnCooldown = false;
+    }
+
+    public void ReceiveDamage(float damage)
+    {
+        healthPoints -= damage;
+        Debug.Log(healthPoints);
+        if (healthPoints < 0.0f)
+        {
+            healthPoints = 0.0f;
+        }
+        public void Die()
+        {
+            Destroy(gameObject);
+            healthBar.gameObject.SetActive(false);
+        }
+    }
