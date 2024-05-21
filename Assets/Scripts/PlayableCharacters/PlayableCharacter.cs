@@ -25,11 +25,15 @@ namespace PlayableCharacters
 
         [SerializeField] private float dashForce;
         [SerializeField] private float dashDuration = 0.2f;
+
+        [SerializeField] private float jumpForce;
         [SerializeField] private Text interactTextUI;
 
         [SerializeField] private InteractionBar interactionBar;
 
         private bool isDashing = false;
+
+        private bool isJumping = false;
         private bool isAttackOnCooldown = false;
 
         private static readonly Dictionary<Type, PlayableCharacter> instances = new();
@@ -110,6 +114,7 @@ namespace PlayableCharacters
             gameInput.OnAttackAction += GameInput_OnAttackAction;
             gameInput.OnDashAction += GameInput_OnDashAction;
             gameInput.OnInteractAction += GameInput_OnInteractAction;
+            gameInput.OnJumpAction += GameInput_OnJumpAction;
         }
 
         private void Update()
@@ -247,6 +252,30 @@ namespace PlayableCharacters
                     interactable.Interact();
                 }
             }
+        }
+
+        private void GameInput_OnJumpAction(object sender, EventArgs e)
+        {
+            if (!isJumping)
+            {
+                StartCoroutine(Jump());
+            }
+        }
+
+        private IEnumerator Jump()
+        {
+            isJumping = true;
+
+            Rigidbody rb = GetComponent<Rigidbody>();
+
+            if (rb != null)
+            {
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            }
+
+            yield return new WaitForSeconds(0.5f);
+
+            isJumping = false;
         }
 
 

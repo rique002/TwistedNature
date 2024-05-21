@@ -8,6 +8,8 @@ public class GameInput : MonoBehaviour {
     public event EventHandler OnAttackAction;
     public event EventHandler OnDashAction;
 
+    public event EventHandler OnJumpAction;
+
     public event EventHandler OnInteractAction;
 
     private void Awake() {
@@ -17,6 +19,7 @@ public class GameInput : MonoBehaviour {
         playerInputActions.Player.Swap.performed += Swap_performed;
         playerInputActions.Player.Attack.performed += Attack_performed;
         playerInputActions.Player.Dash.performed += Dash_performed;
+        playerInputActions.Player.Jump.performed += Jump_performed;
         playerInputActions.Player.Interact.performed += Interact_performed;
 
     }
@@ -31,6 +34,10 @@ public class GameInput : MonoBehaviour {
 
     private void Dash_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
         OnDashAction?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void Jump_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
+        OnJumpAction?.Invoke(this, EventArgs.Empty);
     }
 
     private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
