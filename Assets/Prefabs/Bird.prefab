@@ -78,11 +78,17 @@ MonoBehaviour:
   maxHealthPoints: 0
   attackDamage: 0
   attackRange: 0
+  interactionDistance: 1
   moveSpeed: 0
   rotationSpeed: 0
   cooldownImage: {fileID: 0}
   attackParticles: {fileID: 0}
   attackCooldown: 0
+  dashForce: 0
+  dashDuration: 0.2
+  jumpForce: 0
+  interactTextUI: {fileID: 0}
+  interactionBar: {fileID: 0}
 --- !u!65 &9158112931384618886
 BoxCollider:
   m_ObjectHideFlags: 0
