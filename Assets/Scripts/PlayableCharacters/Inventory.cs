@@ -4,14 +4,18 @@ using UI;
 
 namespace PlayableCharacters
 {
+    [CreateAssetMenu]
     public class Inventory : MonoBehaviour
     {
 
         public static Inventory Instance { get; private set; }
 
+        [Header("Items")]
+        public List<ItemData> items = new();
+
         [SerializeField] private KeyInventory KeyInventory;
 
-        private List<int> keys = new List<int>(); 
+        private List<int> keys = new List<int>();
 
         private void Awake()
         {
@@ -35,12 +39,22 @@ namespace PlayableCharacters
 
         public bool HasKey(int keyId)
         {
-            if(keys.Contains(keyId))
+            if (keys.Contains(keyId))
             {
                 KeyInventory.SetKey1(false);
                 return true;
             }
             return false;
+        }
+
+        public void AddItem(ItemData itemToAdd)
+        {
+            items.Add(itemToAdd);
+        }
+
+        public void RemoveItem(ItemData itemToRemove)
+        {
+            items.Remove(itemToRemove);
         }
     }
 }
