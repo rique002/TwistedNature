@@ -31,6 +31,9 @@ namespace PlayableCharacters
 
         [SerializeField] private InteractionBar interactionBar;
 
+        [SerializeField] public GameObject projectilePrefab;
+        [SerializeField] public float projectileSpeed = 10f;
+
         private bool isDashing = false;
 
         private bool isJumping = false;
@@ -247,8 +250,23 @@ namespace PlayableCharacters
                     enemyScript.ReceiveDamage(attackDamage);
                 }
             }
+
+            float offset = 1.2f; // Adjust this value as needed
+            int numberOfProjectiles = 5;
+            float spreadAngle = 45f; // Adjust this value as needed
+
+            for (int i = 0; i < numberOfProjectiles; i++)
+            {
+                float projectileDirectionAngle = -spreadAngle / 2 + spreadAngle / (numberOfProjectiles - 1) * i;
+                Quaternion projectileRotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y + projectileDirectionAngle, 0);
+                Vector3 spawnPosition = transform.position + transform.forward * offset;
+                spawnPosition.y += 1f;
+                GameObject projectile = Instantiate(projectilePrefab, spawnPosition, projectileRotation);
+            }
+
             attackParticles.transform.position = transform.position;
             attackParticles.Play();
+            isAttackOnCooldown = true;
             StartCoroutine(StartAttackCooldown());
         }
 

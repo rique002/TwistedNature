@@ -55,7 +55,7 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        closeToPlayer = Vector3.Distance(player.position, transform.position) < 5.0f;
+        closeToPlayer = Vector3.Distance(player.position, transform.position) < 15.0f;
 
 
         if (closeToPlayer)
