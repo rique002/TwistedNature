@@ -1,37 +1,54 @@
 using UnityEngine;
 using System;
 using PlayableCharacters;
+using UI;
+using System.Collections.Generic;
 
-public class PlayerManager : MonoBehaviour {
+public class PlayerManager : MonoBehaviour
+{
     [SerializeField] private PlayableCharacter[] playableCharacters;
     [SerializeField] private GameInput gameInput;
+    [SerializeField] private HealthBar healthBar;
+    [SerializeField] private Inventory inventory;
 
     private PlayableCharacter activeCharacter;
     private int indexActiveCharacter;
 
+    private List<int> keys = new List<int>();
+
     public event EventHandler OnPlayerGameOver;
     public event EventHandler<OnActivePlayerChangedEventArgs> OnActivePlayerChaged;
-    public class OnActivePlayerChangedEventArgs : EventArgs {
+    public class OnActivePlayerChangedEventArgs : EventArgs
+    {
         public PlayableCharacter activeCharacter;
     }
 
-    private void Start() {
-        foreach (PlayableCharacter playableCharacter in playableCharacters) {
+
+    private void Start()
+    {
+        foreach (PlayableCharacter playableCharacter in playableCharacters)
+        {
+            playableCharacter.OnPlayableCharacterHealthChange += PlayerManager_OnPlayableCharacterHealthChange;
             playableCharacter.OnPlayableCharacterKilled += PlayerManager_OnPlayableCharacterKilled;
             playableCharacter.SetActive(false);
         }
-
+        gameInput.OnSwapAction += GameInput_OnSwapAction;
         activeCharacter = playableCharacters[0];
-
         indexActiveCharacter = 0;
         activeCharacter.SetActive(true);
-
-        gameInput.OnSwapAction += GameInput_OnSwapAction;
     }
 
-    private void PlayerManager_OnPlayableCharacterKilled(object sender, EventArgs e) {
-        foreach (PlayableCharacter playableCharacter in playableCharacters) {
-            if (!playableCharacter.IsDead()) {
+    private void PlayerManager_OnPlayableCharacterHealthChange(object sender, PlayableCharacter.OnPlayableCharacterHealthChangeArgs e)
+    {
+        healthBar.SetValue(e.healthPercentage);
+    }
+
+    private void PlayerManager_OnPlayableCharacterKilled(object sender, EventArgs e)
+    {
+        foreach (PlayableCharacter playableCharacter in playableCharacters)
+        {
+            if (!playableCharacter.IsDead())
+            {
                 // Swap Character
                 GameInput_OnSwapAction(this, EventArgs.Empty);
                 return;
@@ -42,11 +59,13 @@ public class PlayerManager : MonoBehaviour {
         OnPlayerGameOver?.Invoke(this, EventArgs.Empty);
     }
 
-    private void GameInput_OnSwapAction(object sender, EventArgs e) {
+    private void GameInput_OnSwapAction(object sender, EventArgs e)
+    {
         Transform currentTransform = activeCharacter.GetTransform();
         activeCharacter.SetActive(false);
 
-        do {
+        do
+        {
             indexActiveCharacter = (indexActiveCharacter + 1) % playableCharacters.Length;
         } while (playableCharacters[indexActiveCharacter].IsDead());
 
@@ -55,9 +74,11 @@ public class PlayerManager : MonoBehaviour {
         activeCharacter.SetForward(currentTransform.forward);
         activeCharacter.SetActive(true);
 
-        OnActivePlayerChaged?.Invoke(this, new OnActivePlayerChangedEventArgs {
+        healthBar.SetValue(activeCharacter.GetHealthPercentage());
+
+        OnActivePlayerChaged?.Invoke(this, new OnActivePlayerChangedEventArgs
+        {
             activeCharacter = activeCharacter,
         });
     }
-
 }
