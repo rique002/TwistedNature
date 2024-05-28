@@ -1,7 +1,8 @@
 ﻿using System;
 using UnityEngine;
 
-public class GameInput : MonoBehaviour {
+public class GameInput : MonoBehaviour
+{
     private PlayerInputActions playerInputActions;
 
     public event EventHandler OnSwapAction;
@@ -12,7 +13,8 @@ public class GameInput : MonoBehaviour {
 
     public event EventHandler OnInteractAction;
 
-    private void Awake() {
+    private void Awake()
+    {
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
 
@@ -24,26 +26,32 @@ public class GameInput : MonoBehaviour {
 
     }
 
-    private void Swap_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
+    private void Swap_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
         OnSwapAction?.Invoke(this, EventArgs.Empty);
     }
 
-    private void Attack_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
+    private void Attack_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
         OnAttackAction?.Invoke(this, EventArgs.Empty);
     }
 
-    private void Dash_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
+    private void Dash_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
         OnDashAction?.Invoke(this, EventArgs.Empty);
     }
 
-    private void Jump_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
+    private void Jump_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
         OnJumpAction?.Invoke(this, EventArgs.Empty);
     }
 
-    private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
+    private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
         OnInteractAction?.Invoke(this, EventArgs.Empty);
     }
-    public Vector2 GetMovementVectorNormalized() {
+    public Vector2 GetMovementVectorNormalized()
+    {
         Vector2 inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
 
         return inputVector.normalized;

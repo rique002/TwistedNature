@@ -11,25 +11,22 @@ namespace PlayableCharacters
 {
     public abstract class PlayableCharacter : MonoBehaviour
     {
-        [SerializeField] protected GameInput gameInput;
-        [SerializeField] protected float maxHealthPoints;
         [SerializeField] public float attackDamage;
         [SerializeField] public float attackRange;
-
+        [SerializeField] protected GameInput gameInput;
+        [SerializeField] protected float maxHealthPoints;
         [SerializeField] protected float interactionDistance = 1.0f;
         [SerializeField] protected float moveSpeed;
         [SerializeField] protected float rotationSpeed;
         [SerializeField] private Image cooldownImage;
+        [SerializeField] private Rigidbody playerBody;
         [SerializeField] private ParticleSystem attackParticles;
         [SerializeField] private float attackCooldown;
-        [SerializeField] GameObject model;
-
+        [SerializeField] private GameObject model;
         [SerializeField] private float dashForce;
         [SerializeField] private float dashDuration = 0.2f;
-
         [SerializeField] private float jumpForce;
         [SerializeField] private Text interactTextUI;
-
         [SerializeField] private InteractionBar interactionBar;
 
         private bool isDashing = false;
@@ -120,7 +117,7 @@ namespace PlayableCharacters
             gameInput.OnJumpAction += GameInput_OnJumpAction;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             HandleMovement();
             HandleInteractions();
@@ -131,21 +128,18 @@ namespace PlayableCharacters
         private void HandleMovement()
         {
             Vector2 inputVector = gameInput.GetMovementVectorNormalized();
-            Vector3 moveDirection = new Vector3(inputVector.x, 0f, inputVector.y);
+            playerBody.velocity = new Vector3(inputVector.x * moveSpeed, playerBody.velocity.y, inputVector.y * moveSpeed);
 
-            float moveDistance = moveSpeed * Time.deltaTime;
-
-            if (moveDirection.magnitude > 0)
+            if (inputVector != Vector2.zero)
             {
                 state = State.Running;
+                Quaternion targetRotation = Quaternion.LookRotation(new Vector3(inputVector.x, 0, inputVector.y));
+                playerBody.MoveRotation(Quaternion.Slerp(playerBody.rotation, targetRotation, Time.deltaTime * rotationSpeed));
             }
             else
             {
                 state = State.Idle;
             }
-
-            transform.position += moveDirection * moveDistance;
-            transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * rotationSpeed);
         }
 
         private void HandleInteractions()
@@ -293,13 +287,7 @@ namespace PlayableCharacters
         {
             isJumping = true;
 
-            Rigidbody rb = GetComponent<Rigidbody>();
-
-            if (rb != null)
-            {
-                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            }
-
+            playerBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             yield return new WaitForSeconds(0.5f);
 
             isJumping = false;
@@ -318,27 +306,18 @@ namespace PlayableCharacters
         {
             isDashing = true;
 
-            Rigidbody rb = GetComponent<Rigidbody>();
-
-            if (rb != null)
-            {
-                Vector3 dashDirection = transform.forward;
-                dashDirection.y = 0;
-                rb.AddForce(dashDirection * dashForce, ForceMode.VelocityChange);
-            }
-
+            Vector3 dashDirection = transform.forward;
+            dashDirection.y = 0;
+            playerBody.AddForce(dashDirection * dashForce, ForceMode.VelocityChange);
             yield return new WaitForSeconds(dashDuration);
 
-            if (rb != null)
-            {
-
-                float yVelocity = rb.velocity.y;
-                rb.velocity = new Vector3(0, yVelocity, 0);
-            }
+            float yVelocity = playerBody.velocity.y;
+            playerBody.velocity = new Vector3(0, yVelocity, 0);
 
             isDashing = false;
 
         }
+
         void OnDrawGizmos()
         {
             Gizmos.DrawWireSphere(transform.position, attackRange);
