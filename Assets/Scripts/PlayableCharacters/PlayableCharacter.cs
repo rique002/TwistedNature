@@ -22,6 +22,7 @@ namespace PlayableCharacters
         [SerializeField] private Image cooldownImage;
         [SerializeField] private ParticleSystem attackParticles;
         [SerializeField] private float attackCooldown;
+        [SerializeField] GameObject model;
 
         [SerializeField] private float dashForce;
         [SerializeField] private float dashDuration = 0.2f;
@@ -32,16 +33,17 @@ namespace PlayableCharacters
         [SerializeField] private InteractionBar interactionBar;
 
         private bool isDashing = false;
-
         private bool isJumping = false;
         private bool isAttackOnCooldown = false;
-
         private static readonly Dictionary<Type, PlayableCharacter> instances = new();
         private readonly List<StatusEffect> statusEffects = new();
+
+        protected Animator animator;
 
         protected enum State
         {
             Idle,
+            Running,
             Dead,
         }
 
@@ -106,6 +108,7 @@ namespace PlayableCharacters
 
             state = State.Idle;
             healthPoints = maxHealthPoints;
+            animator = model.GetComponent<Animator>();
         }
 
         private void Start()
@@ -121,6 +124,7 @@ namespace PlayableCharacters
         {
             HandleMovement();
             HandleInteractions();
+            HandleAnimations();
             HandleStatusEffects();
         }
 
@@ -130,6 +134,15 @@ namespace PlayableCharacters
             Vector3 moveDirection = new Vector3(inputVector.x, 0f, inputVector.y);
 
             float moveDistance = moveSpeed * Time.deltaTime;
+
+            if (moveDirection.magnitude > 0)
+            {
+                state = State.Running;
+            }
+            else
+            {
+                state = State.Idle;
+            }
 
             transform.position += moveDirection * moveDistance;
             transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * rotationSpeed);
@@ -148,7 +161,7 @@ namespace PlayableCharacters
                 AddStatusEffect(StatusEffectType.Fire, 10.0f);
             }
 
-            if(Physics.OverlapSphere(transform.position, interactionDistance, LayerMask.GetMask("Interactable")).Length > 0)
+            if (Physics.OverlapSphere(transform.position, interactionDistance, LayerMask.GetMask("Interactable")).Length > 0)
             {
                 interactTextUI.gameObject.SetActive(true);
             }
@@ -158,7 +171,7 @@ namespace PlayableCharacters
                 interactTextUI.gameObject.SetActive(false);
             }
             // if stepping on pressure plate, activate it
-            if (Physics.OverlapSphere(transform.position,0.2f, LayerMask.GetMask("PressurePlate")).Length > 0)
+            if (Physics.OverlapSphere(transform.position, 0.2f, LayerMask.GetMask("PressurePlate")).Length > 0)
             {
                 PressurePlate pressurePlate = Physics.OverlapSphere(transform.position, 0.2f, LayerMask.GetMask("PressurePlate"))[0].GetComponent<PressurePlate>();
                 if (pressurePlate != null)
@@ -168,6 +181,8 @@ namespace PlayableCharacters
                 }
             }
         }
+
+        public abstract void HandleAnimations();
 
         private void HandleStatusEffects()
         {
@@ -253,12 +268,14 @@ namespace PlayableCharacters
         }
 
         private void GameInput_OnInteractAction(object sender, EventArgs e)
-        {    
-            Collider[] hitInteractables = Physics.OverlapSphere(transform.position,interactionDistance, LayerMask.GetMask("Interactable"));
-            if(hitInteractables.Length > 0){
+        {
+            Collider[] hitInteractables = Physics.OverlapSphere(transform.position, interactionDistance, LayerMask.GetMask("Interactable"));
+            if (hitInteractables.Length > 0)
+            {
                 print("Interacting with " + hitInteractables[0].name);
                 Interactable interactable = hitInteractables[0].GetComponent<Interactable>();
-                if(interactable != null){
+                if (interactable != null)
+                {
                     interactable.Interact();
                 }
             }
@@ -315,9 +332,9 @@ namespace PlayableCharacters
             if (rb != null)
             {
 
-                 float yVelocity = rb.velocity.y;
+                float yVelocity = rb.velocity.y;
                 rb.velocity = new Vector3(0, yVelocity, 0);
-                }
+            }
 
             isDashing = false;
 
