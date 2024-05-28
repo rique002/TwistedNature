@@ -1,12 +1,21 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace PlayableCharacters
 {
     public class Hedgehog : PlayableCharacter
     {
-        public override void HandleAnimations()
+        [SerializeField] private FistCollider rightFistCollider;
+        [SerializeField] private FistCollider leftFistCollider;
+
+        protected override void InitWeapon()
         {
-            Debug.Log("Hedgehog HandleAnimations");
+            rightFistCollider.SetDamage(attackDamage);
+            leftFistCollider.SetDamage(attackDamage);
+        }
+
+        protected override void HandleAnimations()
+        {
             if (state == State.Idle)
             {
                 animator.SetBool("Running", false);
@@ -15,6 +24,19 @@ namespace PlayableCharacters
             {
                 animator.SetBool("Running", true);
             }
+        }
+
+        protected override void HandleAttack()
+        {
+            rightFistCollider.StartAttack();
+            leftFistCollider.StartAttack();
+            animator.SetTrigger("Attack");
+        }
+
+        public void EndAttack()
+        {
+            rightFistCollider.EndAttack();
+            leftFistCollider.EndAttack();
         }
     }
 }

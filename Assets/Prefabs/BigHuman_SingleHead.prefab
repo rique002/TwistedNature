@@ -57,6 +57,7 @@ MonoBehaviour:
   - {fileID: 0}
   healthBar: {fileID: 0}
   maxHealthPoints: 100
+  canvas: {fileID: 0}
   speed: 1
   player: {fileID: 0}
   fieldOfView: 90

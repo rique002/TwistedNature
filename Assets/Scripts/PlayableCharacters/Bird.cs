@@ -5,9 +5,19 @@ namespace PlayableCharacters
 {
     public class Bird : PlayableCharacter
     {
-        public override void HandleAnimations()
+        protected override void InitWeapon()
         {
-            Debug.Log("Bird HandleAnimations");
+            throw new NotImplementedException();
+        }
+
+        protected override void HandleAnimations()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void HandleAttack()
+        {
+            throw new NotImplementedException();
         }
     }
 }

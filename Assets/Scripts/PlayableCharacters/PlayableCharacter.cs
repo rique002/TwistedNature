@@ -18,22 +18,22 @@ namespace PlayableCharacters
         [SerializeField] protected float interactionDistance = 1.0f;
         [SerializeField] protected float moveSpeed;
         [SerializeField] protected float rotationSpeed;
-        [SerializeField] private Image cooldownImage;
-        [SerializeField] private Rigidbody playerBody;
-        [SerializeField] private ParticleSystem attackParticles;
-        [SerializeField] private float attackCooldown;
-        [SerializeField] private GameObject model;
-        [SerializeField] private float dashForce;
-        [SerializeField] private float dashDuration = 0.2f;
-        [SerializeField] private float jumpForce;
-        [SerializeField] private Text interactTextUI;
-        [SerializeField] private InteractionBar interactionBar;
+        [SerializeField] protected Image cooldownImage;
+        [SerializeField] protected Rigidbody playerBody;
+        [SerializeField] protected ParticleSystem attackParticles;
+        [SerializeField] protected float attackCooldown;
+        [SerializeField] protected GameObject model;
+        [SerializeField] protected float dashForce;
+        [SerializeField] protected float dashDuration = 0.2f;
+        [SerializeField] protected float jumpForce;
+        [SerializeField] protected Text interactTextUI;
+        [SerializeField] protected InteractionBar interactionBar;
 
-        private bool isDashing = false;
-        private bool isJumping = false;
-        private bool isAttackOnCooldown = false;
-        private static readonly Dictionary<Type, PlayableCharacter> instances = new();
-        private readonly List<StatusEffect> statusEffects = new();
+        protected bool isDashing = false;
+        protected bool isJumping = false;
+        protected bool isAttackOnCooldown = false;
+        protected static readonly Dictionary<Type, PlayableCharacter> instances = new();
+        protected readonly List<StatusEffect> statusEffects = new();
 
         protected Animator animator;
 
@@ -85,10 +85,15 @@ namespace PlayableCharacters
 
         public event EventHandler OnPlayableCharacterKilled;
         public event EventHandler<OnPlayableCharacterHealthChangeArgs> OnPlayableCharacterHealthChange;
+
         public class OnPlayableCharacterHealthChangeArgs : EventArgs
         {
             public float healthPercentage;
         }
+
+        protected abstract void InitWeapon();
+        protected abstract void HandleAnimations();
+        protected abstract void HandleAttack();
 
         private void Awake()
         {
@@ -110,6 +115,7 @@ namespace PlayableCharacters
 
         private void Start()
         {
+            InitWeapon();
             attackParticles.Stop();
             gameInput.OnAttackAction += GameInput_OnAttackAction;
             gameInput.OnDashAction += GameInput_OnDashAction;
@@ -176,8 +182,6 @@ namespace PlayableCharacters
             }
         }
 
-        public abstract void HandleAnimations();
-
         private void HandleStatusEffects()
         {
             for (int i = statusEffects.Count - 1; i >= 0; i--)
@@ -243,22 +247,7 @@ namespace PlayableCharacters
 
         private void GameInput_OnAttackAction(object sender, EventArgs e)
         {
-            if (isAttackOnCooldown)
-            {
-                return;
-            }
-            Collider[] hitEnemies = Physics.OverlapSphere(transform.position, attackRange, LayerMask.GetMask("Enemy"));
-            foreach (Collider enemy in hitEnemies)
-            {
-                Enemy enemyScript = enemy.GetComponent<Enemy>();
-                if (enemyScript != null)
-                {
-                    enemyScript.ReceiveDamage(attackDamage);
-                }
-            }
-            attackParticles.transform.position = transform.position;
-            attackParticles.Play();
-            StartCoroutine(StartAttackCooldown());
+            HandleAttack();
         }
 
         private void GameInput_OnInteractAction(object sender, EventArgs e)
@@ -275,7 +264,7 @@ namespace PlayableCharacters
             }
         }
 
-        private void GameInput_OnJumpAction(object sender, EventArgs e)
+        protected void GameInput_OnJumpAction(object sender, EventArgs e)
         {
             if (!isJumping)
             {

@@ -164,10 +164,9 @@ public class Enemy : MonoBehaviour
     public void ReceiveDamage(float damage)
     {
         healthPoints -= damage;
-        Debug.Log(healthPoints);
         if (healthPoints < 0.0f)
         {
             healthPoints = 0.0f;
         }
     }
-    }
+}

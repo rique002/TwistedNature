@@ -32,6 +32,7 @@ public class PlayerManager : MonoBehaviour
             playableCharacter.OnPlayableCharacterKilled += PlayerManager_OnPlayableCharacterKilled;
             playableCharacter.SetActive(false);
         }
+
         gameInput.OnSwapAction += GameInput_OnSwapAction;
         activeCharacter = playableCharacters[0];
         indexActiveCharacter = 0;
