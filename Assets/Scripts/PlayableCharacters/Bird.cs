@@ -7,7 +7,7 @@ namespace PlayableCharacters
     {
         [SerializeField] PlayerWeaponCollider nozzleCollider;
 
-        protected override void InitWeapon()
+        protected override void Init()
         {
             nozzleCollider.SetDamage(attackDamage);
         }

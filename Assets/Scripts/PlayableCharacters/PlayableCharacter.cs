@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Image = UnityEngine.UI.Image;
@@ -11,8 +10,8 @@ namespace PlayableCharacters
 {
     public abstract class PlayableCharacter : MonoBehaviour
     {
-        [SerializeField] public float attackDamage;
-        [SerializeField] public float attackRange;
+        [SerializeField] protected float attackDamage;
+        [SerializeField] protected float attackRange;
         [SerializeField] protected GameInput gameInput;
         [SerializeField] protected float maxHealthPoints;
         [SerializeField] protected float interactionDistance = 1.0f;
@@ -29,13 +28,19 @@ namespace PlayableCharacters
         [SerializeField] protected Text interactTextUI;
         [SerializeField] protected InteractionBar interactionBar;
 
-        protected bool isDashing = false;
-        protected bool isJumping = false;
+        protected State state;
+        protected float healthPoints;
         protected bool isAttackOnCooldown = false;
         protected static readonly Dictionary<Type, PlayableCharacter> instances = new();
         protected readonly List<StatusEffect> statusEffects = new();
-
         protected Animator animator;
+
+        public event EventHandler OnPlayableCharacterKilled;
+        public event EventHandler<OnPlayableCharacterHealthChangeArgs> OnPlayableCharacterHealthChange;
+        public class OnPlayableCharacterHealthChangeArgs : EventArgs
+        {
+            public float healthPercentage;
+        }
 
         protected enum State
         {
@@ -80,18 +85,7 @@ namespace PlayableCharacters
             }
         }
 
-        protected State state;
-        protected float healthPoints;
-
-        public event EventHandler OnPlayableCharacterKilled;
-        public event EventHandler<OnPlayableCharacterHealthChangeArgs> OnPlayableCharacterHealthChange;
-
-        public class OnPlayableCharacterHealthChangeArgs : EventArgs
-        {
-            public float healthPercentage;
-        }
-
-        protected abstract void InitWeapon();
+        protected abstract void Init();
         protected abstract void HandleAnimations();
         protected abstract void HandleAttack();
 
@@ -115,12 +109,9 @@ namespace PlayableCharacters
 
         private void Start()
         {
-            InitWeapon();
-            attackParticles.Stop();
+            Init();
             gameInput.OnAttackAction += GameInput_OnAttackAction;
-            gameInput.OnDashAction += GameInput_OnDashAction;
             gameInput.OnInteractAction += GameInput_OnInteractAction;
-            gameInput.OnJumpAction += GameInput_OnJumpAction;
         }
 
         private void FixedUpdate()
@@ -264,69 +255,26 @@ namespace PlayableCharacters
             }
         }
 
-        protected void GameInput_OnJumpAction(object sender, EventArgs e)
-        {
-            if (!isJumping)
-            {
-                StartCoroutine(Jump());
-            }
-        }
-
-        private IEnumerator Jump()
-        {
-            isJumping = true;
-
-            playerBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            yield return new WaitForSeconds(0.5f);
-
-            isJumping = false;
-        }
-
-
-        private void GameInput_OnDashAction(object sender, EventArgs e)
-        {
-            if (!isDashing)
-            {
-                StartCoroutine(Dash());
-            }
-        }
-
-        private IEnumerator Dash()
-        {
-            isDashing = true;
-
-            Vector3 dashDirection = transform.forward;
-            dashDirection.y = 0;
-            playerBody.AddForce(dashDirection * dashForce, ForceMode.VelocityChange);
-            yield return new WaitForSeconds(dashDuration);
-
-            float yVelocity = playerBody.velocity.y;
-            playerBody.velocity = new Vector3(0, yVelocity, 0);
-
-            isDashing = false;
-
-        }
-
         void OnDrawGizmos()
         {
             Gizmos.DrawWireSphere(transform.position, attackRange);
         }
 
-        private IEnumerator StartAttackCooldown()
-        {
-            isAttackOnCooldown = true;
-            float cooldownRemaining = attackCooldown;
+        // private IEnumerator StartAttackCooldown()
+        // {
+        //     isAttackOnCooldown = true;
+        //     float cooldownRemaining = attackCooldown;
 
-            while (cooldownRemaining > 0)
-            {
-                cooldownRemaining -= Time.deltaTime;
-                cooldownImage.fillAmount = cooldownRemaining / attackCooldown;
-                yield return null;
-            }
+        //     while (cooldownRemaining > 0)
+        //     {
+        //         cooldownRemaining -= Time.deltaTime;
+        //         cooldownImage.fillAmount = cooldownRemaining / attackCooldown;
+        //         yield return null;
+        //     }
 
-            cooldownImage.fillAmount = 0;
-            isAttackOnCooldown = false;
-        }
+        //     cooldownImage.fillAmount = 0;
+        //     isAttackOnCooldown = false;
+        // }
 
         public void SetActive(bool active)
         {
@@ -343,10 +291,8 @@ namespace PlayableCharacters
 
         public Transform GetTransform()
         {
-            return transform;
+            return instances[GetType()].transform;
         }
-
-
 
         public void SetPosition(Vector3 position)
         {

@@ -28,6 +28,6 @@ public class SmoothCameraFollow : MonoBehaviour
 
     private void GameManager_OnActivePlayerChaged(object sender, PlayerManager.OnActivePlayerChangedEventArgs e)
     {
-        target = e.activeCharacter.GetTransform();
+        target = e.playerTransform;
     }
 }

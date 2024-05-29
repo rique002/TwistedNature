@@ -20,7 +20,7 @@ public class PlayerManager : MonoBehaviour
     public event EventHandler<OnActivePlayerChangedEventArgs> OnActivePlayerChaged;
     public class OnActivePlayerChangedEventArgs : EventArgs
     {
-        public PlayableCharacter activeCharacter;
+        public Transform playerTransform;
     }
 
 
@@ -79,7 +79,7 @@ public class PlayerManager : MonoBehaviour
 
         OnActivePlayerChaged?.Invoke(this, new OnActivePlayerChangedEventArgs
         {
-            activeCharacter = activeCharacter,
+            playerTransform = activeCharacter.GetTransform(),
         });
     }
 }
