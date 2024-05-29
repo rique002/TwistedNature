@@ -5,19 +5,27 @@ namespace PlayableCharacters
 {
     public class Bird : PlayableCharacter
     {
+        [SerializeField] PlayerWeaponCollider nozzleCollider;
+
         protected override void InitWeapon()
         {
-            throw new NotImplementedException();
+            nozzleCollider.SetDamage(attackDamage);
         }
 
         protected override void HandleAnimations()
         {
-            throw new NotImplementedException();
+            // Currently no running/flying animations
         }
 
         protected override void HandleAttack()
         {
-            throw new NotImplementedException();
+            nozzleCollider.StartAttack();
+            animator.SetTrigger("Attack");
+        }
+
+        public void EndAttack()
+        {
+            nozzleCollider.EndAttack();
         }
     }
 }

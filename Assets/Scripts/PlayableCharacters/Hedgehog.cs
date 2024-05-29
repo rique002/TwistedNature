@@ -1,12 +1,11 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace PlayableCharacters
 {
     public class Hedgehog : PlayableCharacter
     {
-        [SerializeField] private FistCollider rightFistCollider;
-        [SerializeField] private FistCollider leftFistCollider;
+        [SerializeField] private PlayerWeaponCollider rightFistCollider;
+        [SerializeField] private PlayerWeaponCollider leftFistCollider;
 
         protected override void InitWeapon()
         {
