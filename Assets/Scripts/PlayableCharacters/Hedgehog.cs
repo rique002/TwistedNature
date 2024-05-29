@@ -1,12 +1,31 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 
 namespace PlayableCharacters
 {
     public class Hedgehog : PlayableCharacter
     {
-        public override void HandleAnimations()
+        [SerializeField] private PlayerWeaponCollider rightFistCollider;
+        [SerializeField] private PlayerWeaponCollider leftFistCollider;
+
+        private bool isDashing = false;
+        private bool isJumping = false;
+
+        protected override void Init()
         {
-            Debug.Log("Hedgehog HandleAnimations");
+            isDashing = false;
+            isJumping = false;
+
+            rightFistCollider.SetDamage(attackDamage);
+            leftFistCollider.SetDamage(attackDamage);
+
+            gameInput.OnDashAction += GameInput_OnDashAction;
+            gameInput.OnJumpAction += GameInput_OnJumpAction;
+        }
+
+        protected override void HandleAnimations()
+        {
             if (state == State.Idle)
             {
                 animator.SetBool("Running", false);
@@ -15,6 +34,62 @@ namespace PlayableCharacters
             {
                 animator.SetBool("Running", true);
             }
+        }
+
+        protected override void HandleAttack()
+        {
+            rightFistCollider.StartAttack();
+            leftFistCollider.StartAttack();
+            animator.SetTrigger("Attack");
+        }
+
+        private void GameInput_OnDashAction(object sender, EventArgs e)
+        {
+            if (!isDashing && isActiveAndEnabled)
+            {
+                StartCoroutine(Dash());
+            }
+        }
+
+        private IEnumerator Dash()
+        {
+            isDashing = true;
+
+            Vector3 dashDirection = transform.forward;
+            dashDirection.y = 0;
+            playerBody.AddForce(dashDirection * dashForce, ForceMode.VelocityChange);
+            yield return new WaitForSeconds(dashDuration);
+
+            float yVelocity = playerBody.velocity.y;
+            playerBody.velocity = new Vector3(0, yVelocity, 0);
+
+            isDashing = false;
+
+        }
+
+        private void GameInput_OnJumpAction(object sender, EventArgs e)
+        {
+            Debug.Log(this.name + " is jumping");
+            if (!isJumping && isActiveAndEnabled)
+            {
+                StartCoroutine(Jump());
+            }
+        }
+
+        private IEnumerator Jump()
+        {
+            isJumping = true;
+
+            playerBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            yield return new WaitForSeconds(0.5f);
+
+            isJumping = false;
+        }
+
+        public void EndAttack()
+        {
+            rightFistCollider.EndAttack();
+            leftFistCollider.EndAttack();
         }
     }
 }

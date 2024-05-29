@@ -20,7 +20,7 @@ public class PlayerManager : MonoBehaviour
     public event EventHandler<OnActivePlayerChangedEventArgs> OnActivePlayerChaged;
     public class OnActivePlayerChangedEventArgs : EventArgs
     {
-        public PlayableCharacter activeCharacter;
+        public Transform playerTransform;
     }
 
 
@@ -32,6 +32,7 @@ public class PlayerManager : MonoBehaviour
             playableCharacter.OnPlayableCharacterKilled += PlayerManager_OnPlayableCharacterKilled;
             playableCharacter.SetActive(false);
         }
+
         gameInput.OnSwapAction += GameInput_OnSwapAction;
         activeCharacter = playableCharacters[0];
         indexActiveCharacter = 0;
@@ -78,7 +79,7 @@ public class PlayerManager : MonoBehaviour
 
         OnActivePlayerChaged?.Invoke(this, new OnActivePlayerChangedEventArgs
         {
-            activeCharacter = activeCharacter,
+            playerTransform = activeCharacter.GetTransform(),
         });
     }
 }

@@ -1,19 +1,19 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UI;
-using UnityEngine.Playables;
 using PlayableCharacters;
+using System;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private PlayerManager gameManager;
+    [SerializeField] private Transform player;
     [SerializeField] private List<Transform> waypoints;
     [SerializeField] private HealthBar healthBar;
     [SerializeField] protected float maxHealthPoints;
     [SerializeField] private Canvas canvas;
     [SerializeField] private float speed = 1.0f;
-    [SerializeField] private Transform player;
     [SerializeField] private float fieldOfView = 90f;
     [SerializeField] private float viewDistance = 10.0f;
     [SerializeField] private LayerMask viewMask;
@@ -21,39 +21,42 @@ public class Enemy : MonoBehaviour
     [SerializeField] private ParticleSystem attackParticles;
     [SerializeField] private float attackCooldown;
     [SerializeField] private float attackDamage;
-    private bool isAttackOnCooldown = false;
+    [SerializeField] private GameObject model;
 
+    private bool isWalking = false;
+    private bool isAttackOnCooldown = false;
     private int waypointIndex = 0;
     private bool playerDetected = false;
     private bool closeToPlayer = false;
+    private Animator animator;
     protected float healthPoints;
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        Debug.Log(player);
         if (waypoints.Count > 0)
         {
             transform.position = waypoints[waypointIndex].position;
         }
         healthPoints = maxHealthPoints;
+        animator = model.GetComponent<Animator>();
 
+        gameManager.OnActivePlayerChaged += GameManager_OnActivePlayerChaged;
     }
 
     private void Update()
     {
-        if (player == null || !player.gameObject.activeInHierarchy)
-        {
-            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-            foreach (GameObject potentialPlayer in players)
-            {
-                if (potentialPlayer.activeInHierarchy)
-                {
-                    player = potentialPlayer.transform;
-                    break;
-                }
-            }
-        }
+        // if (player == null || !player.gameObject.activeInHierarchy)
+        // {
+        //     GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        //     foreach (GameObject potentialPlayer in players)
+        //     {
+        //         if (potentialPlayer.activeInHierarchy)
+        //         {
+        //             player = potentialPlayer.transform;
+        //             break;
+        //         }
+        //     }
+        // }
 
         closeToPlayer = Vector3.Distance(player.position, transform.position) < 5.0f;
 
@@ -74,15 +77,24 @@ public class Enemy : MonoBehaviour
         }
 
         playerDetected = PlayerInFieldOfView();
-        if (!playerDetected)
+
+        if (isWalking)
         {
-            MoveEnemy();
+            if (!playerDetected)
+            {
+                MoveEnemy();
+            }
+            else
+            {
+                ChasePlayer();
+                Attack();
+            }
         }
-        else
-        {
-            ChasePlayer();
-            Attack();
-        }
+    }
+
+    private void GameManager_OnActivePlayerChaged(object sender, PlayerManager.OnActivePlayerChangedEventArgs e)
+    {
+        player = e.playerTransform;
     }
 
     private bool PlayerInFieldOfView()
@@ -103,6 +115,7 @@ public class Enemy : MonoBehaviour
 
     private void MoveEnemy()
     {
+        Debug.Log("Moving enemy");
         if (waypoints.Count == 0) return;
 
         Vector3 direction = waypoints[waypointIndex].position - transform.position;
@@ -164,10 +177,19 @@ public class Enemy : MonoBehaviour
     public void ReceiveDamage(float damage)
     {
         healthPoints -= damage;
-        Debug.Log(healthPoints);
         if (healthPoints < 0.0f)
         {
             healthPoints = 0.0f;
         }
     }
+
+    public void Walk()
+    {
+        isWalking = true;
     }
+
+    public void Stop()
+    {
+        isWalking = false;
+    }
+}
