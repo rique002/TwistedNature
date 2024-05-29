@@ -181,6 +181,7 @@ public class Enemy : MonoBehaviour
         if (healthPoints < 0.0f)
         {
             healthPoints = 0.0f;
+            Destroy(gameObject);
         }
     }
 
