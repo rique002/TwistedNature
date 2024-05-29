@@ -84,7 +84,7 @@ CapsuleCollider:
   m_Radius: 0.2
   m_Height: 0.8
   m_Direction: 1
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Center: {x: 0, y: 0.4, z: 0}
 --- !u!114 &5127760562613120001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,7 +102,7 @@ MonoBehaviour:
   gameInput: {fileID: 0}
   maxHealthPoints: 20
   interactionDistance: 1
-  moveSpeed: 4
+  moveSpeed: 1
   rotationSpeed: 10
   cooldownImage: {fileID: 0}
   playerBody: {fileID: 4732993034793740690}
@@ -115,6 +115,7 @@ MonoBehaviour:
   interactTextUI: {fileID: 0}
   interactionBar: {fileID: 0}
   nozzleCollider: {fileID: 3005595825783238484}
+  flyingSpeed: 4
 --- !u!1001 &7845424926084537860
 PrefabInstance:
   m_ObjectHideFlags: 0

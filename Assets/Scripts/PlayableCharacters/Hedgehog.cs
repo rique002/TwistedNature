@@ -24,13 +24,30 @@ namespace PlayableCharacters
             gameInput.OnJumpAction += GameInput_OnJumpAction;
         }
 
+        protected override void HandleMovement()
+        {
+            Vector2 inputVector = gameInput.GetMovementVectorNormalized();
+            playerBody.velocity = new Vector3(inputVector.x * moveSpeed, playerBody.velocity.y, inputVector.y * moveSpeed);
+
+            if (inputVector != Vector2.zero)
+            {
+                state = State.Mooving;
+                Quaternion targetRotation = Quaternion.LookRotation(new Vector3(inputVector.x, 0, inputVector.y));
+                playerBody.MoveRotation(Quaternion.Slerp(playerBody.rotation, targetRotation, Time.deltaTime * rotationSpeed));
+            }
+            else
+            {
+                state = State.Idle;
+            }
+        }
+
         protected override void HandleAnimations()
         {
             if (state == State.Idle)
             {
                 animator.SetBool("Running", false);
             }
-            else if (state == State.Running)
+            else if (state == State.Mooving)
             {
                 animator.SetBool("Running", true);
             }

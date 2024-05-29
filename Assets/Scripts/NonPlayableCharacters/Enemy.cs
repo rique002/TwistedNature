@@ -78,6 +78,8 @@ public class Enemy : MonoBehaviour
 
         playerDetected = PlayerInFieldOfView();
 
+        if (playerDetected) Attack();
+
         if (isWalking)
         {
             if (!playerDetected)
@@ -87,7 +89,6 @@ public class Enemy : MonoBehaviour
             else
             {
                 ChasePlayer();
-                Attack();
             }
         }
     }

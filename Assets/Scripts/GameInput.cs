@@ -8,10 +8,9 @@ public class GameInput : MonoBehaviour
     public event EventHandler OnSwapAction;
     public event EventHandler OnAttackAction;
     public event EventHandler OnDashAction;
-
     public event EventHandler OnJumpAction;
-
     public event EventHandler OnInteractAction;
+    public event EventHandler OnFlyAction;
 
     private void Awake()
     {
@@ -23,7 +22,7 @@ public class GameInput : MonoBehaviour
         playerInputActions.Player.Dash.performed += Dash_performed;
         playerInputActions.Player.Jump.performed += Jump_performed;
         playerInputActions.Player.Interact.performed += Interact_performed;
-
+        playerInputActions.Player.Fly.performed += Fly_performed;
     }
 
     private void Swap_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -50,6 +49,12 @@ public class GameInput : MonoBehaviour
     {
         OnInteractAction?.Invoke(this, EventArgs.Empty);
     }
+
+    private void Fly_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnFlyAction?.Invoke(this, EventArgs.Empty);
+    }
+
     public Vector2 GetMovementVectorNormalized()
     {
         Vector2 inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
