@@ -63,6 +63,7 @@ public class PlayerManager : MonoBehaviour
     private void GameInput_OnSwapAction(object sender, EventArgs e)
     {
         Transform currentTransform = activeCharacter.GetTransform();
+        activeCharacter.EndAttack();
         activeCharacter.SetActive(false);
 
         do
@@ -74,6 +75,7 @@ public class PlayerManager : MonoBehaviour
         activeCharacter.SetPosition(currentTransform.position);
         activeCharacter.SetForward(currentTransform.forward);
         activeCharacter.SetActive(true);
+        activeCharacter.EndAttack();
 
         healthBar.SetValue(activeCharacter.GetHealthPercentage());
 

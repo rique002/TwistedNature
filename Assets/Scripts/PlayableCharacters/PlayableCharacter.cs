@@ -89,6 +89,7 @@ namespace PlayableCharacters
         protected abstract void HandleMovement();
         protected abstract void HandleAnimations();
         protected abstract void HandleAttack();
+        public abstract void EndAttack();
 
         private void Awake()
         {

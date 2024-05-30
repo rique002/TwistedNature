@@ -60,7 +60,7 @@ namespace PlayableCharacters
             animator.SetTrigger("Attack");
         }
 
-        public void EndAttack()
+        public override void EndAttack()
         {
             rightFistCollider.EndAttack();
             leftFistCollider.EndAttack();

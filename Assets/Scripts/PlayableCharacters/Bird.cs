@@ -71,7 +71,7 @@ namespace PlayableCharacters
             isFlying = !isFlying;
         }
 
-        public void EndAttack()
+        public override void EndAttack()
         {
             nozzleCollider.EndAttack();
         }

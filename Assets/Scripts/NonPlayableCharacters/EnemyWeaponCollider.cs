@@ -7,7 +7,7 @@ public class EnemyWeaponCollider : MonoBehaviour
     private bool isAttacking;
     private float damage;
 
-    void Awake()
+    void Start()
     {
         isAttacking = false;
     }

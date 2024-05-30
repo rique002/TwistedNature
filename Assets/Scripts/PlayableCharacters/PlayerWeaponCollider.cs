@@ -6,7 +6,7 @@ public class PlayerWeaponCollider : MonoBehaviour
     private bool isAttacking;
     private float damage;
 
-    void Awake()
+    void Start()
     {
         isAttacking = false;
     }
@@ -17,6 +17,7 @@ public class PlayerWeaponCollider : MonoBehaviour
         {
             if (other.TryGetComponent<Enemy>(out var enemy))
             {
+                Debug.Log("Enemy hit by " + gameObject.name);
                 enemy.ReceiveDamage(damage);
             }
         }
