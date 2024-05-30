@@ -45,7 +45,7 @@ namespace PlayableCharacters
         protected enum State
         {
             Idle,
-            Running,
+            Mooving,
             Dead,
         }
 
@@ -86,6 +86,7 @@ namespace PlayableCharacters
         }
 
         protected abstract void Init();
+        protected abstract void HandleMovement();
         protected abstract void HandleAnimations();
         protected abstract void HandleAttack();
 
@@ -120,23 +121,6 @@ namespace PlayableCharacters
             HandleInteractions();
             HandleAnimations();
             HandleStatusEffects();
-        }
-
-        private void HandleMovement()
-        {
-            Vector2 inputVector = gameInput.GetMovementVectorNormalized();
-            playerBody.velocity = new Vector3(inputVector.x * moveSpeed, playerBody.velocity.y, inputVector.y * moveSpeed);
-
-            if (inputVector != Vector2.zero)
-            {
-                state = State.Running;
-                Quaternion targetRotation = Quaternion.LookRotation(new Vector3(inputVector.x, 0, inputVector.y));
-                playerBody.MoveRotation(Quaternion.Slerp(playerBody.rotation, targetRotation, Time.deltaTime * rotationSpeed));
-            }
-            else
-            {
-                state = State.Idle;
-            }
         }
 
         private void HandleInteractions()

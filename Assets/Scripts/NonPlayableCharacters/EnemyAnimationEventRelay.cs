@@ -13,4 +13,19 @@ public class EnemyAnimationEventRelay : MonoBehaviour
     {
         enemy.Stop();
     }
+
+    public void StartCollision()
+    {
+        enemy.StartCollision();
+    }
+
+    public void EndCollision()
+    {
+        enemy.EndCollision();
+    }
+
+    public void EndAttack()
+    {
+        enemy.EndAttack();
+    }
 }

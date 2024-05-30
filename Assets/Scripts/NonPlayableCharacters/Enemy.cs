@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UI;
-using PlayableCharacters;
 using System;
 
 public class Enemy : MonoBehaviour
@@ -22,14 +20,17 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float attackCooldown;
     [SerializeField] private float attackDamage;
     [SerializeField] private GameObject model;
+    [SerializeField] private EnemyWeaponCollider weaponCollider;
 
-    private bool isWalking = false;
-    private bool isAttackOnCooldown = false;
+    bool isWalking = false;
     private int waypointIndex = 0;
     private bool playerDetected = false;
     private bool closeToPlayer = false;
     private Animator animator;
-    protected float healthPoints;
+    private State state;
+    private float healthPoints;
+
+    private enum State { Mooving, Attacking };
 
     private void Start()
     {
@@ -39,27 +40,15 @@ public class Enemy : MonoBehaviour
         }
         healthPoints = maxHealthPoints;
         animator = model.GetComponent<Animator>();
+        state = State.Mooving;
+        weaponCollider.SetDamage(attackDamage);
 
         gameManager.OnActivePlayerChaged += GameManager_OnActivePlayerChaged;
     }
 
     private void Update()
     {
-        // if (player == null || !player.gameObject.activeInHierarchy)
-        // {
-        //     GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        //     foreach (GameObject potentialPlayer in players)
-        //     {
-        //         if (potentialPlayer.activeInHierarchy)
-        //         {
-        //             player = potentialPlayer.transform;
-        //             break;
-        //         }
-        //     }
-        // }
-
         closeToPlayer = Vector3.Distance(player.position, transform.position) < 5.0f;
-
 
         if (closeToPlayer)
         {
@@ -69,16 +58,19 @@ public class Enemy : MonoBehaviour
             Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
             screenPosition.y += 200;
             healthBar.transform.position = screenPosition;
-
         }
         else
         {
             healthBar.gameObject.SetActive(false);
         }
 
+        if (state == State.Attacking) return;
+
         playerDetected = PlayerInFieldOfView();
 
-        if (isWalking)
+        if (playerDetected) Attack();
+
+        if (state == State.Mooving && isWalking)
         {
             if (!playerDetected)
             {
@@ -87,7 +79,6 @@ public class Enemy : MonoBehaviour
             else
             {
                 ChasePlayer();
-                Attack();
             }
         }
     }
@@ -115,7 +106,6 @@ public class Enemy : MonoBehaviour
 
     private void MoveEnemy()
     {
-        Debug.Log("Moving enemy");
         if (waypoints.Count == 0) return;
 
         Vector3 direction = waypoints[waypointIndex].position - transform.position;
@@ -149,29 +139,28 @@ public class Enemy : MonoBehaviour
 
     private void Attack()
     {
-        if (isAttackOnCooldown) return;
-
         float distance = Vector3.Distance(player.position, transform.position);
         if (distance < 2.0f)
         {
-            player.GetComponent<PlayableCharacter>().ReceiveDamage(attackDamage);
+            state = State.Attacking;
+            animator.SetTrigger("Attack");
         }
-
-        StartCoroutine(StartAttackCooldown());
     }
 
-    private IEnumerator StartAttackCooldown()
+    public void StartCollision()
     {
-        isAttackOnCooldown = true;
-        float cooldownRemaining = attackCooldown;
+        weaponCollider.StartAttack();
+    }
 
-        while (cooldownRemaining > 0)
-        {
-            cooldownRemaining -= Time.deltaTime;
-            yield return null;
-        }
+    public void EndCollision()
+    {
+        weaponCollider.EndAttack();
+    }
 
-        isAttackOnCooldown = false;
+    public void EndAttack()
+    {
+        state = State.Mooving;
+        weaponCollider.EndAttack();
     }
 
     public void ReceiveDamage(float damage)
@@ -180,6 +169,7 @@ public class Enemy : MonoBehaviour
         if (healthPoints < 0.0f)
         {
             healthPoints = 0.0f;
+            Destroy(gameObject);
         }
     }
 
