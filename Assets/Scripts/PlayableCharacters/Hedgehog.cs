@@ -60,6 +60,12 @@ namespace PlayableCharacters
             animator.SetTrigger("Attack");
         }
 
+        public void EndAttack()
+        {
+            rightFistCollider.EndAttack();
+            leftFistCollider.EndAttack();
+        }
+
         private void GameInput_OnDashAction(object sender, EventArgs e)
         {
             if (!isDashing && isActiveAndEnabled)
@@ -101,12 +107,6 @@ namespace PlayableCharacters
             yield return new WaitForSeconds(0.5f);
 
             isJumping = false;
-        }
-
-        public void EndAttack()
-        {
-            rightFistCollider.EndAttack();
-            leftFistCollider.EndAttack();
         }
     }
 }

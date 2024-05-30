@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7865545467611007879}
   - component: {fileID: 623092760029464639}
   - component: {fileID: 5018137313791214860}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Hedgehog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33,7 +33,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7030657505374363251}
-  - {fileID: 64608951712194236}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!54 &7865545467611007879
@@ -117,37 +116,6 @@ MonoBehaviour:
   interactionBar: {fileID: 0}
   rightFistCollider: {fileID: 8004022815725972468}
   leftFistCollider: {fileID: 2740421422370574445}
---- !u!1 &4978218936114372401
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 64608951712194236}
-  m_Layer: 0
-  m_Name: Weapon
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &64608951712194236
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4978218936114372401}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0.007185161, y: 0.5323845, z: 0.058493376}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5978912615022396803}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7357563189857925528
 PrefabInstance:
   m_ObjectHideFlags: 0
