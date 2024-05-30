@@ -102,7 +102,7 @@ MonoBehaviour:
   gameInput: {fileID: 0}
   maxHealthPoints: 20
   interactionDistance: 1
-  moveSpeed: 4
+  moveSpeed: 6
   rotationSpeed: 10
   cooldownImage: {fileID: 0}
   playerBody: {fileID: 7865545467611007879}

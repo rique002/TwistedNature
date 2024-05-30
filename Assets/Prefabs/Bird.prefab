@@ -102,7 +102,7 @@ MonoBehaviour:
   gameInput: {fileID: 0}
   maxHealthPoints: 20
   interactionDistance: 1
-  moveSpeed: 1
+  moveSpeed: 4
   rotationSpeed: 10
   cooldownImage: {fileID: 0}
   playerBody: {fileID: 4732993034793740690}
@@ -115,7 +115,7 @@ MonoBehaviour:
   interactTextUI: {fileID: 0}
   interactionBar: {fileID: 0}
   nozzleCollider: {fileID: 3355239703370104036}
-  flyingSpeed: 4
+  flyingSpeed: 8
 --- !u!1001 &7845424926084537860
 PrefabInstance:
   m_ObjectHideFlags: 0
