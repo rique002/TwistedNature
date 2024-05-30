@@ -1,19 +1,17 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UI;
-using UnityEngine.Playables;
-using PlayableCharacters;
+using System;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private PlayerManager gameManager;
+    [SerializeField] private Transform player;
     [SerializeField] private List<Transform> waypoints;
     [SerializeField] private HealthBar healthBar;
     [SerializeField] protected float maxHealthPoints;
     [SerializeField] private Canvas canvas;
     [SerializeField] private float speed = 1.0f;
-    [SerializeField] private Transform player;
     [SerializeField] private float fieldOfView = 90f;
     [SerializeField] private float viewDistance = 10.0f;
     [SerializeField] private LayerMask viewMask;
@@ -21,42 +19,36 @@ public class Enemy : MonoBehaviour
     [SerializeField] private ParticleSystem attackParticles;
     [SerializeField] private float attackCooldown;
     [SerializeField] private float attackDamage;
-    private bool isAttackOnCooldown = false;
+    [SerializeField] private GameObject model;
+    [SerializeField] private EnemyWeaponCollider weaponCollider;
 
+    bool isWalking = false;
     private int waypointIndex = 0;
     private bool playerDetected = false;
     private bool closeToPlayer = false;
-    protected float healthPoints;
+    private Animator animator;
+    private State state;
+    private float healthPoints;
+
+    private enum State { Mooving, Attacking };
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        Debug.Log(player);
         if (waypoints.Count > 0)
         {
             transform.position = waypoints[waypointIndex].position;
         }
         healthPoints = maxHealthPoints;
+        animator = model.GetComponent<Animator>();
+        state = State.Mooving;
+        weaponCollider.SetDamage(attackDamage);
 
+        gameManager.OnActivePlayerChaged += GameManager_OnActivePlayerChaged;
     }
 
     private void Update()
     {
-        if (player == null || !player.gameObject.activeInHierarchy)
-        {
-            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-            foreach (GameObject potentialPlayer in players)
-            {
-                if (potentialPlayer.activeInHierarchy)
-                {
-                    player = potentialPlayer.transform;
-                    break;
-                }
-            }
-        }
-
-        closeToPlayer = Vector3.Distance(player.position, transform.position) < 15.0f;
-
+        closeToPlayer = Vector3.Distance(player.position, transform.position) < 5.0f;
 
         if (closeToPlayer)
         {
@@ -66,23 +58,34 @@ public class Enemy : MonoBehaviour
             Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
             screenPosition.y += 200;
             healthBar.transform.position = screenPosition;
-
         }
         else
         {
             healthBar.gameObject.SetActive(false);
         }
 
+        if (state == State.Attacking) return;
+
         playerDetected = PlayerInFieldOfView();
-        if (!playerDetected)
+
+        if (playerDetected) Attack();
+
+        if (state == State.Mooving && isWalking)
         {
-            MoveEnemy();
+            if (!playerDetected)
+            {
+                MoveEnemy();
+            }
+            else
+            {
+                ChasePlayer();
+            }
         }
-        else
-        {
-            ChasePlayer();
-            Attack();
-        }
+    }
+
+    private void GameManager_OnActivePlayerChaged(object sender, PlayerManager.OnActivePlayerChangedEventArgs e)
+    {
+        player = e.playerTransform;
     }
 
     private bool PlayerInFieldOfView()
@@ -136,38 +139,47 @@ public class Enemy : MonoBehaviour
 
     private void Attack()
     {
-        if (isAttackOnCooldown) return;
-
         float distance = Vector3.Distance(player.position, transform.position);
         if (distance < 2.0f)
         {
-            player.GetComponent<PlayableCharacter>().ReceiveDamage(attackDamage);
+            state = State.Attacking;
+            animator.SetTrigger("Attack");
         }
-
-        StartCoroutine(StartAttackCooldown());
     }
 
-    private IEnumerator StartAttackCooldown()
+    public void StartCollision()
     {
-        isAttackOnCooldown = true;
-        float cooldownRemaining = attackCooldown;
+        weaponCollider.StartAttack();
+    }
 
-        while (cooldownRemaining > 0)
-        {
-            cooldownRemaining -= Time.deltaTime;
-            yield return null;
-        }
+    public void EndCollision()
+    {
+        weaponCollider.EndAttack();
+    }
 
-        isAttackOnCooldown = false;
+    public void EndAttack()
+    {
+        state = State.Mooving;
+        weaponCollider.EndAttack();
     }
 
     public void ReceiveDamage(float damage)
     {
         healthPoints -= damage;
-        Debug.Log(healthPoints);
         if (healthPoints < 0.0f)
         {
             healthPoints = 0.0f;
+            Destroy(gameObject);
         }
     }
+
+    public void Walk()
+    {
+        isWalking = true;
     }
+
+    public void Stop()
+    {
+        isWalking = false;
+    }
+}

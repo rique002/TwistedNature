@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Image = UnityEngine.UI.Image;
@@ -11,40 +10,42 @@ namespace PlayableCharacters
 {
     public abstract class PlayableCharacter : MonoBehaviour
     {
+        [SerializeField] protected float attackDamage;
+        [SerializeField] protected float attackRange;
         [SerializeField] protected GameInput gameInput;
         [SerializeField] protected float maxHealthPoints;
-        [SerializeField] public float attackDamage;
-        [SerializeField] public float attackRange;
-
         [SerializeField] protected float interactionDistance = 1.0f;
         [SerializeField] protected float moveSpeed;
         [SerializeField] protected float rotationSpeed;
-        [SerializeField] private Image cooldownImage;
-        [SerializeField] private ParticleSystem attackParticles;
-        [SerializeField] private float attackCooldown;
+        [SerializeField] protected Image cooldownImage;
+        [SerializeField] protected Rigidbody playerBody;
+        [SerializeField] protected ParticleSystem attackParticles;
+        [SerializeField] protected float attackCooldown;
+        [SerializeField] protected GameObject model;
+        [SerializeField] protected float dashForce;
+        [SerializeField] protected float dashDuration = 0.2f;
+        [SerializeField] protected float jumpForce;
+        [SerializeField] protected Text interactTextUI;
+        [SerializeField] protected InteractionBar interactionBar;
 
-        [SerializeField] private float dashForce;
-        [SerializeField] private float dashDuration = 0.2f;
+        protected State state;
+        protected float healthPoints;
+        protected bool isAttackOnCooldown = false;
+        protected static readonly Dictionary<Type, PlayableCharacter> instances = new();
+        protected readonly List<StatusEffect> statusEffects = new();
+        protected Animator animator;
 
-        [SerializeField] private float jumpForce;
-        [SerializeField] private Text interactTextUI;
-
-        [SerializeField] private InteractionBar interactionBar;
-
-        [SerializeField] public GameObject projectilePrefab;
-        [SerializeField] public float projectileSpeed = 10f;
-
-        private bool isDashing = false;
-
-        private bool isJumping = false;
-        private bool isAttackOnCooldown = false;
-
-        private static readonly Dictionary<Type, PlayableCharacter> instances = new();
-        private readonly List<StatusEffect> statusEffects = new();
+        public event EventHandler OnPlayableCharacterKilled;
+        public event EventHandler<OnPlayableCharacterHealthChangeArgs> OnPlayableCharacterHealthChange;
+        public class OnPlayableCharacterHealthChangeArgs : EventArgs
+        {
+            public float healthPercentage;
+        }
 
         protected enum State
         {
             Idle,
+            Mooving,
             Dead,
         }
 
@@ -84,15 +85,11 @@ namespace PlayableCharacters
             }
         }
 
-        protected State state;
-        protected float healthPoints;
-
-        public event EventHandler OnPlayableCharacterKilled;
-        public event EventHandler<OnPlayableCharacterHealthChangeArgs> OnPlayableCharacterHealthChange;
-        public class OnPlayableCharacterHealthChangeArgs : EventArgs
-        {
-            public float healthPercentage;
-        }
+        protected abstract void Init();
+        protected abstract void HandleMovement();
+        protected abstract void HandleAnimations();
+        protected abstract void HandleAttack();
+        public abstract void EndAttack();
 
         private void Awake()
         {
@@ -109,33 +106,22 @@ namespace PlayableCharacters
 
             state = State.Idle;
             healthPoints = maxHealthPoints;
+            animator = model.GetComponent<Animator>();
         }
 
         private void Start()
         {
-            attackParticles.Stop();
+            Init();
             gameInput.OnAttackAction += GameInput_OnAttackAction;
-            gameInput.OnDashAction += GameInput_OnDashAction;
             gameInput.OnInteractAction += GameInput_OnInteractAction;
-            gameInput.OnJumpAction += GameInput_OnJumpAction;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             HandleMovement();
             HandleInteractions();
+            HandleAnimations();
             HandleStatusEffects();
-        }
-
-        private void HandleMovement()
-        {
-            Vector2 inputVector = gameInput.GetMovementVectorNormalized();
-            Vector3 moveDirection = new Vector3(inputVector.x, 0f, inputVector.y);
-
-            float moveDistance = moveSpeed * Time.deltaTime;
-
-            transform.position += moveDirection * moveDistance;
-            transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * rotationSpeed);
         }
 
         private void HandleInteractions()
@@ -151,7 +137,7 @@ namespace PlayableCharacters
                 AddStatusEffect(StatusEffectType.Fire, 10.0f);
             }
 
-            if(Physics.OverlapSphere(transform.position, interactionDistance, LayerMask.GetMask("Interactable")).Length > 0)
+            if (Physics.OverlapSphere(transform.position, interactionDistance, LayerMask.GetMask("Interactable")).Length > 0)
             {
                 interactTextUI.gameObject.SetActive(true);
             }
@@ -161,7 +147,7 @@ namespace PlayableCharacters
                 interactTextUI.gameObject.SetActive(false);
             }
             // if stepping on pressure plate, activate it
-            if (Physics.OverlapSphere(transform.position,0.2f, LayerMask.GetMask("PressurePlate")).Length > 0)
+            if (Physics.OverlapSphere(transform.position, 0.2f, LayerMask.GetMask("PressurePlate")).Length > 0)
             {
                 PressurePlate pressurePlate = Physics.OverlapSphere(transform.position, 0.2f, LayerMask.GetMask("PressurePlate"))[0].GetComponent<PressurePlate>();
                 if (pressurePlate != null)
@@ -237,129 +223,43 @@ namespace PlayableCharacters
 
         private void GameInput_OnAttackAction(object sender, EventArgs e)
         {
-            if (isAttackOnCooldown)
-            {
-                return;
-            }
-            Collider[] hitEnemies = Physics.OverlapSphere(transform.position, attackRange, LayerMask.GetMask("Enemy"));
-            foreach (Collider enemy in hitEnemies)
-            {
-                Enemy enemyScript = enemy.GetComponent<Enemy>();
-                if (enemyScript != null)
-                {
-                    enemyScript.ReceiveDamage(attackDamage);
-                }
-            }
-
-            float offset = 1.2f; 
-            int numberOfProjectiles = 5;
-            float spreadAngle = 45f; 
-
-            for (int i = 0; i < numberOfProjectiles; i++)
-            {
-                float projectileDirectionAngle = -spreadAngle / 2 + spreadAngle / (numberOfProjectiles - 1) * i;
-                Quaternion projectileRotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y + projectileDirectionAngle, 0);
-                Vector3 spawnPosition = transform.position + transform.forward * offset;
-                spawnPosition.y += 1f;
-                GameObject projectile = Instantiate(projectilePrefab, spawnPosition, projectileRotation);
-            }
-
-            attackParticles.transform.position = transform.position;
-            attackParticles.Play();
-            isAttackOnCooldown = true;
-            StartCoroutine(StartAttackCooldown());
+            HandleAttack();
         }
 
         private void GameInput_OnInteractAction(object sender, EventArgs e)
-        {    
-            Collider[] hitInteractables = Physics.OverlapSphere(transform.position,interactionDistance, LayerMask.GetMask("Interactable"));
-            if(hitInteractables.Length > 0){
+        {
+            Collider[] hitInteractables = Physics.OverlapSphere(transform.position, interactionDistance, LayerMask.GetMask("Interactable"));
+            if (hitInteractables.Length > 0)
+            {
                 print("Interacting with " + hitInteractables[0].name);
                 Interactable interactable = hitInteractables[0].GetComponent<Interactable>();
-                if(interactable != null){
+                if (interactable != null)
+                {
                     interactable.Interact();
                 }
             }
         }
 
-        private void GameInput_OnJumpAction(object sender, EventArgs e)
-        {
-            if (!isJumping)
-            {
-                StartCoroutine(Jump());
-            }
-        }
-
-        private IEnumerator Jump()
-        {
-            isJumping = true;
-
-            Rigidbody rb = GetComponent<Rigidbody>();
-
-            if (rb != null)
-            {
-                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            }
-
-            yield return new WaitForSeconds(0.5f);
-
-            isJumping = false;
-        }
-
-
-        private void GameInput_OnDashAction(object sender, EventArgs e)
-        {
-            if (!isDashing)
-            {
-                StartCoroutine(Dash());
-            }
-        }
-
-        private IEnumerator Dash()
-        {
-            isDashing = true;
-
-            Rigidbody rb = GetComponent<Rigidbody>();
-
-            if (rb != null)
-            {
-                Vector3 dashDirection = transform.forward;
-                dashDirection.y = 0;
-                rb.AddForce(dashDirection * dashForce, ForceMode.VelocityChange);
-            }
-
-            yield return new WaitForSeconds(dashDuration);
-
-            if (rb != null)
-            {
-
-                 float yVelocity = rb.velocity.y;
-                rb.velocity = new Vector3(0, yVelocity, 0);
-                }
-
-            isDashing = false;
-
-        }
         void OnDrawGizmos()
         {
             Gizmos.DrawWireSphere(transform.position, attackRange);
         }
 
-        private IEnumerator StartAttackCooldown()
-        {
-            isAttackOnCooldown = true;
-            float cooldownRemaining = attackCooldown;
+        // private IEnumerator StartAttackCooldown()
+        // {
+        //     isAttackOnCooldown = true;
+        //     float cooldownRemaining = attackCooldown;
 
-            while (cooldownRemaining > 0)
-            {
-                cooldownRemaining -= Time.deltaTime;
-                cooldownImage.fillAmount = cooldownRemaining / attackCooldown;
-                yield return null;
-            }
+        //     while (cooldownRemaining > 0)
+        //     {
+        //         cooldownRemaining -= Time.deltaTime;
+        //         cooldownImage.fillAmount = cooldownRemaining / attackCooldown;
+        //         yield return null;
+        //     }
 
-            cooldownImage.fillAmount = 0;
-            isAttackOnCooldown = false;
-        }
+        //     cooldownImage.fillAmount = 0;
+        //     isAttackOnCooldown = false;
+        // }
 
         public void SetActive(bool active)
         {
@@ -376,10 +276,8 @@ namespace PlayableCharacters
 
         public Transform GetTransform()
         {
-            return transform;
+            return instances[GetType()].transform;
         }
-
-
 
         public void SetPosition(Vector3 position)
         {

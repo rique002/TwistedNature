@@ -15,8 +15,13 @@ TagManager:
   - Enemy
   - Interactable
   - PressurePlate
+<<<<<<< HEAD
   - Projectile
   - 
+=======
+  - PlayerWeapon
+  - EnemyWeapon
+>>>>>>> main
   - 
   - 
   - 
