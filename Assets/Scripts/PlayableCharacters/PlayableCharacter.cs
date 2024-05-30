@@ -251,9 +251,9 @@ namespace PlayableCharacters
                 }
             }
 
-            float offset = 1.2f; // Adjust this value as needed
+            float offset = 1.2f; 
             int numberOfProjectiles = 5;
-            float spreadAngle = 45f; // Adjust this value as needed
+            float spreadAngle = 45f; 
 
             for (int i = 0; i < numberOfProjectiles; i++)
             {
