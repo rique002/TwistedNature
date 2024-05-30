@@ -22,9 +22,10 @@ namespace PlayableCharacters
         protected override void HandleMovement()
         {
             float currentMoveSpeed = isFlying ? flyingSpeed : moveSpeed;
+            float velocityY = isFlying ? 0 : playerBody.velocity.y;
 
             Vector2 inputVector = gameInput.GetMovementVectorNormalized();
-            playerBody.velocity = new Vector3(inputVector.x * currentMoveSpeed, playerBody.velocity.y, inputVector.y * currentMoveSpeed);
+            playerBody.velocity = new Vector3(inputVector.x * currentMoveSpeed, velocityY, inputVector.y * currentMoveSpeed);
 
             if (inputVector != Vector2.zero)
             {
