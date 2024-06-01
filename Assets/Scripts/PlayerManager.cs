@@ -33,6 +33,7 @@ public class PlayerManager : MonoBehaviour
             playableCharacter.SetActive(false);
         }
         gameInput.OnSwapAction += GameInput_OnSwapAction;
+        gameInput.OnSkipAction += GameInput_OnSkipAction;
         activeCharacter = playableCharacters[0];
         indexActiveCharacter = 0;
         activeCharacter.SetActive(true);
@@ -80,5 +81,15 @@ public class PlayerManager : MonoBehaviour
         {
             activeCharacter = activeCharacter,
         });
+    }
+
+    private void GameInput_OnSkipAction(object sender, EventArgs e)
+    {
+        {
+            Tutorial tutorial = FindObjectOfType<Tutorial>();
+            if (tutorial != null){
+                tutorial.skipTutorial();
+            }
+        }
     }
 }

@@ -12,6 +12,8 @@ public class GameInput : MonoBehaviour {
 
     public event EventHandler OnInteractAction;
 
+    public event EventHandler OnSkipAction;
+
     private void Awake() {
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
@@ -21,6 +23,7 @@ public class GameInput : MonoBehaviour {
         playerInputActions.Player.Dash.performed += Dash_performed;
         playerInputActions.Player.Jump.performed += Jump_performed;
         playerInputActions.Player.Interact.performed += Interact_performed;
+        playerInputActions.Player.Skip.performed += Skip_performed;
 
     }
 
@@ -43,6 +46,11 @@ public class GameInput : MonoBehaviour {
     private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
         OnInteractAction?.Invoke(this, EventArgs.Empty);
     }
+
+    private void Skip_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
+        OnSkipAction?.Invoke(this, EventArgs.Empty);
+    }
+    
     public Vector2 GetMovementVectorNormalized() {
         Vector2 inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
 
