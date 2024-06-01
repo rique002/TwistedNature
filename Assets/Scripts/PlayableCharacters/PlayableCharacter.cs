@@ -161,7 +161,7 @@ namespace PlayableCharacters
                 interactTextUI.gameObject.SetActive(false);
             }
             // if stepping on pressure plate, activate it
-            if (Physics.OverlapSphere(transform.position,0.2f, LayerMask.GetMask("PressurePlate")).Length > 0)
+            /*if (Physics.OverlapSphere(transform.position,0.2f, LayerMask.GetMask("PressurePlate")).Length > 0)
             {
                 PressurePlate pressurePlate = Physics.OverlapSphere(transform.position, 0.2f, LayerMask.GetMask("PressurePlate"))[0].GetComponent<PressurePlate>();
                 if (pressurePlate != null)
@@ -169,7 +169,7 @@ namespace PlayableCharacters
                     print("Stepping on pressure plate");
                     pressurePlate.Activate();
                 }
-            }
+            }*/
         }
 
         private void HandleStatusEffects()
