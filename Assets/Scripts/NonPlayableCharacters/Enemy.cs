@@ -70,7 +70,9 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            healthBar.gameObject.SetActive(false);
+            if(healthBar != null){
+                healthBar.gameObject.SetActive(false);
+            }
         }
 
         playerDetected = PlayerInFieldOfView();

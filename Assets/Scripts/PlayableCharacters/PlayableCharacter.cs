@@ -34,6 +34,8 @@ namespace PlayableCharacters
         [SerializeField] public GameObject projectilePrefab;
         [SerializeField] public float projectileSpeed = 10f;
 
+        [SerializeField] private CameraSwitcher cameraSwitcher;
+
         private bool isDashing = false;
 
         private bool isJumping = false;
@@ -130,12 +132,29 @@ namespace PlayableCharacters
         private void HandleMovement()
         {
             Vector2 inputVector = gameInput.GetMovementVectorNormalized();
-            Vector3 moveDirection = new Vector3(inputVector.x, 0f, inputVector.y);
+
+            Vector3 moveDirection = new Vector3();
+            if(cameraSwitcher.isMain()){
+                moveDirection = new Vector3(inputVector.x, 0f, inputVector.y);
+                transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * rotationSpeed);
+            }
+            else{
+                moveDirection = transform.forward * inputVector.y;
+                if (inputVector.x >0)
+                {
+                    transform.Rotate(Vector3.up, rotationSpeed*10 * Time.deltaTime);
+                }
+                else if (inputVector.x < 0)
+                {
+                    transform.Rotate(Vector3.up, -rotationSpeed*10 * Time.deltaTime);
+                }
+            }
+            
 
             float moveDistance = moveSpeed * Time.deltaTime;
 
             transform.position += moveDirection * moveDistance;
-            transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * rotationSpeed);
+            
         }
 
         private void HandleInteractions()
