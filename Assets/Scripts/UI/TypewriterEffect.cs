@@ -14,13 +14,18 @@ namespace UI
         private int _currentVisibleCharacterIndex;
         private Coroutine _typewriterCoroutine;
         private bool _readyForNewText = true;
-
         private WaitForSeconds _simpleDelay;
         private WaitForSeconds _interpunctuationDelay;
 
         [Header("Typewriter Settings")] 
         [SerializeField] private float charactersPerSecond = 20;
         [SerializeField] private float interpunctuationDelay = 0.5f;
+        public bool CurrentlySkipping { get; private set; }
+        private WaitForSeconds _skipDelay;
+
+        [Header("Skip options")] 
+        [SerializeField] private bool quickSkip;
+        [SerializeField] [Min(1)] private int skipSpeedup = 5;
 
         private WaitForSeconds _textboxFullEventDelay;
         [SerializeField] [Range(0.1f, 0.5f)] private float sendDoneDelay = 0.25f; 
@@ -36,6 +41,8 @@ namespace UI
             _simpleDelay = new WaitForSeconds(1 / charactersPerSecond);
             _interpunctuationDelay = new WaitForSeconds(interpunctuationDelay);
             _textboxFullEventDelay = new WaitForSeconds(sendDoneDelay);
+            _skipDelay = new WaitForSeconds(1 / (charactersPerSecond * skipSpeedup));
+
         }
         
         private void OnEnable()
@@ -48,6 +55,18 @@ namespace UI
             TMPro_EventManager.TEXT_CHANGED_EVENT.Remove(PrepareForNewText);
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (_textBox.maxVisibleCharacters != _textBox.textInfo.characterCount - 1)
+                    Skip(true);
+            }
+        }
+        public bool IsTyping
+        {
+            get { return _readyForNewText == false; }
+        }
        
 
          private void PrepareForNewText(Object obj)
@@ -56,7 +75,8 @@ namespace UI
                     return;
              }             
              _readyForNewText = false;
-            
+             CurrentlySkipping = false;
+
              if (_typewriterCoroutine != null){
                     StopCoroutine(_typewriterCoroutine);
                     _typewriterCoroutine = null;
@@ -68,13 +88,12 @@ namespace UI
              _typewriterCoroutine = StartCoroutine(Typewriter());
          }
 
+
+
         private IEnumerator Typewriter()
         {
             TMP_TextInfo textInfo = _textBox.textInfo;
-            print("TEXT INFO - "+textInfo.characterCount);
-            print("MAX VISIBLE - "+_textBox.maxVisibleCharacters+" AND _currentVisibleCharacterIndex -"+_currentVisibleCharacterIndex );
-            yield return new WaitForSeconds(0.3f);
-            
+
             while (_currentVisibleCharacterIndex < textInfo.characterCount + 1)
             {
                 var lastCharacterIndex = textInfo.characterCount - 1;
@@ -91,21 +110,45 @@ namespace UI
                 char character = textInfo.characterInfo[_currentVisibleCharacterIndex].character;
 
                 _textBox.maxVisibleCharacters++;
-                print("MAX - "+_textBox.maxVisibleCharacters);
                 
-                if ((character == '?' || character == '.' || character == ',' || character == ':' ||
-                     character == ';' || character == '!'))
+                if (!CurrentlySkipping &&
+                    (character == '?' || character == '.' || character == ',' || character == ':' ||
+                     character == ';' || character == '!' || character == '-'))
                 {
                     yield return _interpunctuationDelay;
                 }
                 else
                 {
-                    yield return _simpleDelay;
+                    yield return CurrentlySkipping ? _skipDelay : _simpleDelay;
                 }
                 
                 CharacterRevealed?.Invoke(character);
                 _currentVisibleCharacterIndex++;
             }
+        }
+        private void Skip(bool quickSkipNeeded = false)
+        {
+            if (CurrentlySkipping)
+                return;
+            
+            CurrentlySkipping = true;
+
+            if (!quickSkip || !quickSkipNeeded)
+            {
+                StartCoroutine(SkipSpeedupReset());
+                return;
+            }
+
+            StopCoroutine(_typewriterCoroutine);
+            _textBox.maxVisibleCharacters = _textBox.textInfo.characterCount;
+            _readyForNewText = true;
+            CompleteTextRevealed?.Invoke();
+        }
+
+        private IEnumerator SkipSpeedupReset()
+        {
+            yield return new WaitUntil(() => _textBox.maxVisibleCharacters == _textBox.textInfo.characterCount - 1);
+            CurrentlySkipping = false;
         }
     }
 }

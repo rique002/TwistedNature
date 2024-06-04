@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 public class CameraSwitcher : MonoBehaviour
 {
@@ -28,15 +29,13 @@ public class CameraSwitcher : MonoBehaviour
         fpCamera.enabled = false;
     }
 
-    [ContextMenu("Switch to First-Person Camera")]
-    private void toFP()
+    public void toFP()
     {
         mainCamera.enabled = false;
         fpCamera.enabled = true;
     }
 
-    [ContextMenu("Switch to Main Camera")]
-    private void toMain()
+    public void toMain()
     {
         mainCamera.enabled = true;
         fpCamera.enabled = false;
@@ -44,9 +43,6 @@ public class CameraSwitcher : MonoBehaviour
 
     public bool isMain()
     {
-        print("Main Camera Enabled: " + mainCamera.enabled);
         return mainCamera.enabled;
     }
-
-
 }
