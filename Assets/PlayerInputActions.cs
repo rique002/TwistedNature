@@ -82,9 +82,18 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Fly"",
+                    ""type"": ""Button"",
+                    ""id"": ""bdb5c106-6080-431b-b222-a17be9bdc956"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Skip"",
                     ""type"": ""Button"",
-                    ""id"": ""f2b6de9c-e67e-4888-b297-8709ad1736b5"",
+                    ""id"": ""60225ffa-0f6e-4223-92a4-43a723dca7f3"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -183,7 +192,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""0c350242-2079-4929-be73-6fab9f9314cb"",
-                    ""path"": ""<Keyboard>/ctrl"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -226,7 +235,18 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""8e057b9b-4f45-4218-9f38-bf358e52de21"",
+                    ""id"": ""43a736d9-c44f-4731-b234-07bd803ae069"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fly"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ee55b59e-1498-424d-a51b-9c37650f9da0"",
                     ""path"": ""<Keyboard>/x"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -296,6 +316,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_Fly = m_Player.FindAction("Fly", throwIfNotFound: true);
         m_Player_Skip = m_Player.FindAction("Skip", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
@@ -368,6 +389,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_Fly;
     private readonly InputAction m_Player_Skip;
     public struct PlayerActions
     {
@@ -379,6 +401,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @Fly => m_Wrapper.m_Player_Fly;
         public InputAction @Skip => m_Wrapper.m_Player_Skip;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
@@ -407,6 +430,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @Fly.started += instance.OnFly;
+            @Fly.performed += instance.OnFly;
+            @Fly.canceled += instance.OnFly;
             @Skip.started += instance.OnSkip;
             @Skip.performed += instance.OnSkip;
             @Skip.canceled += instance.OnSkip;
@@ -432,6 +458,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @Fly.started -= instance.OnFly;
+            @Fly.performed -= instance.OnFly;
+            @Fly.canceled -= instance.OnFly;
             @Skip.started -= instance.OnSkip;
             @Skip.performed -= instance.OnSkip;
             @Skip.canceled -= instance.OnSkip;
@@ -514,6 +543,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnDash(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnFly(InputAction.CallbackContext context);
         void OnSkip(InputAction.CallbackContext context);
     }
     public interface ICameraActions

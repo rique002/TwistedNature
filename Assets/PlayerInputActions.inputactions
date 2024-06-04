@@ -60,9 +60,18 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Fly",
+                    "type": "Button",
+                    "id": "bdb5c106-6080-431b-b222-a17be9bdc956",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Skip",
                     "type": "Button",
-                    "id": "f2b6de9c-e67e-4888-b297-8709ad1736b5",
+                    "id": "60225ffa-0f6e-4223-92a4-43a723dca7f3",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -161,7 +170,7 @@
                 {
                     "name": "",
                     "id": "0c350242-2079-4929-be73-6fab9f9314cb",
-                    "path": "<Keyboard>/ctrl",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -204,7 +213,18 @@
                 },
                 {
                     "name": "",
-                    "id": "8e057b9b-4f45-4218-9f38-bf358e52de21",
+                    "id": "43a736d9-c44f-4731-b234-07bd803ae069",
+                    "path": "<Keyboard>/space",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fly",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ee55b59e-1498-424d-a51b-9c37650f9da0",
                     "path": "<Keyboard>/x",
                     "interactions": "",
                     "processors": "",

@@ -43,15 +43,13 @@ namespace UI
         }
 
         private void Update(){
-            print("Typing: " + typewriterEffect.IsTyping);
-            print("isNPC: " + isNPC);
             if(!isNPC){
                 answer1.SetActive(false);
                 answer2.SetActive(false);
             }
             else{
                 imageContainer.SetActive(true);
-                
+
                 if(typewriterEffect.IsTyping){
                     answer1.SetActive(false);
                     answer2.SetActive(false);

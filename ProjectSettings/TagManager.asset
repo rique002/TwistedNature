@@ -17,6 +17,8 @@ TagManager:
   - PressurePlate
   - Projectile
   - 
+  - PlayerWeapon
+  - EnemyWeapon
   - 
   - 
   - 
