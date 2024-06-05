@@ -12,6 +12,8 @@ public class GameInput : MonoBehaviour
     public event EventHandler OnInteractAction;
     public event EventHandler OnFlyAction;
 
+    public event EventHandler OnSkipAction;
+
     private void Awake()
     {
         playerInputActions = new PlayerInputActions();
@@ -23,6 +25,7 @@ public class GameInput : MonoBehaviour
         playerInputActions.Player.Jump.performed += Jump_performed;
         playerInputActions.Player.Interact.performed += Interact_performed;
         playerInputActions.Player.Fly.performed += Fly_performed;
+        playerInputActions.Player.Skip.performed += Skip_performed;
     }
 
     private void Swap_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -53,6 +56,11 @@ public class GameInput : MonoBehaviour
     private void Fly_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         OnFlyAction?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void Skip_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnSkipAction?.Invoke(this, EventArgs.Empty);
     }
 
     public Vector2 GetMovementVectorNormalized()

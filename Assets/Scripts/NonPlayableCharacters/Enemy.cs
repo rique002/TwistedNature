@@ -48,20 +48,44 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        closeToPlayer = Vector3.Distance(player.position, transform.position) < 5.0f;
+        if (player == null || !player.gameObject.activeInHierarchy)
+        {
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+            foreach (GameObject potentialPlayer in players)
+            {
+                if (potentialPlayer.activeInHierarchy)
+                {
+                    player = potentialPlayer.transform;
+                    break;
+                }
+            }
+        }
+
+        closeToPlayer = Vector3.Distance(player.position, transform.position) < 15.0f;
 
         if (closeToPlayer)
         {
             healthBar.SetName(enemyName);
             healthBar.gameObject.SetActive(true);
             healthBar.SetValue(healthPoints / maxHealthPoints);
-            Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
-            screenPosition.y += 200;
-            healthBar.transform.position = screenPosition;
+            if(Camera.main != null){
+                Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
+                screenPosition.y += 200;
+                healthBar.transform.position = screenPosition;
+            }
+            else
+            {
+                if(healthBar != null){
+                    healthBar.gameObject.SetActive(false);
+                }
+            }
+
         }
         else
         {
-            healthBar.gameObject.SetActive(false);
+            if(healthBar != null){
+                healthBar.gameObject.SetActive(false);
+            }
         }
 
         if (state == State.Attacking) return;
@@ -93,12 +117,13 @@ public class Enemy : MonoBehaviour
         Vector3 directionToPlayer = transform.InverseTransformPoint(player.position);
         float angle = Vector3.Angle(-Vector3.right, directionToPlayer);
 
-        Debug.DrawRay(transform.position, Quaternion.Euler(0, -fieldOfView / 2, 0) * -transform.right * viewDistance, Color.red);
-        Debug.DrawRay(transform.position, Quaternion.Euler(0, fieldOfView / 2, 0) * -transform.right * viewDistance, Color.red);
+        Vector3 rayDrawPos = new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z);
+        Debug.DrawRay(rayDrawPos, Quaternion.Euler(0, -fieldOfView / 2, 0) * -transform.right * viewDistance, Color.red);
+        Debug.DrawRay(rayDrawPos, Quaternion.Euler(0, fieldOfView / 2, 0) * -transform.right * viewDistance, Color.red);
 
         if (angle < fieldOfView / 2 && directionToPlayer.magnitude < viewDistance)
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(directionToPlayer), Color.green);
+            Debug.DrawRay(rayDrawPos, transform.TransformDirection(directionToPlayer), Color.blue);
             return true;
         }
         return false;

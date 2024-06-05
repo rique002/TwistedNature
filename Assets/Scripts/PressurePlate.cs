@@ -6,6 +6,23 @@ using UnityEngine;
         private bool isActive = false;
 
         // This method could be called when a player steps on the pressure plate
+
+        private void Update()
+        {
+            if(Physics.OverlapSphere(transform.position, 1.3f, LayerMask.GetMask("Enemy")).Length > 0)
+            {
+                Activate();
+            }
+            else if(Physics.OverlapSphere(transform.position, 1.3f, LayerMask.GetMask("Player")).Length > 0)
+            {
+                Activate();
+            }
+            else
+            {
+                Deactivate();
+                
+            }
+        }
         public void Activate()
         {
             if(isActive == true)
@@ -19,7 +36,7 @@ using UnityEngine;
 
         public void Deactivate()
         {
-            print("Deactivate");
+           // print("Deactivate");
             if(isActive == false)
             {
                 return;
@@ -33,5 +50,10 @@ using UnityEngine;
         public bool IsActive()
         {
             return isActive;
+        }
+        void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(transform.position, 1.0f);
         }
     }
