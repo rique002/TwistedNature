@@ -8,6 +8,9 @@ public class NPC : Interactable
     [SerializeField] private string answer1;
 
     [SerializeField] private string answer2;
+
+    [SerializeField] private string finalMessage;
+    
     [SerializeField] private InteractionBar uiInteractText;
 
     public override void Interact()
@@ -18,6 +21,17 @@ public class NPC : Interactable
         uiInteractText.SetName(gameObject.name); 
         uiInteractText.SetAnswerText(answer1, answer2);   
         uiInteractText.SetNPC(true); 
+    }
+
+    public void Update(){
+
+    }
+
+    public void Answer1()
+    {
+        uiInteractText.SetText(finalMessage);
+        uiInteractText.SetAnswerText("", "");
+        uiInteractText.SetNPC(false);
     }
 
 }

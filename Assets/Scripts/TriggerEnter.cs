@@ -8,6 +8,7 @@ public class TriggerEnter : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            print("Player entered the trigger");
             cameraSwitcher.toFP();
         }
     }

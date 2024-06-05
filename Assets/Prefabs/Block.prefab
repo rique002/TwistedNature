@@ -47,6 +47,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tile Top 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4172201787302145859, guid: 3df9158ae7c86a64ca9128178be2a2f4,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ca84838835c66d148a8772ef83593bbe, type: 2}
     - target: {fileID: 5114996075067899094, guid: 3df9158ae7c86a64ca9128178be2a2f4,
         type: 3}
       propertyPath: m_LocalScale.x

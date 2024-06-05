@@ -57,7 +57,7 @@ namespace UI
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.X))
             {
                 if (_textBox.maxVisibleCharacters != _textBox.textInfo.characterCount - 1)
                     Skip(true);
