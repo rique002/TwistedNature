@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInventory : MonoBehaviour
+namespace PlayableCharacters
 {
-    public DynamicInventory inventory;
-
-    private void OnTriggerEnter(Collider other)
+    public class PlayerInventory : MonoBehaviour
     {
-        if (other.TryGetComponent(out InstanceItemContainer foundItem))
+        public DynamicInventory inventory;
+
+        private void OnTriggerEnter(Collider other)
         {
-            inventory.AddItem(foundItem.TakeItem());
+            if (other.TryGetComponent(out InstanceItemContainer foundItem))
+            {
+                inventory.AddItem(foundItem.TakeItem());
+            }
         }
     }
 }

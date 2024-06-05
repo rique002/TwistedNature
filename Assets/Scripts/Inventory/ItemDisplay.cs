@@ -3,19 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemDisplay : MonoBehaviour
+namespace PlayableCharacters
 {
-    public int itemIndex;
-    public Image image;
-
-    public void UpdateItemDisplay(Sprite newSprite, int newItemIndex)
+    public class ItemDisplay : MonoBehaviour
     {
-        image.sprite = newSprite;
-        itemIndex = newItemIndex;
-    }
+        public int itemIndex;
+        public Image image;
 
-    public void DropFromInventory(InventoryDisplay inventoryDisplay)
-    {
-        inventoryDisplay.DropItem(itemIndex);
+        public void UpdateItemDisplay(Sprite newSprite, int newItemIndex)
+        {
+            image.sprite = newSprite;
+            itemIndex = newItemIndex;
+        }
+
+        public void DropFromInventory(InventoryDisplay inventoryDisplay)
+        {
+            inventoryDisplay.DropItem(itemIndex);
+        }
     }
 }

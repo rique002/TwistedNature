@@ -2,37 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
-public class DynamicInventory : ScriptableObject
+namespace PlayableCharacters
 {
-    public int maxItems = 10; 
-    public List<ItemInstance> items = new();
 
-    public bool AddItem(ItemInstance itemToAdd)
+    [CreateAssetMenu]
+    public class DynamicInventory : ScriptableObject
     {
-        // Finds an empty slot if there is one
-        for (int i = 0; i < items.Count; i++)
+        public int maxItems = 10;
+        public List<ItemInstance> items = new();
+
+        public bool AddItem(ItemInstance itemToAdd)
         {
-            if (items[i] == null)
+            for (int i = 0; i < items.Count; i++)
             {
-                items[i] = itemToAdd;
+                if (items[i] == null)
+                {
+                    items[i] = itemToAdd;
+                    return true;
+                }
+            }
+
+            if (items.Count < maxItems)
+            {
+                items.Add(itemToAdd);
                 return true;
             }
+
+            Debug.Log("No space in the inventory");
+            return false;
         }
 
-        // Adds a new item if the inventory has space
-        if (items.Count < maxItems)
+        public void RemoveItem(ItemInstance itemToRemove)
         {
-            items.Add(itemToAdd);
-            return true;
+            items.Remove(itemToRemove);
         }
-
-        Debug.Log("No space in the inventory");
-        return false;
-    }
-
-    public void RemoveItem(ItemInstance itemToRemove)
-    {
-        items.Remove(itemToRemove);
     }
 }
