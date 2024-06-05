@@ -574,6 +574,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1706992460}
+  - component: {fileID: 1706992462}
+  - component: {fileID: 1706992461}
   m_Layer: 0
   m_Name: Inventory
   m_TagString: Untagged
@@ -596,6 +598,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1706992461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706992459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d86fa0e4d33aa8f4c95f122766c9e049, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 11400000, guid: b2c9590ab2766c747953b35fb78eff2c, type: 2}
+--- !u!114 &1706992462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706992459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71fef1b6579a87848a59bcc4efbc15d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 11400000, guid: b2c9590ab2766c747953b35fb78eff2c, type: 2}
+  slots:
+  - {fileID: 0}
 --- !u!1 &2014758780
 GameObject:
   m_ObjectHideFlags: 0
@@ -871,6 +901,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8959388327145924942}
+  - component: {fileID: 8960927726533505671}
   m_Layer: 0
   m_Name: Bottle_Health
   m_TagString: Untagged
@@ -878,6 +909,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8960927726533505671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8960927726533505670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ce104c91883f714883b89388ba77dfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item:
+    itemType: {fileID: 11400000, guid: 96e015eaad51d194c9bf603ad56a3354, type: 2}
 --- !u!1 &8960927726900946128
 GameObject:
   m_ObjectHideFlags: 0
