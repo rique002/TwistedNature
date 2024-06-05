@@ -8,7 +8,14 @@ public class ResetPuzzleButton : Interactable
 
         [SerializeField] private Door door;
         [SerializeField] public List<PressurePlate> solution;
+
+        bool toSolve = true;
         
+        private void Update(){
+            if(toSolve){
+                CheckSolution();
+            }
+        }
         public override void Interact()
         {
             base.Interact();
@@ -43,14 +50,16 @@ public class ResetPuzzleButton : Interactable
             if (solved)
             {
                 door.OpenDoor();
+                print("Puzzle solved");
+                toSolve = false;
             }
-            else
+           /* else
             {
                 ResetPuzzle();
-            }
+            }*/
         }
 
-        public void ResetPuzzle()
+        /*public void ResetPuzzle()
         {
             print("Resetting puzzle");
             foreach (var plate in pressurePlates)
@@ -58,6 +67,6 @@ public class ResetPuzzleButton : Interactable
                 print(plate + " is being deactivated");
                 plate.Deactivate();
             }
-        }
+        }*/
     }
 }

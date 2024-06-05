@@ -17,6 +17,8 @@ namespace PlayableCharacters
 
         private List<int> keys = new List<int>();
 
+        private List<int> triangles = new List<int>();
+
         private void Awake()
         {
             if (Instance == null)
@@ -37,6 +39,12 @@ namespace PlayableCharacters
             KeyInventory.SetKey1(true);
         }
 
+        public void AddTriangle(int triangleId)
+        {
+            triangles.Add(triangleId);
+            Debug.Log("Added triangle with ID " + triangleId + " to inventory.");
+        }
+
         public bool HasKey(int keyId)
         {
             if (keys.Contains(keyId))
@@ -47,14 +55,9 @@ namespace PlayableCharacters
             return false;
         }
 
-        public void AddItem(ItemData itemToAdd)
+        public bool HasTriangle(int triangleId)
         {
-            items.Add(itemToAdd);
-        }
-
-        public void RemoveItem(ItemData itemToRemove)
-        {
-            items.Remove(itemToRemove);
+            return triangles.Contains(triangleId);
         }
     }
 }

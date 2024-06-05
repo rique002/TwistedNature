@@ -11,6 +11,8 @@ public class Nameplate : Interactable
         base.Interact();
         uiInteractText.SetActive(true);
         uiInteractText.SetText(message);
+        uiInteractText.SetName("Board");
+        uiInteractText.SetNPC(false);
     }
 
 }
