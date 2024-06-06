@@ -1,6 +1,7 @@
 using Interactables;
 using UnityEngine;
 using UI;
+using System.Collections;
 public class NPC : Interactable
 {
     [SerializeField] private string message;
@@ -13,6 +14,8 @@ public class NPC : Interactable
     
     [SerializeField] private InteractionBar uiInteractText;
 
+    [SerializeField] private PlayerManager playerManager;
+
     public override void Interact()
     {
         base.Interact();
@@ -24,14 +27,26 @@ public class NPC : Interactable
     }
 
     public void Update(){
-
+        if(uiInteractText.answer1Clicked){
+            Answer1();
+        }
     }
 
-    public void Answer1()
+        public void Answer1()
     {
         uiInteractText.SetText(finalMessage);
         uiInteractText.SetAnswerText("", "");
         uiInteractText.SetNPC(false);
+        
+        StartCoroutine(DestroyAfterDelay(2f));
+    }
+
+    private IEnumerator DestroyAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        playerManager.addCharacter();
+        Destroy(gameObject);
+        
     }
 
 }

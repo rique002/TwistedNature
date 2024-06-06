@@ -8,7 +8,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private PlayerManager gameManager;
     [SerializeField] private Transform player;
     [SerializeField] private List<Transform> waypoints;
-    [SerializeField] private HealthBar healthBar;
+    [SerializeField] private HealthBar healthBarPrefab;
+
+    private HealthBar healthBar;
     [SerializeField] protected float maxHealthPoints;
     [SerializeField] private Canvas canvas;
     [SerializeField] private float speed = 1.0f;
@@ -42,6 +44,7 @@ public class Enemy : MonoBehaviour
         animator = model.GetComponent<Animator>();
         state = State.Mooving;
         weaponCollider.SetDamage(attackDamage);
+        healthBar = Instantiate(healthBarPrefab, canvas.transform);
 
         gameManager.OnActivePlayerChaged += GameManager_OnActivePlayerChaged;
     }
@@ -194,6 +197,7 @@ public class Enemy : MonoBehaviour
         if (healthPoints < 0.0f)
         {
             healthPoints = 0.0f;
+            Destroy(healthBar.gameObject);
             Destroy(gameObject);
         }
     }
