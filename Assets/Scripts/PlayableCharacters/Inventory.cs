@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UI;
+using TreeEditor;
 
 namespace PlayableCharacters
 {
@@ -10,6 +11,8 @@ namespace PlayableCharacters
         public static Inventory Instance { get; private set; }
 
         [SerializeField] private KeyInventory KeyInventory;
+
+        [SerializeField] private TriangleBox triangleBox;
 
         private List<int> keys = new List<int>(); 
 
@@ -38,6 +41,8 @@ namespace PlayableCharacters
         public void AddTriangle(int triangleId)
         {
             triangles.Add(triangleId);
+            triangleBox.SetActive(true);
+            triangleBox.SetTriangle(triangleId);
             Debug.Log("Added triangle with ID " + triangleId + " to inventory.");
         }
 
