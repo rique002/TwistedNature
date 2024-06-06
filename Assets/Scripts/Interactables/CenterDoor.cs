@@ -1,3 +1,4 @@
+using System.Collections;
 using PlayableCharacters;
 using UnityEngine; 
 
@@ -10,6 +11,8 @@ namespace Interactables
         [SerializeField] private GameObject triangleRight;
         [SerializeField] private GameObject triangleCenter;
         [SerializeField] private Animator animator;
+
+        [SerializeField] private GameObject boss;
         private bool isOpen = false; 
 
         
@@ -35,6 +38,7 @@ namespace Interactables
         public override void Interact()
         {
             base.Interact();
+            Invoke("TriggerOpenDoor", 1f);
             if (Inventory.Instance.HasTriangle(0))
             {
                 triangleCenterAnimator.SetTrigger("Place");
@@ -64,13 +68,43 @@ namespace Interactables
                 if (!isOpen)
                 {
                     isOpen = true;
-                    Invoke("OpenDoor", 1f);
+                    Invoke("TriggerOpenDoor", 1f);
                 }
             }
         }
-        private void OpenDoor()
+       private IEnumerator OpenDoor()
+{
+    int layerMask = LayerMask.GetMask("Player");
+
+    // Create a sphere in front of the door
+    Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5f, layerMask);
+    foreach (var hitCollider in hitColliders)
+    {
+        print("Collided with - " + hitCollider.name);
+        // If the player is hit, push them to the X, -Z direction
+        Rigidbody playerRigidbody = hitCollider.GetComponent<Rigidbody>();
+        if (playerRigidbody != null)
         {
-            animator.SetTrigger("Open");
+            Vector3 forceDirection = new Vector3(1, 0.1f, -1).normalized;
+            playerRigidbody.AddForce(forceDirection * 100, ForceMode.Impulse);
+            print("Pushed player");
         }
+    }
+
+    // Wait for 1 second
+    yield return new WaitForSeconds(1f);
+
+    if (boss != null)
+    {
+        Quaternion rotation = Quaternion.LookRotation(Quaternion.Euler(0, -135, 0) * Vector3.forward);
+        Instantiate(boss, new Vector3(transform.position.x+2,transform.position.y,transform.position.z-2), rotation);
+    }
+}
+
+// Call the coroutine from another method
+public void TriggerOpenDoor()
+{
+    StartCoroutine(OpenDoor());
+}
     }
 }
