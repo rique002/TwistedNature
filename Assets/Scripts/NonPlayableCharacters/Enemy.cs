@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UI;
 using System;
@@ -112,7 +111,7 @@ public class Enemy : MonoBehaviour
     {
         state = State.Mooving;
         Vector3 direction = player.position - transform.position;
-        transform.Translate(direction.normalized * speed * Time.deltaTime, Space.World);
+        transform.Translate(speed * Time.deltaTime * direction.normalized, Space.World);
 
         if (direction != Vector3.zero)
         {
