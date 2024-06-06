@@ -5,6 +5,7 @@ using Image = UnityEngine.UI.Image;
 using UnityEngine.UI;
 using Interactables;
 using UI;
+using FMODUnity;
 
 namespace PlayableCharacters
 {
@@ -26,6 +27,7 @@ namespace PlayableCharacters
         [SerializeField] protected InteractionBar interactionBar;
         [SerializeField] protected CameraSwitcher cameraSwitcher;
         [SerializeField] protected Transform spawnPoint;
+        [SerializeField] EventReference damageSoundEvent;
 
         protected State state;
         protected float healthPoints;
@@ -34,7 +36,7 @@ namespace PlayableCharacters
         protected readonly List<StatusEffect> statusEffects = new();
         protected Animator animator;
 
-        public event EventHandler OnPlayableCharacterKilled;
+        public event System.EventHandler OnPlayableCharacterKilled;
         public event EventHandler<OnPlayableCharacterHealthChangeArgs> OnPlayableCharacterHealthChange;
         public class OnPlayableCharacterHealthChangeArgs : EventArgs
         {
@@ -219,6 +221,10 @@ namespace PlayableCharacters
                 state = State.Dead;
 
                 OnPlayableCharacterKilled?.Invoke(this, EventArgs.Empty);
+            }
+            else if (!damageSoundEvent.IsNull)
+            {
+                RuntimeManager.PlayOneShot(damageSoundEvent, transform.position);
             }
         }
 

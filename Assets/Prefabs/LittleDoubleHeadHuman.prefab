@@ -306,6 +306,13 @@ MonoBehaviour:
   weaponCollider: {fileID: 6675939342582469709}
   healthBar: {fileID: 105394034906781103}
   rigidBody: {fileID: 5880696227703852970}
+  damageSoundEvent:
+    Guid:
+      Data1: 306445360
+      Data2: 1196063038
+      Data3: 1637135240
+      Data4: 1397929059
+    Path: event:/Inimigos/Dano do npc 2
 --- !u!1 &5052295768335539116
 GameObject:
   m_ObjectHideFlags: 0

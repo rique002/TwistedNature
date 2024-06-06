@@ -1,6 +1,7 @@
 using UnityEngine;
 using UI;
 using System;
+using FMODUnity;
 
 public class Enemy : MonoBehaviour
 {
@@ -14,8 +15,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private EnemyWeaponCollider weaponCollider;
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private Rigidbody rigidBody;
+    [SerializeField] EventReference damageSoundEvent;
 
-    public event EventHandler OnEnemyKilled;
+    public event System.EventHandler OnEnemyKilled;
 
     private Transform player;
     private bool isWalking = false;
@@ -171,6 +173,10 @@ public class Enemy : MonoBehaviour
             OnEnemyKilled?.Invoke(this, EventArgs.Empty);
             animator.SetTrigger("Death");
             state = State.Dead;
+        }
+        else if (!damageSoundEvent.IsNull)
+        {
+            RuntimeManager.PlayOneShot(damageSoundEvent, transform.position);
         }
     }
 

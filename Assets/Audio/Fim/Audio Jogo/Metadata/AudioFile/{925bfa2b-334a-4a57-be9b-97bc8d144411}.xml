@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{925bfa2b-334a-4a57-be9b-97bc8d144411}">
+		<property name="assetPath">
+			<value>SFX/+ SFX/Porco Espinho/Som do salto/Som Voz Salto Passaro 1.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>0.60734693877551016</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{32ed6c20-0a06-45e1-9d18-e6425e2eb693}</destination>
+		</relationship>
+	</object>
+</objects>

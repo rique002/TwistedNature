@@ -113,6 +113,13 @@ MonoBehaviour:
   interactionBar: {fileID: 0}
   cameraSwitcher: {fileID: 0}
   spawnPoint: {fileID: 0}
+  damageSoundEvent:
+    Guid:
+      Data1: 675923674
+      Data2: 1126332177
+      Data3: -1475687271
+      Data4: -847671432
+    Path: "event:/P\xE1ssaro/Dano"
   dashForce: 15
   dashDuration: 0.1
   jumpForce: 3

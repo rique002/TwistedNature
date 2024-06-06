@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="EncodableAsset" id="{efdc925d-52fd-4d02-9bac-7ed28c5905cf}">
+		<property name="assetPath">
+			<value>SFX/Pássaro/Passos Floresta/</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{32ed6c20-0a06-45e1-9d18-e6425e2eb693}</destination>
+		</relationship>
+	</object>
+</objects>

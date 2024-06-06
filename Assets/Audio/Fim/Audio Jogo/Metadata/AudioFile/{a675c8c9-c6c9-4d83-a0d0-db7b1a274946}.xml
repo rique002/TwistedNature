@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{a675c8c9-c6c9-4d83-a0d0-db7b1a274946}">
+		<property name="assetPath">
+			<value>SFX/Pássaro/Salto/Som Salto.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>0.93807256235827663</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{32ed6c20-0a06-45e1-9d18-e6425e2eb693}</destination>
+		</relationship>
+	</object>
+</objects>
