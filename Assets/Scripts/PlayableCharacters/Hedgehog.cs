@@ -122,6 +122,7 @@ namespace PlayableCharacters
         private void GameInput_OnJumpAction(object sender, EventArgs e)
         {
             Debug.Log(this.name + " is jumping");
+            print(!isJumping + "and" + isActiveAndEnabled);
             if (!isJumping && isActiveAndEnabled)
             {
                 StartCoroutine(Jump());
@@ -144,7 +145,6 @@ namespace PlayableCharacters
             isJumping = false;
             isDashing = false;
             state = State.Idle;
-            animator.SetBool("Flying", false);
             animator.SetBool("Running", false);
             gameObject.SetActive(false);
         }

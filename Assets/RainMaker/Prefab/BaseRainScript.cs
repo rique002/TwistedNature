@@ -35,7 +35,7 @@ namespace DigitalRuby.RainMaker
 
         [Tooltip("Intensity of rain (0-1)")]
         [Range(0.0f, 1.0f)]
-        public float RainIntensity;
+        public float RainIntensity = 0.0f;
 
         [Tooltip("Rain particle system")]
         public ParticleSystem RainFallParticleSystem;
