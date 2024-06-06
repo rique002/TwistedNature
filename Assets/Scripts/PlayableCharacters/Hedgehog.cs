@@ -93,6 +93,7 @@ namespace PlayableCharacters
         private void GameInput_OnJumpAction(object sender, EventArgs e)
         {
             Debug.Log(this.name + " is jumping");
+            print(!isJumping +"and" +isActiveAndEnabled);
             if (!isJumping && isActiveAndEnabled)
             {
                 StartCoroutine(Jump());
