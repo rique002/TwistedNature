@@ -80,8 +80,7 @@ public class PlayerManager : MonoBehaviour
             return;
         }
         Transform currentTransform = activeCharacter.GetTransform();
-        activeCharacter.EndAttack();
-        activeCharacter.SetActive(false);
+        activeCharacter.Deactivate();
 
         do
         {

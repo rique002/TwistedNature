@@ -21,6 +21,16 @@ namespace PlayableCharacters
 
         protected override void HandleMovement()
         {
+            if (transform.position.y < -3)
+            {
+                transform.position = spawnPoint.position;
+                isFlying = false;
+                state = State.Idle;
+                animator.SetBool("Flying", false);
+                animator.SetBool("Running", false);
+                return;
+            }
+
             float currentMoveSpeed = isFlying ? flyingSpeed : moveSpeed;
             float velocityY = isFlying ? 0 : playerBody.velocity.y;
 
@@ -75,6 +85,16 @@ namespace PlayableCharacters
         public override void EndAttack()
         {
             nozzleCollider.EndAttack();
+        }
+
+        public override void Deactivate()
+        {
+            EndAttack();
+            isFlying = false;
+            state = State.Idle;
+            animator.SetBool("Flying", false);
+            animator.SetBool("Running", false);
+            gameObject.SetActive(false);
         }
     }
 }
