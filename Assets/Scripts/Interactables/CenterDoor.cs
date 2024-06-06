@@ -1,3 +1,4 @@
+using System.Collections;
 using PlayableCharacters;
 using UnityEngine; 
 
@@ -10,6 +11,11 @@ namespace Interactables
         [SerializeField] private GameObject triangleRight;
         [SerializeField] private GameObject triangleCenter;
         [SerializeField] private Animator animator;
+
+        [SerializeField] private GameObject boss;
+        private GameObject bossInstance;
+        
+        private bool bossSpawned = false;
         private bool isOpen = false; 
 
         
@@ -61,16 +67,56 @@ namespace Interactables
             if (triangleLeftPlaced && triangleRightPlaced && triangleCenterPlaced)
             {
 
-                if (!isOpen)
+                if (!isOpen && !bossSpawned)
                 {
                     isOpen = true;
-                    Invoke("OpenDoor", 1f);
+                    Invoke("TriggerOpenDoor", 1f);
                 }
             }
+            if(bossInstance != null && bossInstance.GetComponent<Enemy>().isDead)
+            {
+                animator.SetTrigger("Open");
+            }
         }
-        private void OpenDoor()
+private IEnumerator PushPlayer(Rigidbody playerRigidbody)
+{
+    Vector3 forceDirection = new Vector3(10, 0.2f, -10);
+    for (int i = 0; i < 50; i++)
+    {
+        playerRigidbody.AddForce(forceDirection, ForceMode.VelocityChange);
+        yield return new WaitForFixedUpdate();
+    }
+}
+
+private IEnumerator OpenDoor()
+{
+    int layerMask = LayerMask.GetMask("Player");
+
+    Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5f, layerMask);
+    foreach (var hitCollider in hitColliders)
+    {
+        print("Collided with - " + hitCollider.name);
+        Rigidbody playerRigidbody = hitCollider.GetComponent<Rigidbody>();
+        if (playerRigidbody != null)
         {
-            animator.SetTrigger("Open");
+            StartCoroutine(PushPlayer(playerRigidbody));
+            print("Pushed player");
         }
+    }
+
+    yield return new WaitForSeconds(1f);
+
+    if (boss != null)
+    {
+        Quaternion rotation = Quaternion.LookRotation(Quaternion.Euler(0, -135, 0) * Vector3.forward);
+        bossInstance= Instantiate(boss, new Vector3(transform.position.x+2,transform.position.y,transform.position.z-2), rotation);
+        bossSpawned = true;
+    }
+}
+
+public void TriggerOpenDoor()
+{
+    StartCoroutine(OpenDoor());
+}
     }
 }
