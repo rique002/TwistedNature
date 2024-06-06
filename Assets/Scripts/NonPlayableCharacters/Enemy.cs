@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UI;
+using System;
 
 public class Enemy : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject model;
     [SerializeField] private EnemyWeaponCollider weaponCollider;
     [SerializeField] private HealthBar healthBar;
+
+    public event EventHandler OnEnemyKilled;
 
     private Transform player;
     private bool isWalking = false;
@@ -60,19 +63,6 @@ public class Enemy : MonoBehaviour
             healthBar.SetName(enemyName);
             healthBar.gameObject.SetActive(true);
             healthBar.SetValue(healthPoints / maxHealthPoints);
-            // if (Camera.main != null)
-            // {
-            //     Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
-            //     screenPosition.y += 200;
-            //     healthBar.transform.position = screenPosition;
-            // }
-            // else
-            // {
-            //     if (healthBar != null)
-            //     {
-            //         healthBar.gameObject.SetActive(false);
-            //     }
-            // }
 
         }
         else
@@ -184,6 +174,7 @@ public class Enemy : MonoBehaviour
         if (healthPoints < 0.0f)
         {
             healthPoints = 0.0f;
+            OnEnemyKilled?.Invoke(this, EventArgs.Empty);
             Destroy(healthBar.gameObject);
             Destroy(gameObject);
         }
