@@ -1,30 +1,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UI;
-using System;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private PlayerManager gameManager;
-    [SerializeField] private Transform player;
     [SerializeField] private List<Transform> waypoints;
-    [SerializeField] private HealthBar healthBarPrefab;
-
-    private HealthBar healthBar;
     [SerializeField] protected float maxHealthPoints;
-    [SerializeField] private Canvas canvas;
     [SerializeField] private float speed = 1.0f;
     [SerializeField] private float fieldOfView = 90f;
     [SerializeField] private float viewDistance = 10.0f;
-    [SerializeField] private LayerMask viewMask;
     [SerializeField] private string enemyName;
-    [SerializeField] private ParticleSystem attackParticles;
-    [SerializeField] private float attackCooldown;
     [SerializeField] private float attackDamage;
     [SerializeField] private GameObject model;
     [SerializeField] private EnemyWeaponCollider weaponCollider;
+    [SerializeField] private HealthBar healthBar;
 
-    bool isWalking = false;
+    private Transform player;
+    private bool isWalking = false;
     private int waypointIndex = 0;
     private bool playerDetected = false;
     private bool closeToPlayer = false;
@@ -44,9 +36,6 @@ public class Enemy : MonoBehaviour
         animator = model.GetComponent<Animator>();
         state = State.Mooving;
         weaponCollider.SetDamage(attackDamage);
-        healthBar = Instantiate(healthBarPrefab, canvas.transform);
-
-        gameManager.OnActivePlayerChaged += GameManager_OnActivePlayerChaged;
     }
 
     private void Update()
@@ -71,22 +60,25 @@ public class Enemy : MonoBehaviour
             healthBar.SetName(enemyName);
             healthBar.gameObject.SetActive(true);
             healthBar.SetValue(healthPoints / maxHealthPoints);
-            if(Camera.main != null){
-                Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
-                screenPosition.y += 200;
-                healthBar.transform.position = screenPosition;
-            }
-            else
-            {
-                if(healthBar != null){
-                    healthBar.gameObject.SetActive(false);
-                }
-            }
+            // if (Camera.main != null)
+            // {
+            //     Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
+            //     screenPosition.y += 200;
+            //     healthBar.transform.position = screenPosition;
+            // }
+            // else
+            // {
+            //     if (healthBar != null)
+            //     {
+            //         healthBar.gameObject.SetActive(false);
+            //     }
+            // }
 
         }
         else
         {
-            if(healthBar != null){
+            if (healthBar != null)
+            {
                 healthBar.gameObject.SetActive(false);
             }
         }
@@ -108,11 +100,6 @@ public class Enemy : MonoBehaviour
                 ChasePlayer();
             }
         }
-    }
-
-    private void GameManager_OnActivePlayerChaged(object sender, PlayerManager.OnActivePlayerChangedEventArgs e)
-    {
-        player = e.playerTransform;
     }
 
     private bool PlayerInFieldOfView()
