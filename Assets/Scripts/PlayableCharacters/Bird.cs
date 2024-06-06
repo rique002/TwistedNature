@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.Timeline;
 
 namespace PlayableCharacters
 {
@@ -31,7 +30,7 @@ namespace PlayableCharacters
             if (inputVector != Vector2.zero)
             {
                 state = State.Mooving;
-                if(cameraSwitcher.isMain())
+                if (cameraSwitcher.isMain())
                 {
                     Quaternion targetRotation = Quaternion.LookRotation(new Vector3(inputVector.x, 0, inputVector.y));
                     playerBody.MoveRotation(Quaternion.Slerp(playerBody.rotation, targetRotation, Time.deltaTime * rotationSpeed));
@@ -39,15 +38,17 @@ namespace PlayableCharacters
                 else
                 {
                     playerBody.velocity = transform.forward * inputVector.y * currentMoveSpeed;
-                    if(inputVector.x>0){
-                        transform.Rotate(Vector3.up, rotationSpeed*10 * Time.deltaTime);
+                    if (inputVector.x > 0)
+                    {
+                        transform.Rotate(Vector3.up, rotationSpeed * 10 * Time.deltaTime);
                     }
-                    else if(inputVector.x<0){
-                        transform.Rotate(Vector3.up, -rotationSpeed*10 * Time.deltaTime);
+                    else if (inputVector.x < 0)
+                    {
+                        transform.Rotate(Vector3.up, -rotationSpeed * 10 * Time.deltaTime);
                     }
                 }
 
-           }
+            }
             else
             {
                 state = State.Idle;

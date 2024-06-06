@@ -114,6 +114,7 @@ MonoBehaviour:
   jumpForce: 3
   interactTextUI: {fileID: 0}
   interactionBar: {fileID: 0}
+  cameraSwitcher: {fileID: 0}
   nozzleCollider: {fileID: 3355239703370104036}
   flyingSpeed: 4
 --- !u!1001 &7845424926084537860
@@ -173,6 +174,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7676287012621583555, guid: 1cc37d635a831477ca243885b6d57ecd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: -4908670238621968113, guid: 1cc37d635a831477ca243885b6d57ecd,
         type: 3}

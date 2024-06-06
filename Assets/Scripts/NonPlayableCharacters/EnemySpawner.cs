@@ -3,9 +3,10 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject enemyPrefab;
-    [SerializeField] private float maxEnemies = 1.0f;
+    [SerializeField] private int maxEnemies = 1;
     [SerializeField] private float spawnRate = 1.0f;
-    [SerializeField] private float spawnRadius = 1.0f;
+    [SerializeField] private Transform[] spawnPoints;
+    [SerializeField] private Transform LookAt;
 
     private int currentEnemies;
     private float spawnTimer;
@@ -18,13 +19,15 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
+        if (currentEnemies >= maxEnemies) return;
+
         spawnTimer += Time.deltaTime;
 
-        if (currentEnemies < maxEnemies && spawnTimer >= spawnRate)
+        if (spawnTimer >= spawnRate)
         {
-            Vector3 randomPosition = Random.insideUnitSphere * spawnRadius;
-            Vector3 spawnPosition = new(transform.position.x + randomPosition.x, transform.position.y, transform.position.z + randomPosition.z);
-            Enemy enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity).GetComponent<Enemy>();
+            Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+            Quaternion spawnRotation = Quaternion.LookRotation(LookAt.position - spawnPoint.position);
+            Enemy enemy = Instantiate(enemyPrefab, spawnPoint.position, spawnRotation).GetComponent<Enemy>();
             enemy.OnEnemyKilled += (object sender, System.EventArgs e) => currentEnemies--;
             currentEnemies++;
             spawnTimer = 0.0f;
