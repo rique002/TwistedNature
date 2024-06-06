@@ -92,12 +92,10 @@ private IEnumerator OpenDoor()
 {
     int layerMask = LayerMask.GetMask("Player");
 
-    // Create a sphere in front of the door
     Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5f, layerMask);
     foreach (var hitCollider in hitColliders)
     {
         print("Collided with - " + hitCollider.name);
-        // If the player is hit, push them to the X, -Z direction
         Rigidbody playerRigidbody = hitCollider.GetComponent<Rigidbody>();
         if (playerRigidbody != null)
         {
@@ -116,7 +114,6 @@ private IEnumerator OpenDoor()
     }
 }
 
-// Call the coroutine from another method
 public void TriggerOpenDoor()
 {
     StartCoroutine(OpenDoor());
