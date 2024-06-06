@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using PlayableCharacters;
 using UnityEngine;
@@ -71,11 +72,6 @@ namespace Interactables
                     Invoke("TriggerOpenDoor", 1f);
                 }
             }
-            if (bossInstance != null && bossInstance.GetComponent<Enemy>().isDead)
-            {
-                animator.SetTrigger("Open");
-                Destroy(bossEnemies);
-            }
         }
         private IEnumerator PushPlayer(Rigidbody playerRigidbody)
         {
@@ -109,6 +105,12 @@ namespace Interactables
             {
                 Quaternion rotation = Quaternion.LookRotation(Quaternion.Euler(0, -135, 0) * Vector3.forward);
                 bossInstance = Instantiate(boss, new Vector3(transform.position.x + 2, transform.position.y, transform.position.z - 2), rotation);
+                Enemy enemy = bossInstance.GetComponent<Enemy>();
+                enemy.OnEnemyKilled += (object sender, EventArgs e) =>
+                {
+                    animator.SetTrigger("Open");
+                    Destroy(bossEnemies);
+                };
                 bossSpawned = true;
                 bossEnemies.SetActive(true);
             }

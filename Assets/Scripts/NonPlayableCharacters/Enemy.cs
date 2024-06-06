@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject model;
     [SerializeField] private EnemyWeaponCollider weaponCollider;
     [SerializeField] private HealthBar healthBar;
+    [SerializeField] private Rigidbody rigidBody;
 
     public event EventHandler OnEnemyKilled;
 
@@ -23,8 +24,6 @@ public class Enemy : MonoBehaviour
     private Animator animator;
     private State state;
     private bool isAttacking = false;
-
-    public bool isDead => state == State.Dead;
     private float healthPoints;
 
     private enum State { Idle, Mooving, Attacking, Dead };
@@ -69,7 +68,6 @@ public class Enemy : MonoBehaviour
         {
             healthBar.SetName(enemyName);
             healthBar.gameObject.SetActive(true);
-            healthBar.SetValue(healthPoints / maxHealthPoints);
 
         }
         else
@@ -107,7 +105,7 @@ public class Enemy : MonoBehaviour
         Vector3 directionToPlayer = transform.InverseTransformPoint(player.position);
         float angle = Vector3.Angle(-Vector3.right, directionToPlayer);
 
-        Vector3 rayDrawPos = new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z);
+        Vector3 rayDrawPos = new(transform.position.x, transform.position.y + 1.0f, transform.position.z);
         Debug.DrawRay(rayDrawPos, Quaternion.Euler(0, -fieldOfView / 2, 0) * -transform.right * viewDistance, Color.red);
         Debug.DrawRay(rayDrawPos, Quaternion.Euler(0, fieldOfView / 2, 0) * -transform.right * viewDistance, Color.red);
 
@@ -123,7 +121,8 @@ public class Enemy : MonoBehaviour
     {
         state = State.Mooving;
         Vector3 direction = player.position - transform.position;
-        transform.Translate(speed * Time.deltaTime * direction.normalized, Space.World);
+        direction.y = 0;
+        rigidBody.velocity = new Vector3(direction.normalized.x * speed, rigidBody.velocity.y, direction.normalized.z * speed);
 
         if (direction != Vector3.zero)
         {
@@ -138,6 +137,7 @@ public class Enemy : MonoBehaviour
         float distance = Vector3.Distance(player.position, transform.position);
         if (distance < 2.0f)
         {
+            rigidBody.velocity = Vector3.zero;
             state = State.Attacking;
             isAttacking = true;
             animator.SetTrigger("Attack");
@@ -164,6 +164,7 @@ public class Enemy : MonoBehaviour
     public void ReceiveDamage(float damage)
     {
         healthPoints -= damage;
+        healthBar.SetValue(healthPoints / maxHealthPoints);
         if (healthPoints < 0.0f)
         {
             healthPoints = 0.0f;
@@ -180,6 +181,7 @@ public class Enemy : MonoBehaviour
 
     public void Stop()
     {
+        rigidBody.velocity = Vector3.zero;
         isWalking = false;
     }
 
