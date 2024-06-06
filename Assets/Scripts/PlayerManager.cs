@@ -3,6 +3,7 @@ using System;
 using PlayableCharacters;
 using UI;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class PlayerManager : MonoBehaviour
     private PlayableCharacter activeCharacter;
     private int indexActiveCharacter;
 
+    public bool canChange = false;
+
     private List<int> keys = new List<int>();
 
     public event EventHandler OnPlayerGameOver;
@@ -21,6 +24,10 @@ public class PlayerManager : MonoBehaviour
     public class OnActivePlayerChangedEventArgs : EventArgs
     {
         public Transform playerTransform;
+    }
+
+    public void addCharacter(){
+        canChange = true;
     }
 
 
@@ -63,6 +70,10 @@ public class PlayerManager : MonoBehaviour
 
     private void GameInput_OnSwapAction(object sender, EventArgs e)
     {
+
+        if (!canChange){
+            return;
+        }
         Transform currentTransform = activeCharacter.GetTransform();
         activeCharacter.EndAttack();
         activeCharacter.SetActive(false);

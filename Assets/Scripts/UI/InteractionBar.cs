@@ -21,6 +21,8 @@ namespace UI
         private Button buttonAnswer1;
         private Button buttonAnswer2;
 
+        public bool answer1Clicked = false;
+
         private bool isNPC = false;
 
         public void SetNPC(bool isNPC){
@@ -46,6 +48,7 @@ namespace UI
             if(!isNPC){
                 answer1.SetActive(false);
                 answer2.SetActive(false);
+                imageContainer.SetActive(false);
             }
             else{
                 imageContainer.SetActive(true);
@@ -97,7 +100,9 @@ namespace UI
 
         public void OnAnswer1Clicked()
         {
+            answer1Clicked = true;
             print("Answer1 clicked");
+            
         }
 
         public void OnAnswer2Clicked()
