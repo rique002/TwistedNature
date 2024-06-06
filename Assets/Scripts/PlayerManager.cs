@@ -11,6 +11,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private Inventory inventory;
     [SerializeField] private GameOverScreen gameOverScreen;
 
+    [SerializeField] private WonScreen wonScreen;
     private PlayableCharacter activeCharacter;
     private int indexActiveCharacter;
 
@@ -31,6 +32,7 @@ public class PlayerManager : MonoBehaviour
     private void Start()
     {
         gameOverScreen.Hide();
+        wonScreen.Hide();
 
         foreach (PlayableCharacter playableCharacter in playableCharacters)
         {
