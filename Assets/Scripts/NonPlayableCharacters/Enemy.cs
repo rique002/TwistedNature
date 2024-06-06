@@ -5,7 +5,6 @@ using System;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private List<Transform> waypoints;
     [SerializeField] protected float maxHealthPoints;
     [SerializeField] private float speed = 1.0f;
     [SerializeField] private float fieldOfView = 90f;
@@ -20,29 +19,26 @@ public class Enemy : MonoBehaviour
 
     private Transform player;
     private bool isWalking = false;
-    private int waypointIndex = 0;
     private bool playerDetected = false;
     private bool closeToPlayer = false;
     private Animator animator;
     private State state;
     private float healthPoints;
 
-    private enum State { Mooving, Attacking };
+    private enum State { Idle, Mooving, Attacking, Dead };
 
     private void Start()
     {
-        if (waypoints.Count > 0)
-        {
-            transform.position = waypoints[waypointIndex].position;
-        }
         healthPoints = maxHealthPoints;
         animator = model.GetComponent<Animator>();
-        state = State.Mooving;
+        state = State.Idle;
         weaponCollider.SetDamage(attackDamage);
     }
 
     private void Update()
     {
+        if (state == State.Attacking || state == State.Dead) return;
+
         if (player == null || !player.gameObject.activeInHierarchy)
         {
             GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
@@ -73,22 +69,25 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        if (state == State.Attacking) return;
-
         playerDetected = PlayerInFieldOfView();
 
-        if (playerDetected) Attack();
-
-        if (state == State.Mooving && isWalking)
+        if (playerDetected)
         {
-            if (!playerDetected)
+            Attack();
+
+            if (state != State.Attacking)
             {
-                MoveEnemy();
+                animator.SetBool("Running", true);
+                if (isWalking)
+                {
+                    ChasePlayer();
+                }
             }
-            else
-            {
-                ChasePlayer();
-            }
+        }
+        else
+        {
+            animator.SetBool("Running", false);
+            state = State.Idle;
         }
     }
 
@@ -109,28 +108,9 @@ public class Enemy : MonoBehaviour
         return false;
     }
 
-    private void MoveEnemy()
-    {
-        if (waypoints.Count == 0) return;
-
-        Vector3 direction = waypoints[waypointIndex].position - transform.position;
-        transform.Translate(direction.normalized * speed * Time.deltaTime, Space.World);
-
-        if (direction != Vector3.zero)
-        {
-            Quaternion toRotation = Quaternion.LookRotation(direction, Vector3.up);
-            toRotation *= Quaternion.Euler(0, 90, 0);
-            transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, speed * Time.deltaTime);
-        }
-
-        if (Vector3.Distance(transform.position, waypoints[waypointIndex].position) < 0.1f)
-        {
-            waypointIndex = (waypointIndex + 1) % waypoints.Count;
-        }
-    }
-
     private void ChasePlayer()
     {
+        state = State.Mooving;
         Vector3 direction = player.position - transform.position;
         transform.Translate(direction.normalized * speed * Time.deltaTime, Space.World);
 
@@ -175,8 +155,8 @@ public class Enemy : MonoBehaviour
         {
             healthPoints = 0.0f;
             OnEnemyKilled?.Invoke(this, EventArgs.Empty);
-            Destroy(healthBar.gameObject);
-            Destroy(gameObject);
+            animator.SetTrigger("Death");
+            state = State.Dead;
         }
     }
 
@@ -188,5 +168,11 @@ public class Enemy : MonoBehaviour
     public void Stop()
     {
         isWalking = false;
+    }
+
+    public void Destroy()
+    {
+        Destroy(healthBar.gameObject);
+        Destroy(gameObject);
     }
 }

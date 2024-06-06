@@ -114,6 +114,7 @@ MonoBehaviour:
   jumpForce: 3
   interactTextUI: {fileID: 0}
   interactionBar: {fileID: 0}
+  cameraSwitcher: {fileID: 0}
   rightFistCollider: {fileID: 8004022815725972468}
   leftFistCollider: {fileID: 2740421422370574445}
 --- !u!1001 &7357563189857925528
@@ -177,7 +178,7 @@ PrefabInstance:
     - target: {fileID: -8322026229719339847, guid: 23e390ebd6d354d89add239b5315b717,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: -7411677227845934495, guid: 23e390ebd6d354d89add239b5315b717,
         type: 3}
@@ -187,7 +188,7 @@ PrefabInstance:
     - target: {fileID: -3582719908346108219, guid: 23e390ebd6d354d89add239b5315b717,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 23e390ebd6d354d89add239b5315b717,
         type: 3}

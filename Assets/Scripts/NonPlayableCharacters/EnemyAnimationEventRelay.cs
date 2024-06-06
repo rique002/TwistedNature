@@ -28,4 +28,9 @@ public class EnemyAnimationEventRelay : MonoBehaviour
     {
         enemy.EndAttack();
     }
+
+    public void Destroy()
+    {
+        enemy.Destroy();
+    }
 }

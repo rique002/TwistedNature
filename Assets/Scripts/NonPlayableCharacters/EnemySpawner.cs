@@ -18,9 +18,11 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
+        if (currentEnemies >= maxEnemies) return;
+
         spawnTimer += Time.deltaTime;
 
-        if (currentEnemies < maxEnemies && spawnTimer >= spawnRate)
+        if (spawnTimer >= spawnRate)
         {
             Vector3 randomPosition = Random.insideUnitSphere * spawnRadius;
             Vector3 spawnPosition = new(transform.position.x + randomPosition.x, transform.position.y, transform.position.z + randomPosition.z);

@@ -268,7 +268,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bcdda6a640be4442ab8b859e53c193b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints: []
   maxHealthPoints: 100
   speed: 2
   fieldOfView: 90
@@ -730,7 +729,7 @@ Animator:
   m_GameObject: {fileID: 8114514796301696972}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a582d72754b6b438a8d48843c0a3afc2, type: 2}
+  m_Controller: {fileID: 9100000, guid: 99e50d7e55ad74cdebdcef8dc4dc7b6e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
