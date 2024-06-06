@@ -172,7 +172,6 @@ public class Enemy : MonoBehaviour
 
     public void Destroy()
     {
-        Destroy(healthBar.gameObject);
         Destroy(gameObject);
     }
 }
