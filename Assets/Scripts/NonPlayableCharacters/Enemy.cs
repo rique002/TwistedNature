@@ -22,6 +22,8 @@ public class Enemy : MonoBehaviour
     private bool closeToPlayer = false;
     private Animator animator;
     private State state;
+
+    public bool isDead => state == State.Dead;
     private float healthPoints;
 
     private enum State { Idle, Mooving, Attacking, Dead };

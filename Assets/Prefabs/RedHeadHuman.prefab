@@ -409,12 +409,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bcdda6a640be4442ab8b859e53c193b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints: []
   maxHealthPoints: 100
   speed: 2
   fieldOfView: 90
   viewDistance: 10
-  enemyName: RIC THE FAZERES
+  enemyName: RED
   attackDamage: 5
   model: {fileID: 8114514796301696972}
   weaponCollider: {fileID: 6675939342582469709}
