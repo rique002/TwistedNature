@@ -99,7 +99,8 @@ namespace PlayableCharacters
 
             if (instances.ContainsKey(type))
             {
-                Debug.LogError("There is more than one instance of " + type);
+                instances.Remove(type);
+                instances.Add(type, this);
             }
             else
             {
