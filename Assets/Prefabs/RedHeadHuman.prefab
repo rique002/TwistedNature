@@ -305,8 +305,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3534069017356026680}
   - component: {fileID: 2743530246094728312}
-  - component: {fileID: 2859886730540873750}
-  - component: {fileID: 3917106492196819194}
   - component: {fileID: 6372112357343656214}
   m_Layer: 6
   m_Name: RedHeadHuman
@@ -351,52 +349,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.3
-  m_Height: 1.5
+  m_Radius: 1
+  m_Height: 4
   m_Direction: 1
-  m_Center: {x: 0, y: 0.75, z: 0}
---- !u!135 &2859886730540873750
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3376213730718967953}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.28
-  m_Center: {x: -0.6, y: 1.55, z: -0.05}
---- !u!135 &3917106492196819194
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3376213730718967953}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0.3, y: 1.6, z: -0.1}
+  m_Center: {x: 0.1, y: 2, z: 0}
 --- !u!114 &6372112357343656214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,8 +367,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealthPoints: 100
   speed: 2
-  fieldOfView: 90
-  viewDistance: 10
+  fieldOfView: 360
+  viewDistance: 25
   enemyName: RED
   attackDamage: 5
   model: {fileID: 8114514796301696972}
@@ -583,7 +539,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f8459ccba482742ac83c3cda95c83c54,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8459ccba482742ac83c3cda95c83c54,
         type: 3}

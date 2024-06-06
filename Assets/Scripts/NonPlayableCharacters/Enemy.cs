@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
     private bool closeToPlayer = false;
     private Animator animator;
     private State state;
+    private bool isAttacking = false;
 
     public bool isDead => state == State.Dead;
     private float healthPoints;
@@ -38,7 +39,16 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        if (state == State.Attacking || state == State.Dead) return;
+        if (state == State.Dead) return;
+
+        if (state == State.Attacking && isAttacking)
+        {
+            Vector3 direction = player.position - transform.position;
+            Quaternion toRotation = Quaternion.LookRotation(direction, Vector3.up);
+            toRotation *= Quaternion.Euler(0, 90, 0);
+            transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, speed * Time.deltaTime);
+            return;
+        }
 
         if (player == null || !player.gameObject.activeInHierarchy)
         {
@@ -129,6 +139,7 @@ public class Enemy : MonoBehaviour
         if (distance < 2.0f)
         {
             state = State.Attacking;
+            isAttacking = true;
             animator.SetTrigger("Attack");
         }
     }
@@ -140,6 +151,7 @@ public class Enemy : MonoBehaviour
 
     public void EndCollision()
     {
+        isAttacking = false;
         weaponCollider.EndAttack();
     }
 
