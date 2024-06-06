@@ -22,11 +22,10 @@ namespace PlayableCharacters
         [SerializeField] protected ParticleSystem attackParticles;
         [SerializeField] protected float attackCooldown;
         [SerializeField] protected GameObject model;
-        [SerializeField] protected float dashForce;
-        [SerializeField] protected float dashDuration = 0.2f;
-        [SerializeField] protected float jumpForce;
         [SerializeField] protected Text interactTextUI;
         [SerializeField] protected InteractionBar interactionBar;
+        [SerializeField] protected CameraSwitcher cameraSwitcher;
+        [SerializeField] protected Transform spawnPoint;
 
         protected State state;
         protected float healthPoints;
@@ -34,8 +33,6 @@ namespace PlayableCharacters
         protected static readonly Dictionary<Type, PlayableCharacter> instances = new();
         protected readonly List<StatusEffect> statusEffects = new();
         protected Animator animator;
-
-        [SerializeField] public CameraSwitcher cameraSwitcher;
 
         public event EventHandler OnPlayableCharacterKilled;
         public event EventHandler<OnPlayableCharacterHealthChangeArgs> OnPlayableCharacterHealthChange;
@@ -92,6 +89,7 @@ namespace PlayableCharacters
         protected abstract void HandleAnimations();
         protected abstract void HandleAttack();
         public abstract void EndAttack();
+        public abstract void Deactivate();
 
         private void Awake()
         {

@@ -109,12 +109,13 @@ MonoBehaviour:
   attackParticles: {fileID: 0}
   attackCooldown: 2
   model: {fileID: 7699529652518618313}
-  dashForce: 15
-  dashDuration: 0.1
-  jumpForce: 3
   interactTextUI: {fileID: 0}
   interactionBar: {fileID: 0}
   cameraSwitcher: {fileID: 0}
+  spawnPoint: {fileID: 0}
+  dashForce: 15
+  dashDuration: 0.1
+  jumpForce: 3
   rightFistCollider: {fileID: 8004022815725972468}
   leftFistCollider: {fileID: 2740421422370574445}
 --- !u!1001 &7357563189857925528
