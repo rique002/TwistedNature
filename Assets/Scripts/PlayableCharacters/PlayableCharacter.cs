@@ -35,9 +35,6 @@ namespace PlayableCharacters
         protected readonly List<StatusEffect> statusEffects = new();
         protected Animator animator;
 
-        [SerializeField] public GameObject projectilePrefab;
-        [SerializeField] public float projectileSpeed = 10f;
-
         [SerializeField] public CameraSwitcher cameraSwitcher;
 
         public event EventHandler OnPlayableCharacterKilled;
