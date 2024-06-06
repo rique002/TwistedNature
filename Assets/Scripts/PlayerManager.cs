@@ -2,8 +2,6 @@ using UnityEngine;
 using System;
 using PlayableCharacters;
 using UI;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -11,28 +9,29 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private GameInput gameInput;
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private Inventory inventory;
+    [SerializeField] private GameOverScreen gameOverScreen;
 
     private PlayableCharacter activeCharacter;
     private int indexActiveCharacter;
 
     public bool canChange = false;
 
-    private List<int> keys = new List<int>();
-
-    public event EventHandler OnPlayerGameOver;
     public event EventHandler<OnActivePlayerChangedEventArgs> OnActivePlayerChaged;
     public class OnActivePlayerChangedEventArgs : EventArgs
     {
         public Transform playerTransform;
     }
 
-    public void addCharacter(){
+    public void addCharacter()
+    {
         canChange = true;
     }
 
 
     private void Start()
     {
+        gameOverScreen.Hide();
+
         foreach (PlayableCharacter playableCharacter in playableCharacters)
         {
             playableCharacter.OnPlayableCharacterHealthChange += PlayerManager_OnPlayableCharacterHealthChange;
@@ -54,9 +53,10 @@ public class PlayerManager : MonoBehaviour
 
     private void PlayerManager_OnPlayableCharacterKilled(object sender, EventArgs e)
     {
+        Debug.Log("Player Killed");
         foreach (PlayableCharacter playableCharacter in playableCharacters)
         {
-            if (!playableCharacter.IsDead())
+            if (!playableCharacter.IsDead() && canChange)
             {
                 // Swap Character
                 GameInput_OnSwapAction(this, EventArgs.Empty);
@@ -64,14 +64,17 @@ public class PlayerManager : MonoBehaviour
             }
         }
 
+        activeCharacter.SetActive(false);
+
         // Game Over
-        OnPlayerGameOver?.Invoke(this, EventArgs.Empty);
+        gameOverScreen.Show();
     }
 
     private void GameInput_OnSwapAction(object sender, EventArgs e)
     {
 
-        if (!canChange){
+        if (!canChange)
+        {
             return;
         }
         Transform currentTransform = activeCharacter.GetTransform();
@@ -101,7 +104,8 @@ public class PlayerManager : MonoBehaviour
     {
         {
             Tutorial tutorial = FindObjectOfType<Tutorial>();
-            if (tutorial != null){
+            if (tutorial != null)
+            {
                 tutorial.skipTutorial();
             }
         }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private int maxEnemies = 1;
     [SerializeField] private float spawnRate = 1.0f;
     [SerializeField] private Transform[] spawnPoints;
@@ -25,6 +25,7 @@ public class EnemySpawner : MonoBehaviour
 
         if (spawnTimer >= spawnRate)
         {
+            GameObject enemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
             Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
             Quaternion spawnRotation = Quaternion.LookRotation(LookAt.position - spawnPoint.position);
             Enemy enemy = Instantiate(enemyPrefab, spawnPoint.position, spawnRotation).GetComponent<Enemy>();

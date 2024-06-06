@@ -270,8 +270,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealthPoints: 100
   speed: 2
-  fieldOfView: 90
-  viewDistance: 10
+  fieldOfView: 150
+  viewDistance: 8
   enemyName: ZEZOQUINHA
   attackDamage: 5
   model: {fileID: 8114514796301696972}
