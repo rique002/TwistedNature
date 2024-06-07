@@ -5,7 +5,6 @@ using Image = UnityEngine.UI.Image;
 using UnityEngine.UI;
 using Interactables;
 using UI;
-using FMODUnity;
 
 namespace PlayableCharacters
 {
@@ -27,7 +26,6 @@ namespace PlayableCharacters
         [SerializeField] protected InteractionBar interactionBar;
         [SerializeField] protected CameraSwitcher cameraSwitcher;
         [SerializeField] protected Transform spawnPoint;
-        [SerializeField] EventReference damageSoundEvent;
 
         protected State state;
         protected float healthPoints;
@@ -90,6 +88,7 @@ namespace PlayableCharacters
         protected abstract void HandleMovement();
         protected abstract void HandleAnimations();
         protected abstract void HandleAttack();
+        protected abstract void UpdateSound();
         public abstract void EndAttack();
         public abstract void Deactivate();
 
@@ -125,6 +124,7 @@ namespace PlayableCharacters
             HandleInteractions();
             HandleAnimations();
             HandleStatusEffects();
+            //UpdateSound();
         }
 
         private void HandleInteractions()
@@ -222,10 +222,7 @@ namespace PlayableCharacters
 
                 OnPlayableCharacterKilled?.Invoke(this, EventArgs.Empty);
             }
-            else if (!damageSoundEvent.IsNull)
-            {
-                RuntimeManager.PlayOneShot(damageSoundEvent, transform.position);
-            }
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerDamage, transform.position);
         }
 
         private void GameInput_OnAttackAction(object sender, EventArgs e)

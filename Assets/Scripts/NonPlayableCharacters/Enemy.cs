@@ -176,7 +176,7 @@ public class Enemy : MonoBehaviour
         }
         else if (!damageSoundEvent.IsNull)
         {
-            RuntimeManager.PlayOneShot(damageSoundEvent, transform.position);
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnemyDamage, transform.position);
         }
     }
 

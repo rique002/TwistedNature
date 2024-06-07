@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: Assets/Audio/Build/Desktop/Master.bank
   Name: Audio/Build/Desktop/Master
   StudioPath: bank:/Master
-  lastModified: 638532851570000000
+  lastModified: 638533194214718787
   FileSizes: []
   Exists: 1
 --- !u!114 &-8524976485910755422
@@ -38,7 +38,7 @@ MonoBehaviour:
     Data4: -772762836
   Banks:
   - {fileID: -1824906820059989922}
-  - {fileID: 3945635312354648982}
+  - {fileID: -6363066044091201261}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -66,7 +66,7 @@ MonoBehaviour:
     Data4: 2026930962
   Banks:
   - {fileID: -2542185011233407190}
-  - {fileID: -5420452615673231738}
+  - {fileID: 5872205352872687129}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -74,24 +74,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1653
---- !u!114 &-7598109111169552570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: "bank:/Audio/Build/Desktop/Ouric\u0327o xD.bank"
-  m_EditorClassIdentifier: 
-  Path: "Assets/Audio/Build/Desktop/Ouric\u0327o xD.bank"
-  Name: "Audio/Build/Desktop/Ouric\u0327o xD"
-  StudioPath: "bank:/Ouric\u0327o xD"
-  lastModified: 638532851570000000
-  FileSizes: []
-  Exists: 1
 --- !u!114 &-6976955538174028339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,7 +89,7 @@ MonoBehaviour:
   Path: Assets/Audio/Build/Desktop/Musicas.bank
   Name: Audio/Build/Desktop/Musicas
   StudioPath: bank:/Musicas
-  lastModified: 638532851570000000
+  lastModified: 638533194215016121
   FileSizes: []
   Exists: 1
 --- !u!114 &-6850061208700740285
@@ -130,7 +112,7 @@ MonoBehaviour:
     Data4: -1634974371
   Banks:
   - {fileID: -1824906820059989922}
-  - {fileID: 3945635312354648982}
+  - {fileID: -6363066044091201261}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -138,7 +120,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2000
---- !u!114 &-6557380405797764354
+--- !u!114 &-6363066044091201261
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,12 +130,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Audio/Fim/Audio Jogo/Build/Desktop/Master.bank
+  m_Name: bank:/Audio/Fim/Audio Jogo/Build/Desktop/SFX Gerais.bank
   m_EditorClassIdentifier: 
-  Path: Assets/Audio/Fim/Audio Jogo/Build/Desktop/Master.bank
-  Name: Audio/Fim/Audio Jogo/Build/Desktop/Master
-  StudioPath: bank:/Master
-  lastModified: 638532851570000000
+  Path: Assets/Audio/Fim/Audio Jogo/Build/Desktop/SFX Gerais.bank
+  Name: Audio/Fim/Audio Jogo/Build/Desktop/SFX Gerais
+  StudioPath: bank:/SFX Gerais
+  lastModified: 638533194218040047
   FileSizes: []
   Exists: 1
 --- !u!114 &-6006053668278235583
@@ -176,7 +158,7 @@ MonoBehaviour:
     Data4: 1511414328
   Banks:
   - {fileID: 3802696715509763169}
-  - {fileID: -3940393947913005881}
+  - {fileID: -2266302952093580633}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -204,7 +186,7 @@ MonoBehaviour:
     Data4: -847671432
   Banks:
   - {fileID: 3802696715509763169}
-  - {fileID: -3940393947913005881}
+  - {fileID: -2266302952093580633}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -232,7 +214,7 @@ MonoBehaviour:
     Data4: -131838988
   Banks:
   - {fileID: -6976955538174028339}
-  - {fileID: 8507253254801559120}
+  - {fileID: -334232313661279048}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -240,7 +222,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 20561
---- !u!114 &-5420452615673231738
+--- !u!114 &-4845610120347047372
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -250,30 +232,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Audio/Fim/Audio Jogo/Build/Desktop/SFX Inimigos.bank
+  m_Name: bank:/Audio/Fim/Audio Jogo/Build/Desktop/Master.bank
   m_EditorClassIdentifier: 
-  Path: Assets/Audio/Fim/Audio Jogo/Build/Desktop/SFX Inimigos.bank
-  Name: Audio/Fim/Audio Jogo/Build/Desktop/SFX Inimigos
-  StudioPath: bank:/SFX Inimigos
-  lastModified: 638532851570000000
-  FileSizes: []
-  Exists: 1
---- !u!114 &-3940393947913005881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Audio/Fim/Audio Jogo/Build/Desktop/Bird.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/Audio/Fim/Audio Jogo/Build/Desktop/Bird.bank
-  Name: Audio/Fim/Audio Jogo/Build/Desktop/Bird
-  StudioPath: bank:/Bird
-  lastModified: 638532851570000000
+  Path: Assets/Audio/Fim/Audio Jogo/Build/Desktop/Master.bank
+  Name: Audio/Fim/Audio Jogo/Build/Desktop/Master
+  StudioPath: bank:/Master
+  lastModified: 638533194217887524
   FileSizes: []
   Exists: 1
 --- !u!114 &-3793876572435638797
@@ -295,8 +259,8 @@ MonoBehaviour:
     Data3: 928889508
     Data4: -261696594
   Banks:
-  - {fileID: -7598109111169552570}
-  - {fileID: 6603244863294183332}
+  - {fileID: 807284692364123619}
+  - {fileID: 8529281157639825874}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -324,7 +288,7 @@ MonoBehaviour:
     Data4: 832983255
   Banks:
   - {fileID: -1824906820059989922}
-  - {fileID: 3945635312354648982}
+  - {fileID: -6363066044091201261}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -347,7 +311,25 @@ MonoBehaviour:
   Path: Assets/Audio/Build/Desktop/SFX Inimigos.bank
   Name: Audio/Build/Desktop/SFX Inimigos
   StudioPath: bank:/SFX Inimigos
-  lastModified: 638532851570000000
+  lastModified: 638533194215114327
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-2266302952093580633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Audio/Fim/Audio Jogo/Build/Desktop/Bird.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Audio/Fim/Audio Jogo/Build/Desktop/Bird.bank
+  Name: Audio/Fim/Audio Jogo/Build/Desktop/Bird
+  StudioPath: bank:/Bird
+  lastModified: 638533194217885646
   FileSizes: []
   Exists: 1
 --- !u!114 &-1981095409368272122
@@ -370,7 +352,7 @@ MonoBehaviour:
     Data4: 249160131
   Banks:
   - {fileID: 3802696715509763169}
-  - {fileID: -3940393947913005881}
+  - {fileID: -2266302952093580633}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -393,7 +375,7 @@ MonoBehaviour:
   Path: Assets/Audio/Build/Desktop/SFX Gerais.bank
   Name: Audio/Build/Desktop/SFX Gerais
   StudioPath: bank:/SFX Gerais
-  lastModified: 638532851570000000
+  lastModified: 638533194215097803
   FileSizes: []
   Exists: 1
 --- !u!114 &-1688800341732428854
@@ -411,7 +393,7 @@ MonoBehaviour:
   Path: Assets/Audio/Build/Desktop/SFX Menu.bank
   Name: Audio/Build/Desktop/SFX Menu
   StudioPath: bank:/SFX Menu
-  lastModified: 638532851570000000
+  lastModified: 638533194215125909
   FileSizes: []
   Exists: 1
 --- !u!114 &-1544352702766042749
@@ -434,7 +416,7 @@ MonoBehaviour:
     Data4: -1097251582
   Banks:
   - {fileID: -1824906820059989922}
-  - {fileID: 3945635312354648982}
+  - {fileID: -6363066044091201261}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -462,7 +444,7 @@ MonoBehaviour:
     Data4: -1199432397
   Banks:
   - {fileID: 3802696715509763169}
-  - {fileID: -3940393947913005881}
+  - {fileID: -2266302952093580633}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -490,7 +472,7 @@ MonoBehaviour:
     Data4: -237947096
   Banks:
   - {fileID: -1824906820059989922}
-  - {fileID: 3945635312354648982}
+  - {fileID: -6363066044091201261}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -518,7 +500,7 @@ MonoBehaviour:
     Data4: 333771457
   Banks:
   - {fileID: -2542185011233407190}
-  - {fileID: -5420452615673231738}
+  - {fileID: 5872205352872687129}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -526,6 +508,24 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 879
+--- !u!114 &-334232313661279048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Audio/Fim/Audio Jogo/Build/Desktop/Musicas.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Audio/Fim/Audio Jogo/Build/Desktop/Musicas.bank
+  Name: Audio/Fim/Audio Jogo/Build/Desktop/Musicas
+  StudioPath: bank:/Musicas
+  lastModified: 638533194218027734
+  FileSizes: []
+  Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,17 +543,17 @@ MonoBehaviour:
   - {fileID: 3802696715509763169}
   - {fileID: -8575695176975750633}
   - {fileID: -6976955538174028339}
-  - {fileID: -7598109111169552570}
   - {fileID: -1824906820059989922}
   - {fileID: -2542185011233407190}
   - {fileID: -1688800341732428854}
-  - {fileID: -3940393947913005881}
-  - {fileID: -6557380405797764354}
-  - {fileID: 8507253254801559120}
-  - {fileID: 6603244863294183332}
-  - {fileID: 3945635312354648982}
-  - {fileID: -5420452615673231738}
-  - {fileID: 4568742215083375186}
+  - {fileID: 807284692364123619}
+  - {fileID: -2266302952093580633}
+  - {fileID: -4845610120347047372}
+  - {fileID: -334232313661279048}
+  - {fileID: 8529281157639825874}
+  - {fileID: -6363066044091201261}
+  - {fileID: 5872205352872687129}
+  - {fileID: 9184873578683653307}
   EditorEvents:
   - {fileID: -1981095409368272122}
   - {fileID: 6332734077914403737}
@@ -584,11 +584,29 @@ MonoBehaviour:
   EditorParameters: []
   MasterBanks:
   - {fileID: -8575695176975750633}
-  - {fileID: -6557380405797764354}
+  - {fileID: -4845610120347047372}
   StringsBanks:
   - {fileID: 7546299331015816702}
-  cacheTime: 638532851570000000
+  cacheTime: 638533194218086318
   cacheVersion: 131618
+--- !u!114 &807284692364123619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: "bank:/Audio/Build/Desktop/Ouri\xE7o xD.bank"
+  m_EditorClassIdentifier: 
+  Path: "Assets/Audio/Build/Desktop/Ouri\xE7o xD.bank"
+  Name: "Audio/Build/Desktop/Ouri\xE7o xD"
+  StudioPath: "bank:/Ouri\xE7o xD"
+  lastModified: 638533194215042344
+  FileSizes: []
+  Exists: 1
 --- !u!114 &996473037436352431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -609,7 +627,7 @@ MonoBehaviour:
     Data4: 1724763903
   Banks:
   - {fileID: -6976955538174028339}
-  - {fileID: 8507253254801559120}
+  - {fileID: -334232313661279048}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
@@ -637,7 +655,7 @@ MonoBehaviour:
     Data4: 1576138544
   Banks:
   - {fileID: -1688800341732428854}
-  - {fileID: 4568742215083375186}
+  - {fileID: 9184873578683653307}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -665,7 +683,7 @@ MonoBehaviour:
     Data4: 1679284698
   Banks:
   - {fileID: -6976955538174028339}
-  - {fileID: 8507253254801559120}
+  - {fileID: -334232313661279048}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -693,7 +711,7 @@ MonoBehaviour:
     Data4: -731582105
   Banks:
   - {fileID: -2542185011233407190}
-  - {fileID: -5420452615673231738}
+  - {fileID: 5872205352872687129}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -721,7 +739,7 @@ MonoBehaviour:
     Data4: -642985741
   Banks:
   - {fileID: -2542185011233407190}
-  - {fileID: -5420452615673231738}
+  - {fileID: 5872205352872687129}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -749,7 +767,7 @@ MonoBehaviour:
     Data4: 103530053
   Banks:
   - {fileID: -1688800341732428854}
-  - {fileID: 4568742215083375186}
+  - {fileID: 9184873578683653307}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -772,25 +790,7 @@ MonoBehaviour:
   Path: Assets/Audio/Build/Desktop/Bird.bank
   Name: Audio/Build/Desktop/Bird
   StudioPath: bank:/Bird
-  lastModified: 638532851570000000
-  FileSizes: []
-  Exists: 1
---- !u!114 &3945635312354648982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Audio/Fim/Audio Jogo/Build/Desktop/SFX Gerais.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/Audio/Fim/Audio Jogo/Build/Desktop/SFX Gerais.bank
-  Name: Audio/Fim/Audio Jogo/Build/Desktop/SFX Gerais
-  StudioPath: bank:/SFX Gerais
-  lastModified: 638532851570000000
+  lastModified: 638533194214702320
   FileSizes: []
   Exists: 1
 --- !u!114 &3988445734423544158
@@ -813,7 +813,7 @@ MonoBehaviour:
     Data4: -1715964790
   Banks:
   - {fileID: -2542185011233407190}
-  - {fileID: -5420452615673231738}
+  - {fileID: 5872205352872687129}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -841,7 +841,7 @@ MonoBehaviour:
     Data4: -294856421
   Banks:
   - {fileID: -1824906820059989922}
-  - {fileID: 3945635312354648982}
+  - {fileID: -6363066044091201261}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -849,24 +849,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &4568742215083375186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Audio/Fim/Audio Jogo/Build/Desktop/SFX Menu.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/Audio/Fim/Audio Jogo/Build/Desktop/SFX Menu.bank
-  Name: Audio/Fim/Audio Jogo/Build/Desktop/SFX Menu
-  StudioPath: bank:/SFX Menu
-  lastModified: 638532851570000000
-  FileSizes: []
-  Exists: 1
 --- !u!114 &4784156392714536110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -887,7 +869,7 @@ MonoBehaviour:
     Data4: 1397929059
   Banks:
   - {fileID: -2542185011233407190}
-  - {fileID: -5420452615673231738}
+  - {fileID: 5872205352872687129}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -895,6 +877,24 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 607
+--- !u!114 &5872205352872687129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Audio/Fim/Audio Jogo/Build/Desktop/SFX Inimigos.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Audio/Fim/Audio Jogo/Build/Desktop/SFX Inimigos.bank
+  Name: Audio/Fim/Audio Jogo/Build/Desktop/SFX Inimigos
+  StudioPath: bank:/SFX Inimigos
+  lastModified: 638533194218075376
+  FileSizes: []
+  Exists: 1
 --- !u!114 &6332734077914403737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -915,7 +915,7 @@ MonoBehaviour:
     Data4: 526059598
   Banks:
   - {fileID: 3802696715509763169}
-  - {fileID: -3940393947913005881}
+  - {fileID: -2266302952093580633}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -923,24 +923,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 854
---- !u!114 &6603244863294183332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: "bank:/Audio/Fim/Audio Jogo/Build/Desktop/Ouric\u0327o xD.bank"
-  m_EditorClassIdentifier: 
-  Path: "Assets/Audio/Fim/Audio Jogo/Build/Desktop/Ouric\u0327o xD.bank"
-  Name: "Audio/Fim/Audio Jogo/Build/Desktop/Ouric\u0327o xD"
-  StudioPath: "bank:/Ouric\u0327o xD"
-  lastModified: 638532851570000000
-  FileSizes: []
-  Exists: 1
 --- !u!114 &7198305429404097783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -963,7 +945,7 @@ MonoBehaviour:
     Data4: 1783604936
   Banks:
   - {fileID: -1824906820059989922}
-  - {fileID: 3945635312354648982}
+  - {fileID: -6363066044091201261}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -991,7 +973,7 @@ MonoBehaviour:
     Data4: -1945729152
   Banks:
   - {fileID: 3802696715509763169}
-  - {fileID: -3940393947913005881}
+  - {fileID: -2266302952093580633}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1014,12 +996,12 @@ MonoBehaviour:
   Path: Assets/Audio/Build/Desktop/Master.strings.bank
   Name: Audio/Build/Desktop/Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638532851570000000
+  lastModified: 638533194214725488
   FileSizes:
   - Name: 
     Value: 2388
   Exists: 1
---- !u!114 &8507253254801559120
+--- !u!114 &8529281157639825874
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1029,12 +1011,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Audio/Fim/Audio Jogo/Build/Desktop/Musicas.bank
+  m_Name: "bank:/Audio/Fim/Audio Jogo/Build/Desktop/Ouri\xE7o xD.bank"
   m_EditorClassIdentifier: 
-  Path: Assets/Audio/Fim/Audio Jogo/Build/Desktop/Musicas.bank
-  Name: Audio/Fim/Audio Jogo/Build/Desktop/Musicas
-  StudioPath: bank:/Musicas
-  lastModified: 638532851570000000
+  Path: "Assets/Audio/Fim/Audio Jogo/Build/Desktop/Ouri\xE7o xD.bank"
+  Name: "Audio/Fim/Audio Jogo/Build/Desktop/Ouri\xE7o xD"
+  StudioPath: "bank:/Ouri\xE7o xD"
+  lastModified: 638533194218035558
   FileSizes: []
   Exists: 1
 --- !u!114 &8736801921876511637
@@ -1057,7 +1039,7 @@ MonoBehaviour:
     Data4: -376278821
   Banks:
   - {fileID: 3802696715509763169}
-  - {fileID: -3940393947913005881}
+  - {fileID: -2266302952093580633}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1065,3 +1047,21 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1124
+--- !u!114 &9184873578683653307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Audio/Fim/Audio Jogo/Build/Desktop/SFX Menu.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Audio/Fim/Audio Jogo/Build/Desktop/SFX Menu.bank
+  Name: Audio/Fim/Audio Jogo/Build/Desktop/SFX Menu
+  StudioPath: bank:/SFX Menu
+  lastModified: 638533194218086318
+  FileSizes: []
+  Exists: 1

@@ -48,6 +48,11 @@ public class PlayerManager : MonoBehaviour
         activeCharacter.SetActive(true);
     }
 
+    private void FixedUpdate()
+    {
+        transform.position = activeCharacter.GetTransform().position;
+    }
+
     private void PlayerManager_OnPlayableCharacterHealthChange(object sender, PlayableCharacter.OnPlayableCharacterHealthChangeArgs e)
     {
         healthBar.SetValue(e.healthPercentage);

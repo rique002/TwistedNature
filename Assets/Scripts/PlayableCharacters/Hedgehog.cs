@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
-using FMODUnity;
 
 namespace PlayableCharacters
 {
@@ -88,6 +87,11 @@ namespace PlayableCharacters
             rightFistCollider.StartAttack();
             leftFistCollider.StartAttack();
             animator.SetTrigger("Attack");
+        }
+
+        protected override void UpdateSound()
+        {
+
         }
 
         public override void EndAttack()

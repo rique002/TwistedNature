@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-using FMODUnity;
+using FMOD.Studio;
 
 namespace PlayableCharacters
 {
@@ -10,12 +10,14 @@ namespace PlayableCharacters
         [SerializeField] private float flyingSpeed;
 
         private bool isFlying;
+        private EventInstance footSteps;
 
         protected override void Init()
         {
             state = State.Idle;
             isFlying = false;
             nozzleCollider.SetDamage(attackDamage);
+            //footSteps = AudioManager.Instance.CreateInstance(FMODEvents.Instance.PlayerFootsteps);
 
             gameInput.OnFlyAction += GameInput_OnFlyAction;
         }
@@ -96,6 +98,23 @@ namespace PlayableCharacters
             animator.SetBool("Flying", false);
             animator.SetBool("Running", false);
             gameObject.SetActive(false);
+        }
+
+        protected override void UpdateSound()
+        {
+            if (playerBody.velocity.magnitude > 0.1f && !isFlying)
+            {
+                footSteps.getPlaybackState(out PLAYBACK_STATE playbackState);
+
+                if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+                {
+                    footSteps.start();
+                }
+            }
+            else
+            {
+                footSteps.stop(STOP_MODE.ALLOWFADEOUT);
+            }
         }
     }
 }
