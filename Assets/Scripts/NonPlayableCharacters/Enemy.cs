@@ -108,12 +108,9 @@ public class Enemy : MonoBehaviour
         float angle = Vector3.Angle(-Vector3.right, directionToPlayer);
 
         Vector3 rayDrawPos = new(transform.position.x, transform.position.y + 1.0f, transform.position.z);
-        Debug.DrawRay(rayDrawPos, Quaternion.Euler(0, -fieldOfView / 2, 0) * -transform.right * viewDistance, Color.red);
-        Debug.DrawRay(rayDrawPos, Quaternion.Euler(0, fieldOfView / 2, 0) * -transform.right * viewDistance, Color.red);
 
         if (angle < fieldOfView / 2 && directionToPlayer.magnitude < viewDistance)
         {
-            Debug.DrawRay(rayDrawPos, transform.TransformDirection(directionToPlayer), Color.blue);
             return true;
         }
         return false;

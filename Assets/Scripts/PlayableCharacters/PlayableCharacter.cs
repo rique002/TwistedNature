@@ -75,7 +75,6 @@ namespace PlayableCharacters
             public void UpdateDuration(float elapsedTime)
             {
                 Duration -= elapsedTime;
-                Debug.Log("Poison Duration: " + Duration);
 
                 if (Duration <= 0.0f)
                 {

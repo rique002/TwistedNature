@@ -1,18 +1,22 @@
 using UnityEngine;
 using System.Collections.Generic;
-namespace Interactables{
-public class ResetPuzzleButton : Interactable
+
+namespace Interactables
+{
+    public class ResetPuzzleButton : Interactable
     {
-        
+
         [SerializeField] public List<PressurePlate> pressurePlates;
 
         [SerializeField] private Door door;
         [SerializeField] public List<PressurePlate> solution;
 
         bool toSolve = true;
-        
-        private void Update(){
-            if(toSolve){
+
+        private void Update()
+        {
+            if (toSolve)
+            {
                 CheckSolution();
             }
         }
@@ -30,7 +34,7 @@ public class ResetPuzzleButton : Interactable
             {
                 if (!solution.Contains(plate))
                 {
-                    if(plate.IsActive())
+                    if (plate.IsActive())
                     {
                         solved = false;
                         break;
@@ -44,7 +48,7 @@ public class ResetPuzzleButton : Interactable
                         break;
                     }
                 }
-   
+
             }
 
             if (solved)
@@ -53,10 +57,10 @@ public class ResetPuzzleButton : Interactable
                 print("Puzzle solved");
                 toSolve = false;
             }
-           /* else
-            {
-                ResetPuzzle();
-            }*/
+            /* else
+             {
+                 ResetPuzzle();
+             }*/
         }
 
         /*public void ResetPuzzle()

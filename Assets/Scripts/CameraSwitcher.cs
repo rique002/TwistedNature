@@ -1,48 +1,45 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 public class CameraSwitcher : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Camera fpCamera;
 
-
-
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            if (mainCamera.enabled)
-            {
-                toFP();
-            }
-            else
-            {
-                toMain();
-            }
-        }
-    }
     private void Start()
     {
         mainCamera.enabled = true;
         fpCamera.enabled = false;
     }
 
+    private void Update()
+    {
+        // if (Input.GetKeyDown(KeyCode.C))
+        // {
+        //     if (mainCamera.enabled)
+        //     {
+        //         toFP();
+        //     }
+        //     else
+        //     {
+        //         toMain();
+        //     }
+        // }
+    }
+
     public void toFP()
     {
-        mainCamera.enabled = false;
-        fpCamera.enabled = true;
+        // mainCamera.enabled = false;
+        // fpCamera.enabled = true;
     }
 
     public void toMain()
     {
-        mainCamera.enabled = true;
-        fpCamera.enabled = false;
+        // mainCamera.enabled = true;
+        // fpCamera.enabled = false;
     }
 
     public bool isMain()
     {
-        return mainCamera.enabled;
+        return true;
+        // return mainCamera.enabled;
     }
 }

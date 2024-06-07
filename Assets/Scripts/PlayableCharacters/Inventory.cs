@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UI;
-using TreeEditor;
 
 namespace PlayableCharacters
 {
@@ -14,7 +13,7 @@ namespace PlayableCharacters
 
         [SerializeField] private TriangleBox triangleBox;
 
-        private List<int> keys = new List<int>(); 
+        private List<int> keys = new List<int>();
 
         private List<int> triangles = new List<int>();
 
@@ -34,7 +33,6 @@ namespace PlayableCharacters
         public void AddKey(int keyId)
         {
             keys.Add(keyId);
-            Debug.Log("Added key with ID " + keyId + " to inventory.");
             KeyInventory.SetKey1(true);
         }
 
@@ -43,12 +41,11 @@ namespace PlayableCharacters
             triangles.Add(triangleId);
             triangleBox.SetActive(true);
             triangleBox.SetTriangle(triangleId);
-            Debug.Log("Added triangle with ID " + triangleId + " to inventory.");
         }
 
         public bool HasKey(int keyId)
         {
-            if(keys.Contains(keyId))
+            if (keys.Contains(keyId))
             {
                 KeyInventory.SetKey1(false);
                 return true;

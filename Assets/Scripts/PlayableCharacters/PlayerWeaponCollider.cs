@@ -15,7 +15,6 @@ public class PlayerWeaponCollider : MonoBehaviour
     {
         if (isAttacking && enemyLayer == (enemyLayer | (1 << other.gameObject.layer)))
         {
-            Debug.Log("Enemy hit by " + gameObject.name);
             if (other.TryGetComponent<Enemy>(out var enemy))
             {
                 enemy.ReceiveDamage(damage);

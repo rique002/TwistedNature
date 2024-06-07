@@ -1,17 +1,18 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System;
-using Unity.VisualScripting;
-namespace Interactables{
-public class BarrierPlates : Interactable
-    {       
+namespace Interactables
+{
+    public class BarrierPlates : Interactable
+    {
         [SerializeField] public List<PressurePlate> pressurePlates;
         [SerializeField] public List<PressurePlate> solution;
 
         bool toSolve = true;
 
-        private void Update(){
-            if(toSolve){
+        private void Update()
+        {
+            if (toSolve)
+            {
                 CheckSolution();
             }
         }
@@ -29,7 +30,7 @@ public class BarrierPlates : Interactable
             {
                 if (!solution.Contains(plate))
                 {
-                    if(plate.IsActive())
+                    if (plate.IsActive())
                     {
                         solved = false;
                         break;
@@ -43,7 +44,7 @@ public class BarrierPlates : Interactable
                         break;
                     }
                 }
-   
+
             }
 
             if (solved)
@@ -53,8 +54,8 @@ public class BarrierPlates : Interactable
                 toSolve = false;
             }
         }
-    
 
-        
+
+
     }
 }

@@ -54,10 +54,6 @@ namespace Interactables
                 triangleRightAnimator.SetTrigger("Place");
                 triangleRightPlaced = true;
             }
-            else
-            {
-                Debug.Log("You need 3 triangle shaped object to open this door.");
-            }
         }
 
         private void Update()

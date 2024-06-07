@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -27,30 +24,23 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    public void Pause() 
+    public void Pause()
     {
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
     }
 
-    public void Resume() 
+    public void Resume()
     {
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
     }
 
-    public void Exit() 
+    public void Exit()
     {
         Time.timeScale = 1f; // Make sure the time scale is reset when exiting
-        //SceneManager.LoadScene("MainMenu");
-        #if UNITY_EDITOR
-            // If in the Unity Editor, stop playing the scene
-            UnityEditor.EditorApplication.isPlaying = false;
-        #else
-            // If in a built executable, quit the application
-            Application.Quit();
-        #endif
+        Application.Quit();
     }
 }

@@ -1,8 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
-namespace Interactables{
-public class Totem : Interactable
-    {       
+
+namespace Interactables
+{
+    public class Totem : Interactable
+    {
         [SerializeField] GameObject cube;
         [SerializeField] GameObject sphere;
         [SerializeField] GameObject piramid;
@@ -19,17 +21,17 @@ public class Totem : Interactable
         public override void Interact()
         {
             base.Interact();
-            if(cube.activeSelf)
+            if (cube.activeSelf)
             {
                 cube.SetActive(false);
                 sphere.SetActive(true);
             }
-            else if(sphere.activeSelf)
+            else if (sphere.activeSelf)
             {
                 sphere.SetActive(false);
                 piramid.SetActive(true);
             }
-            else if(piramid.activeSelf)
+            else if (piramid.activeSelf)
             {
                 piramid.SetActive(false);
                 cube.SetActive(true);
@@ -37,15 +39,15 @@ public class Totem : Interactable
         }
         public string GetActiveShape()
         {
-            if(cube.activeSelf)
+            if (cube.activeSelf)
             {
                 return "Cube";
             }
-            else if(sphere.activeSelf)
+            else if (sphere.activeSelf)
             {
                 return "Sphere";
             }
-            else if(piramid.activeSelf)
+            else if (piramid.activeSelf)
             {
                 return "Piramid";
             }

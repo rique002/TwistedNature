@@ -60,7 +60,6 @@ public class PlayerManager : MonoBehaviour
 
     private void PlayerManager_OnPlayableCharacterKilled(object sender, EventArgs e)
     {
-        Debug.Log("Player Killed");
         foreach (PlayableCharacter playableCharacter in playableCharacters)
         {
             if (!playableCharacter.IsDead() && canChange)

@@ -52,5 +52,11 @@ public class AudioManager : MonoBehaviour
         backgroundMusicEventInstance.start();
         backgroundMusicEventInstance.setVolume(1);
     }
+
+    private void OnDestroy()
+    {
+        backgroundMusicEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        backgroundMusicEventInstance.release();
+    }
 }
 

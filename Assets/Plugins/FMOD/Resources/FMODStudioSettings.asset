@@ -633,7 +633,6 @@ MonoBehaviour:
   Plugins: []
   MasterBanks:
   - Audio/Build/Desktop/Master
-  - Audio/Fim/Audio Jogo/Build/Desktop/Master
   Banks:
   - Audio/Build/Desktop/Bird
   - Audio/Build/Desktop/Musicas
@@ -641,12 +640,6 @@ MonoBehaviour:
   - Audio/Build/Desktop/SFX Gerais
   - Audio/Build/Desktop/SFX Inimigos
   - Audio/Build/Desktop/SFX Menu
-  - Audio/Fim/Audio Jogo/Build/Desktop/Bird
-  - Audio/Fim/Audio Jogo/Build/Desktop/Musicas
-  - "Audio/Fim/Audio Jogo/Build/Desktop/Ouri\xE7o xD"
-  - Audio/Fim/Audio Jogo/Build/Desktop/SFX Gerais
-  - Audio/Fim/Audio Jogo/Build/Desktop/SFX Inimigos
-  - Audio/Fim/Audio Jogo/Build/Desktop/SFX Menu
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0
