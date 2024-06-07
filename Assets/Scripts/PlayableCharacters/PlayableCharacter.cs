@@ -22,11 +22,10 @@ namespace PlayableCharacters
         [SerializeField] protected ParticleSystem attackParticles;
         [SerializeField] protected float attackCooldown;
         [SerializeField] protected GameObject model;
-        [SerializeField] protected float dashForce;
-        [SerializeField] protected float dashDuration = 0.2f;
-        [SerializeField] protected float jumpForce;
         [SerializeField] protected Text interactTextUI;
         [SerializeField] protected InteractionBar interactionBar;
+        [SerializeField] protected CameraSwitcher cameraSwitcher;
+        [SerializeField] protected Transform spawnPoint;
 
         protected State state;
         protected float healthPoints;
@@ -35,12 +34,7 @@ namespace PlayableCharacters
         protected readonly List<StatusEffect> statusEffects = new();
         protected Animator animator;
 
-        [SerializeField] public GameObject projectilePrefab;
-        [SerializeField] public float projectileSpeed = 10f;
-
-        [SerializeField] public CameraSwitcher cameraSwitcher;
-
-        public event EventHandler OnPlayableCharacterKilled;
+        public event System.EventHandler OnPlayableCharacterKilled;
         public event EventHandler<OnPlayableCharacterHealthChangeArgs> OnPlayableCharacterHealthChange;
         public class OnPlayableCharacterHealthChangeArgs : EventArgs
         {
@@ -81,7 +75,6 @@ namespace PlayableCharacters
             public void UpdateDuration(float elapsedTime)
             {
                 Duration -= elapsedTime;
-                Debug.Log("Poison Duration: " + Duration);
 
                 if (Duration <= 0.0f)
                 {
@@ -94,7 +87,9 @@ namespace PlayableCharacters
         protected abstract void HandleMovement();
         protected abstract void HandleAnimations();
         protected abstract void HandleAttack();
+        protected abstract void UpdateSound();
         public abstract void EndAttack();
+        public abstract void Deactivate();
 
         private void Awake()
         {
@@ -102,7 +97,8 @@ namespace PlayableCharacters
 
             if (instances.ContainsKey(type))
             {
-                Debug.LogError("There is more than one instance of " + type);
+                instances.Remove(type);
+                instances.Add(type, this);
             }
             else
             {
@@ -127,6 +123,7 @@ namespace PlayableCharacters
             HandleInteractions();
             HandleAnimations();
             HandleStatusEffects();
+            //UpdateSound();
         }
 
         private void HandleInteractions()
@@ -224,6 +221,7 @@ namespace PlayableCharacters
 
                 OnPlayableCharacterKilled?.Invoke(this, EventArgs.Empty);
             }
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerDamage, transform.position);
         }
 
         private void GameInput_OnAttackAction(object sender, EventArgs e)

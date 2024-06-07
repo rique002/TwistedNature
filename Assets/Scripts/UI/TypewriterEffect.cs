@@ -17,18 +17,18 @@ namespace UI
         private WaitForSeconds _simpleDelay;
         private WaitForSeconds _interpunctuationDelay;
 
-        [Header("Typewriter Settings")] 
+        [Header("Typewriter Settings")]
         [SerializeField] private float charactersPerSecond = 20;
         [SerializeField] private float interpunctuationDelay = 0.5f;
         public bool CurrentlySkipping { get; private set; }
         private WaitForSeconds _skipDelay;
 
-        [Header("Skip options")] 
+        [Header("Skip options")]
         [SerializeField] private bool quickSkip;
-        [SerializeField] [Min(1)] private int skipSpeedup = 5;
+        [SerializeField][Min(1)] private int skipSpeedup = 5;
 
         private WaitForSeconds _textboxFullEventDelay;
-        [SerializeField] [Range(0.1f, 0.5f)] private float sendDoneDelay = 0.25f; 
+        [SerializeField][Range(0.1f, 0.5f)] private float sendDoneDelay = 0.25f;
 
         public static event Action CompleteTextRevealed;
         public static event Action<char> CharacterRevealed;
@@ -44,7 +44,7 @@ namespace UI
             _skipDelay = new WaitForSeconds(1 / (charactersPerSecond * skipSpeedup));
 
         }
-        
+
         private void OnEnable()
         {
             TMPro_EventManager.TEXT_CHANGED_EVENT.Add(PrepareForNewText);
@@ -67,26 +67,28 @@ namespace UI
         {
             get { return _readyForNewText == false; }
         }
-       
 
-         private void PrepareForNewText(Object obj)
-         {
-             if (obj != _textBox || !_readyForNewText){
-                    return;
-             }             
-             _readyForNewText = false;
-             CurrentlySkipping = false;
 
-             if (_typewriterCoroutine != null){
-                    StopCoroutine(_typewriterCoroutine);
-                    _typewriterCoroutine = null;
-             }
-            
-             _textBox.maxVisibleCharacters = 0;
-             _currentVisibleCharacterIndex = 0;
+        private void PrepareForNewText(Object obj)
+        {
+            if (obj != _textBox || !_readyForNewText)
+            {
+                return;
+            }
+            _readyForNewText = false;
+            CurrentlySkipping = false;
 
-             _typewriterCoroutine = StartCoroutine(Typewriter());
-         }
+            if (_typewriterCoroutine != null)
+            {
+                StopCoroutine(_typewriterCoroutine);
+                _typewriterCoroutine = null;
+            }
+
+            _textBox.maxVisibleCharacters = 0;
+            _currentVisibleCharacterIndex = 0;
+
+            _typewriterCoroutine = StartCoroutine(Typewriter());
+        }
 
 
 
@@ -110,7 +112,7 @@ namespace UI
                 char character = textInfo.characterInfo[_currentVisibleCharacterIndex].character;
 
                 _textBox.maxVisibleCharacters++;
-                
+
                 if (!CurrentlySkipping &&
                     (character == '?' || character == '.' || character == ',' || character == ':' ||
                      character == ';' || character == '!' || character == '-'))
@@ -121,7 +123,7 @@ namespace UI
                 {
                     yield return CurrentlySkipping ? _skipDelay : _simpleDelay;
                 }
-                
+
                 CharacterRevealed?.Invoke(character);
                 _currentVisibleCharacterIndex++;
             }
@@ -130,7 +132,7 @@ namespace UI
         {
             if (CurrentlySkipping)
                 return;
-            
+
             CurrentlySkipping = true;
 
             if (!quickSkip || !quickSkipNeeded)

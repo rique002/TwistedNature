@@ -1,5 +1,7 @@
+using System;
+using System.Collections;
 using PlayableCharacters;
-using UnityEngine; 
+using UnityEngine;
 
 namespace Interactables
 {
@@ -10,13 +12,17 @@ namespace Interactables
         [SerializeField] private GameObject triangleRight;
         [SerializeField] private GameObject triangleCenter;
         [SerializeField] private Animator animator;
-        private bool isOpen = false; 
+        [SerializeField] private GameObject bossEnemies;
 
-        
+        [SerializeField] private GameObject boss;
+        private GameObject bossInstance;
+
+        private bool bossSpawned = false;
+        private bool isOpen = false;
 
         private Animator triangleLeftAnimator;
         private Animator triangleRightAnimator;
-        private Animator triangleCenterAnimator; 
+        private Animator triangleCenterAnimator;
 
 
         private bool triangleLeftPlaced = false;
@@ -29,8 +35,6 @@ namespace Interactables
             triangleRightAnimator = triangleRight.GetComponent<Animator>();
             triangleCenterAnimator = triangleCenter.GetComponent<Animator>();
         }
-
-        
 
         public override void Interact()
         {
@@ -50,10 +54,6 @@ namespace Interactables
                 triangleRightAnimator.SetTrigger("Place");
                 triangleRightPlaced = true;
             }
-            else
-            {
-                Debug.Log("You need 3 triangle shaped object to open this door.");
-            }
         }
 
         private void Update()
@@ -61,16 +61,59 @@ namespace Interactables
             if (triangleLeftPlaced && triangleRightPlaced && triangleCenterPlaced)
             {
 
-                if (!isOpen)
+                if (!isOpen && !bossSpawned)
                 {
                     isOpen = true;
-                    Invoke("OpenDoor", 1f);
+                    Invoke("TriggerOpenDoor", 1f);
                 }
             }
         }
-        private void OpenDoor()
+        private IEnumerator PushPlayer(Rigidbody playerRigidbody)
         {
-            animator.SetTrigger("Open");
+            Vector3 forceDirection = new Vector3(10, 0.2f, -10);
+            for (int i = 0; i < 50; i++)
+            {
+                playerRigidbody.AddForce(forceDirection, ForceMode.VelocityChange);
+                yield return new WaitForFixedUpdate();
+            }
+        }
+
+        private IEnumerator OpenDoor()
+        {
+            int layerMask = LayerMask.GetMask("Player");
+
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5f, layerMask);
+            foreach (var hitCollider in hitColliders)
+            {
+                print("Collided with - " + hitCollider.name);
+                Rigidbody playerRigidbody = hitCollider.GetComponent<Rigidbody>();
+                if (playerRigidbody != null)
+                {
+                    StartCoroutine(PushPlayer(playerRigidbody));
+                    print("Pushed player");
+                }
+            }
+
+            yield return new WaitForSeconds(1f);
+
+            if (boss != null)
+            {
+                Quaternion rotation = Quaternion.LookRotation(Quaternion.Euler(0, -135, 0) * Vector3.forward);
+                bossInstance = Instantiate(boss, new Vector3(transform.position.x + 2, transform.position.y, transform.position.z - 2), rotation);
+                Enemy enemy = bossInstance.GetComponent<Enemy>();
+                enemy.OnEnemyKilled += (object sender, EventArgs e) =>
+                {
+                    animator.SetTrigger("Open");
+                    Destroy(bossEnemies);
+                };
+                bossSpawned = true;
+                bossEnemies.SetActive(true);
+            }
+        }
+
+        public void TriggerOpenDoor()
+        {
+            StartCoroutine(OpenDoor());
         }
     }
 }

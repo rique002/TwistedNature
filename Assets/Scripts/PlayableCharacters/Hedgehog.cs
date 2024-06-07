@@ -6,6 +6,9 @@ namespace PlayableCharacters
 {
     public class Hedgehog : PlayableCharacter
     {
+        [SerializeField] private float dashForce;
+        [SerializeField] private float dashDuration;
+        [SerializeField] private float jumpForce;
         [SerializeField] private PlayerWeaponCollider rightFistCollider;
         [SerializeField] private PlayerWeaponCollider leftFistCollider;
 
@@ -26,24 +29,39 @@ namespace PlayableCharacters
 
         protected override void HandleMovement()
         {
+            if (transform.position.y < -3)
+            {
+                transform.position = spawnPoint.position;
+                isDashing = false;
+                isJumping = false;
+                state = State.Idle;
+                animator.SetBool("Running", false);
+                ReceiveDamage(5);
+                return;
+            }
+
             Vector2 inputVector = gameInput.GetMovementVectorNormalized();
             playerBody.velocity = new Vector3(inputVector.x * moveSpeed, playerBody.velocity.y, inputVector.y * moveSpeed);
 
             if (inputVector != Vector2.zero)
             {
                 state = State.Mooving;
-                if(cameraSwitcher.isMain()){
+                if (cameraSwitcher.isMain())
+                {
                     Quaternion targetRotation = Quaternion.LookRotation(new Vector3(inputVector.x, 0, inputVector.y));
                     playerBody.MoveRotation(Quaternion.Slerp(playerBody.rotation, targetRotation, Time.deltaTime * rotationSpeed));
-           
+
                 }
-                else{
-                    playerBody.velocity = transform.forward * inputVector.y * moveSpeed;
-                    if(inputVector.x>0){
-                        transform.Rotate(Vector3.up, rotationSpeed*10 * Time.deltaTime);
+                else
+                {
+                    playerBody.velocity = inputVector.y * moveSpeed * transform.forward;
+                    if (inputVector.x > 0)
+                    {
+                        transform.Rotate(Vector3.up, rotationSpeed * 10 * Time.deltaTime);
                     }
-                    else if(inputVector.x<0){
-                        transform.Rotate(Vector3.up, -rotationSpeed*10 * Time.deltaTime);
+                    else if (inputVector.x < 0)
+                    {
+                        transform.Rotate(Vector3.up, -rotationSpeed * 10 * Time.deltaTime);
                     }
                 }
             }
@@ -70,6 +88,11 @@ namespace PlayableCharacters
             rightFistCollider.StartAttack();
             leftFistCollider.StartAttack();
             animator.SetTrigger("Attack");
+        }
+
+        protected override void UpdateSound()
+        {
+
         }
 
         public override void EndAttack()
@@ -104,7 +127,7 @@ namespace PlayableCharacters
 
         private void GameInput_OnJumpAction(object sender, EventArgs e)
         {
-            Debug.Log(this.name + " is jumping");
+            print(!isJumping + "and" + isActiveAndEnabled);
             if (!isJumping && isActiveAndEnabled)
             {
                 StartCoroutine(Jump());
@@ -119,6 +142,16 @@ namespace PlayableCharacters
             yield return new WaitForSeconds(0.5f);
 
             isJumping = false;
+        }
+
+        public override void Deactivate()
+        {
+            EndAttack();
+            isJumping = false;
+            isDashing = false;
+            state = State.Idle;
+            animator.SetBool("Running", false);
+            gameObject.SetActive(false);
         }
     }
 }

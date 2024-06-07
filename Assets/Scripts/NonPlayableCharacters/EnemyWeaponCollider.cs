@@ -30,13 +30,11 @@ public class EnemyWeaponCollider : MonoBehaviour
 
     public void StartAttack()
     {
-        Debug.Log("Weapon is attacking!");
         isAttacking = true;
     }
 
     public void EndAttack()
     {
-        Debug.Log("Weapon stopped attacking!");
         isAttacking = false;
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class SmoothCameraFollow : MonoBehaviour
@@ -6,17 +5,13 @@ public class SmoothCameraFollow : MonoBehaviour
     [SerializeField] private PlayerManager gameManager;
     [SerializeField] private Transform target;
     [SerializeField] private float smoothTime;
+    [SerializeField] private Vector3 offset;
 
-    private Vector3 offset;
     private Vector3 currentVelocity = Vector3.zero;
-
-    private void Awake()
-    {
-        offset = transform.position - target.position;
-    }
 
     private void Start()
     {
+        transform.position = target.position + offset;
         gameManager.OnActivePlayerChaged += GameManager_OnActivePlayerChaged;
     }
 

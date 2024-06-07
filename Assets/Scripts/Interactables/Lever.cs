@@ -1,8 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
-namespace Interactables{
-public class Lever : Interactable
-    {       
+
+namespace Interactables
+{
+    public class Lever : Interactable
+    {
         [SerializeField] private Animator animator;
 
         [SerializeField] private bool isOn = false;
@@ -10,26 +12,26 @@ public class Lever : Interactable
         public override void Interact()
         {
             base.Interact();
-            if(isOn)
+            if (isOn)
             {
                 animator.SetTrigger("Close");
                 print("Closed the door.");
-                
+
 
             }
             else
             {
                 animator.SetTrigger("Open");
                 print("Opened the door.");
-                
+
             }
             foreach (var door in doors)
-                {
-                    door.OpenDoor();
-                }
+            {
+                door.OpenDoor();
+            }
             isOn = !isOn;
-            
+
         }
-        
+
     }
 }
