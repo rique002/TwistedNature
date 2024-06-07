@@ -36,6 +36,7 @@ namespace PlayableCharacters
                 isJumping = false;
                 state = State.Idle;
                 animator.SetBool("Running", false);
+                ReceiveDamage(5);
                 return;
             }
 

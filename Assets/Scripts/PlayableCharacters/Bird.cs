@@ -31,6 +31,7 @@ namespace PlayableCharacters
                 state = State.Idle;
                 animator.SetBool("Flying", false);
                 animator.SetBool("Running", false);
+                ReceiveDamage(5);
                 return;
             }
 
