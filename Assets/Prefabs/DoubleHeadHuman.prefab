@@ -403,7 +403,7 @@ MonoBehaviour:
   fieldOfView: 200
   viewDistance: 10
   enemyName: ZEZOCA
-  attackDamage: 5
+  attackDamage: 10
   model: {fileID: 8114514796301696972}
   weaponCollider: {fileID: 6675939342582469709}
   healthBar: {fileID: 6999014959078910841}

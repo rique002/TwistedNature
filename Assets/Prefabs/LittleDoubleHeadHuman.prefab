@@ -296,7 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bcdda6a640be4442ab8b859e53c193b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthPoints: 100
+  maxHealthPoints: 50
   speed: 2
   fieldOfView: 150
   viewDistance: 8

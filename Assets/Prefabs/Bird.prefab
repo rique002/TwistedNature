@@ -100,9 +100,9 @@ MonoBehaviour:
   attackDamage: 40
   attackRange: 10
   gameInput: {fileID: 0}
-  maxHealthPoints: 20
+  maxHealthPoints: 25
   interactionDistance: 1
-  moveSpeed: 1
+  moveSpeed: 4
   rotationSpeed: 10
   cooldownImage: {fileID: 0}
   playerBody: {fileID: 4732993034793740690}
@@ -113,15 +113,8 @@ MonoBehaviour:
   interactionBar: {fileID: 0}
   cameraSwitcher: {fileID: 0}
   spawnPoint: {fileID: 0}
-  damageSoundEvent:
-    Guid:
-      Data1: 675923674
-      Data2: 1126332177
-      Data3: -1475687271
-      Data4: -847671432
-    Path: "event:/P\xE1ssaro/Dano"
   nozzleCollider: {fileID: 3355239703370104036}
-  flyingSpeed: 4
+  flyingSpeed: 8
 --- !u!1001 &7845424926084537860
 PrefabInstance:
   m_ObjectHideFlags: 0

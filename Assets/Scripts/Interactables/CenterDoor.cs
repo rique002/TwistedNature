@@ -38,7 +38,6 @@ namespace Interactables
 
         public override void Interact()
         {
-            StartCoroutine(OpenDoor());
             base.Interact();
             if (Inventory.Instance.HasTriangle(0))
             {

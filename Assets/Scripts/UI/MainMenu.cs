@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
@@ -22,15 +19,23 @@ public class MainMenu : MonoBehaviour
         cloudAnim.SetTrigger("move");
         rainAnim.SetTrigger("move");
         StartCoroutine(ActivateThunderAfterDelay(27f));
-        //SceneManager.LoadScene("GameScene");
     }
+
     private IEnumerator ActivateThunderAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
         thunder.SetActive(true);
+
+        StartCoroutine(StartGame());
     }
 
-   public void Quit()
+    private IEnumerator StartGame()
+    {
+        yield return new WaitForSeconds(3f);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+    }
+
+    public void Quit()
     {
         Application.Quit();
     }
