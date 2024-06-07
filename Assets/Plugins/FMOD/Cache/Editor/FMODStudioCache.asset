@@ -38,6 +38,7 @@ MonoBehaviour:
     Data4: -772762836
   Banks:
   - {fileID: -1824906820059989922}
+  - {fileID: 4891362570378400581}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -65,6 +66,7 @@ MonoBehaviour:
     Data4: 2026930962
   Banks:
   - {fileID: -2542185011233407190}
+  - {fileID: 2233972330577743555}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -72,6 +74,24 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1653
+--- !u!114 &-7658098783070039029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/StreamingAssets/Audio/Build/Desktop/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/StreamingAssets/Audio/Build/Desktop/Master.bank
+  Name: StreamingAssets/Audio/Build/Desktop/Master
+  StudioPath: bank:/Master
+  lastModified: 638533326459996926
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-6976955538174028339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,6 +130,7 @@ MonoBehaviour:
     Data4: -1634974371
   Banks:
   - {fileID: -1824906820059989922}
+  - {fileID: 4891362570378400581}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -137,6 +158,7 @@ MonoBehaviour:
     Data4: 1511414328
   Banks:
   - {fileID: 3802696715509763169}
+  - {fileID: -5786679584861371948}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -144,6 +166,24 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2246
+--- !u!114 &-5786679584861371948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/StreamingAssets/Audio/Build/Desktop/Bird.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/StreamingAssets/Audio/Build/Desktop/Bird.bank
+  Name: StreamingAssets/Audio/Build/Desktop/Bird
+  StudioPath: bank:/Bird
+  lastModified: 638533194214702320
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-5606923124098040982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,6 +204,7 @@ MonoBehaviour:
     Data4: -847671432
   Banks:
   - {fileID: 3802696715509763169}
+  - {fileID: -5786679584861371948}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -191,6 +232,7 @@ MonoBehaviour:
     Data4: -131838988
   Banks:
   - {fileID: -6976955538174028339}
+  - {fileID: 3786961523977449623}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -218,6 +260,7 @@ MonoBehaviour:
     Data4: -261696594
   Banks:
   - {fileID: 807284692364123619}
+  - {fileID: 2496488168436153470}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -245,6 +288,7 @@ MonoBehaviour:
     Data4: 832983255
   Banks:
   - {fileID: -1824906820059989922}
+  - {fileID: 4891362570378400581}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -290,6 +334,7 @@ MonoBehaviour:
     Data4: 249160131
   Banks:
   - {fileID: 3802696715509763169}
+  - {fileID: -5786679584861371948}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -353,6 +398,7 @@ MonoBehaviour:
     Data4: -1097251582
   Banks:
   - {fileID: -1824906820059989922}
+  - {fileID: 4891362570378400581}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -380,6 +426,7 @@ MonoBehaviour:
     Data4: -1199432397
   Banks:
   - {fileID: 3802696715509763169}
+  - {fileID: -5786679584861371948}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -407,6 +454,7 @@ MonoBehaviour:
     Data4: -237947096
   Banks:
   - {fileID: -1824906820059989922}
+  - {fileID: 4891362570378400581}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -434,6 +482,7 @@ MonoBehaviour:
     Data4: 333771457
   Banks:
   - {fileID: -2542185011233407190}
+  - {fileID: 2233972330577743555}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -462,6 +511,13 @@ MonoBehaviour:
   - {fileID: -2542185011233407190}
   - {fileID: -1688800341732428854}
   - {fileID: 807284692364123619}
+  - {fileID: -5786679584861371948}
+  - {fileID: -7658098783070039029}
+  - {fileID: 3786961523977449623}
+  - {fileID: 2496488168436153470}
+  - {fileID: 4891362570378400581}
+  - {fileID: 2233972330577743555}
+  - {fileID: 451927239714759272}
   EditorEvents:
   - {fileID: -1981095409368272122}
   - {fileID: 6332734077914403737}
@@ -492,10 +548,29 @@ MonoBehaviour:
   EditorParameters: []
   MasterBanks:
   - {fileID: -8575695176975750633}
+  - {fileID: -7658098783070039029}
   StringsBanks:
   - {fileID: 7546299331015816702}
-  cacheTime: 638533194215125909
+  cacheTime: 638533326460391613
   cacheVersion: 131618
+--- !u!114 &451927239714759272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/StreamingAssets/Audio/Build/Desktop/SFX Menu.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/StreamingAssets/Audio/Build/Desktop/SFX Menu.bank
+  Name: StreamingAssets/Audio/Build/Desktop/SFX Menu
+  StudioPath: bank:/SFX Menu
+  lastModified: 638533326460391613
+  FileSizes: []
+  Exists: 1
 --- !u!114 &807284692364123619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -534,6 +609,7 @@ MonoBehaviour:
     Data4: 1724763903
   Banks:
   - {fileID: -6976955538174028339}
+  - {fileID: 3786961523977449623}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
@@ -561,6 +637,7 @@ MonoBehaviour:
     Data4: 1576138544
   Banks:
   - {fileID: -1688800341732428854}
+  - {fileID: 451927239714759272}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -588,6 +665,7 @@ MonoBehaviour:
     Data4: 1679284698
   Banks:
   - {fileID: -6976955538174028339}
+  - {fileID: 3786961523977449623}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -615,6 +693,7 @@ MonoBehaviour:
     Data4: -731582105
   Banks:
   - {fileID: -2542185011233407190}
+  - {fileID: 2233972330577743555}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -642,6 +721,7 @@ MonoBehaviour:
     Data4: -642985741
   Banks:
   - {fileID: -2542185011233407190}
+  - {fileID: 2233972330577743555}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -649,6 +729,42 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2000
+--- !u!114 &2233972330577743555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/StreamingAssets/Audio/Build/Desktop/SFX Inimigos.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/StreamingAssets/Audio/Build/Desktop/SFX Inimigos.bank
+  Name: StreamingAssets/Audio/Build/Desktop/SFX Inimigos
+  StudioPath: bank:/SFX Inimigos
+  lastModified: 638533326460364733
+  FileSizes: []
+  Exists: 1
+--- !u!114 &2496488168436153470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: "bank:/StreamingAssets/Audio/Build/Desktop/Ouri\xE7o xD.bank"
+  m_EditorClassIdentifier: 
+  Path: "Assets/StreamingAssets/Audio/Build/Desktop/Ouri\xE7o xD.bank"
+  Name: "StreamingAssets/Audio/Build/Desktop/Ouri\xE7o xD"
+  StudioPath: "bank:/Ouri\xE7o xD"
+  lastModified: 638533326460323035
+  FileSizes: []
+  Exists: 1
 --- !u!114 &3548960790653537759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -669,6 +785,7 @@ MonoBehaviour:
     Data4: 103530053
   Banks:
   - {fileID: -1688800341732428854}
+  - {fileID: 451927239714759272}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -676,6 +793,24 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &3786961523977449623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/StreamingAssets/Audio/Build/Desktop/Musicas.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/StreamingAssets/Audio/Build/Desktop/Musicas.bank
+  Name: StreamingAssets/Audio/Build/Desktop/Musicas
+  StudioPath: bank:/Musicas
+  lastModified: 638533326460314345
+  FileSizes: []
+  Exists: 1
 --- !u!114 &3802696715509763169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -714,6 +849,7 @@ MonoBehaviour:
     Data4: -1715964790
   Banks:
   - {fileID: -2542185011233407190}
+  - {fileID: 2233972330577743555}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -741,6 +877,7 @@ MonoBehaviour:
     Data4: -294856421
   Banks:
   - {fileID: -1824906820059989922}
+  - {fileID: 4891362570378400581}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -768,6 +905,7 @@ MonoBehaviour:
     Data4: 1397929059
   Banks:
   - {fileID: -2542185011233407190}
+  - {fileID: 2233972330577743555}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -775,6 +913,24 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 607
+--- !u!114 &4891362570378400581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/StreamingAssets/Audio/Build/Desktop/SFX Gerais.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/StreamingAssets/Audio/Build/Desktop/SFX Gerais.bank
+  Name: StreamingAssets/Audio/Build/Desktop/SFX Gerais
+  StudioPath: bank:/SFX Gerais
+  lastModified: 638533326460330788
+  FileSizes: []
+  Exists: 1
 --- !u!114 &6332734077914403737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -795,6 +951,7 @@ MonoBehaviour:
     Data4: 526059598
   Banks:
   - {fileID: 3802696715509763169}
+  - {fileID: -5786679584861371948}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -824,6 +981,7 @@ MonoBehaviour:
     Data4: 1783604936
   Banks:
   - {fileID: -1824906820059989922}
+  - {fileID: 4891362570378400581}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -851,6 +1009,7 @@ MonoBehaviour:
     Data4: -1945729152
   Banks:
   - {fileID: 3802696715509763169}
+  - {fileID: -5786679584861371948}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -898,6 +1057,7 @@ MonoBehaviour:
     Data4: -376278821
   Banks:
   - {fileID: 3802696715509763169}
+  - {fileID: -5786679584861371948}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
