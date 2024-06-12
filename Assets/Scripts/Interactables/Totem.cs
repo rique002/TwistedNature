@@ -21,6 +21,7 @@ namespace Interactables
         public override void Interact()
         {
             base.Interact();
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.SquareChange, transform.position);
             if (cube.activeSelf)
             {
                 cube.SetActive(false);

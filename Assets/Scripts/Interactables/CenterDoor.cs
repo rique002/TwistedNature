@@ -39,17 +39,17 @@ namespace Interactables
         public override void Interact()
         {
             base.Interact();
-            if (Inventory.Instance.HasTriangle(0))
+            if (!Inventory.Instance.HasTriangle(0))
             {
                 triangleCenterAnimator.SetTrigger("Place");
                 triangleCenterPlaced = true;
             }
-            if (Inventory.Instance.HasTriangle(1))
+            if (!Inventory.Instance.HasTriangle(1))
             {
                 triangleLeftAnimator.SetTrigger("Place");
                 triangleLeftPlaced = true;
             }
-            if (Inventory.Instance.HasTriangle(2))
+            if (!Inventory.Instance.HasTriangle(2))
             {
                 triangleRightAnimator.SetTrigger("Place");
                 triangleRightPlaced = true;
@@ -60,7 +60,6 @@ namespace Interactables
         {
             if (triangleLeftPlaced && triangleRightPlaced && triangleCenterPlaced)
             {
-
                 if (!isOpen && !bossSpawned)
                 {
                     isOpen = true;
@@ -101,11 +100,14 @@ namespace Interactables
                 Quaternion rotation = Quaternion.LookRotation(Quaternion.Euler(0, -135, 0) * Vector3.forward);
                 bossInstance = Instantiate(boss, new Vector3(transform.position.x + 2, transform.position.y, transform.position.z - 2), rotation);
                 Enemy enemy = bossInstance.GetComponent<Enemy>();
+
                 enemy.OnEnemyKilled += (object sender, EventArgs e) =>
                 {
+                    StartCoroutine(AudioManager.Instance.PlayTimedShot(FMODEvents.Instance.DoorOpening, transform.position, 2.0f));
                     animator.SetTrigger("Open");
                     Destroy(bossEnemies);
                 };
+
                 bossSpawned = true;
                 bossEnemies.SetActive(true);
             }

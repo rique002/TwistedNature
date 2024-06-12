@@ -23,7 +23,7 @@ public class PlayerManager : MonoBehaviour
         public Transform playerTransform;
     }
 
-    public void addCharacter()
+    public void AddCharacter()
     {
         canChange = true;
     }
@@ -74,6 +74,8 @@ public class PlayerManager : MonoBehaviour
 
         // Game Over
         gameOverScreen.Show();
+        AudioManager.Instance.StopBackgroundMusic();
+        StartCoroutine(AudioManager.Instance.PlayTimedShot(FMODEvents.Instance.GameOverMusic, transform.position, 3.5f));
     }
 
     private void GameInput_OnSwapAction(object sender, EventArgs e)

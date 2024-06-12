@@ -16,9 +16,8 @@ namespace PlayableCharacters
         {
             state = State.Idle;
             isFlying = false;
-            nozzleCollider.SetDamage(attackDamage);
-            //footSteps = AudioManager.Instance.CreateInstance(FMODEvents.Instance.PlayerFootsteps);
-
+            nozzleCollider.Init(attackDamage, FMODEvents.Instance.HedgehogHit);
+            footSteps = AudioManager.Instance.CreateInstance(FMODEvents.Instance.BirdFootsteps);
             gameInput.OnFlyAction += GameInput_OnFlyAction;
         }
 
@@ -81,6 +80,24 @@ namespace PlayableCharacters
             animator.SetTrigger("Attack");
         }
 
+        protected override void UpdateSound()
+        {
+            if (playerBody.velocity.magnitude > 0.1f && !isFlying)
+            {
+                footSteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform));
+                footSteps.getPlaybackState(out PLAYBACK_STATE playbackState);
+
+                if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+                {
+                    footSteps.start();
+                }
+            }
+            else
+            {
+                footSteps.stop(STOP_MODE.ALLOWFADEOUT);
+            }
+        }
+
         private void GameInput_OnFlyAction(object sender, EventArgs e)
         {
             isFlying = !isFlying;
@@ -95,27 +112,14 @@ namespace PlayableCharacters
         {
             EndAttack();
             isFlying = false;
-            state = State.Idle;
             animator.SetBool("Flying", false);
             animator.SetBool("Running", false);
             gameObject.SetActive(false);
         }
 
-        protected override void UpdateSound()
+        protected override void PlayDamageSFX()
         {
-            if (playerBody.velocity.magnitude > 0.1f && !isFlying)
-            {
-                footSteps.getPlaybackState(out PLAYBACK_STATE playbackState);
-
-                if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
-                {
-                    footSteps.start();
-                }
-            }
-            else
-            {
-                footSteps.stop(STOP_MODE.ALLOWFADEOUT);
-            }
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.BirdDamage, transform.position);
         }
     }
 }

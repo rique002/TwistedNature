@@ -47,7 +47,7 @@ public class NPC : Interactable
     private IEnumerator DestroyAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        playerManager.addCharacter();
+        playerManager.AddCharacter();
         Destroy(gameObject);
 
     }

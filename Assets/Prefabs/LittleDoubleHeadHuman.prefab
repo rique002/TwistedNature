@@ -300,7 +300,7 @@ MonoBehaviour:
   speed: 2
   fieldOfView: 150
   viewDistance: 8
-  enemyName: ZEZOQUINHA
+  enemyName: SMALLY
   attackDamage: 5
   model: {fileID: 8114514796301696972}
   weaponCollider: {fileID: 6675939342582469709}

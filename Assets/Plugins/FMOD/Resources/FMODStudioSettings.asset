@@ -607,12 +607,12 @@ MonoBehaviour:
   m_Name: FMODStudioSettings
   m_EditorClassIdentifier: 
   switchSettingsMigration: 1
-  HasSourceProject: 0
-  HasPlatforms: 0
-  sourceProjectPath: 
-  sourceBankPath: Assets
+  HasSourceProject: 1
+  HasPlatforms: 1
+  sourceProjectPath: ../../Downloads/Audio Jogo/Audio Jogo.fspro
+  sourceBankPath: ../../Downloads/Audio Jogo/Build
   sourceBankPathUnformatted: 
-  BankRefreshCooldown: -2
+  BankRefreshCooldown: 1
   ShowBankRefreshWindow: 1
   AutomaticEventLoading: 1
   BankLoadType: 0
@@ -632,14 +632,14 @@ MonoBehaviour:
   RealChannelSettings: []
   Plugins: []
   MasterBanks:
-  - Audio/Build/Desktop/Master
+  - Master
   Banks:
-  - Audio/Build/Desktop/Bird
-  - Audio/Build/Desktop/Musicas
-  - "Audio/Build/Desktop/Ouri\xE7o xD"
-  - Audio/Build/Desktop/SFX Gerais
-  - Audio/Build/Desktop/SFX Inimigos
-  - Audio/Build/Desktop/SFX Menu
+  - "Mu\u0301sicas"
+  - "Ouric\u0327o"
+  - "Pa\u0301ssaro"
+  - SFX Gerais
+  - SFX Inimigos
+  - SFX Menu
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0

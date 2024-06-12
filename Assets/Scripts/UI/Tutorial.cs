@@ -33,7 +33,7 @@ namespace UI
             else if (status == 3)
             {
                 status++;
-                tutorialText.text = "press L-CTRL to attack";
+                tutorialText.text = "press P to attack";
             }
             else if (status == 4)
             {

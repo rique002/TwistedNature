@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using FMOD.Studio;
+using UnityEditor;
 using UnityEngine;
 
 namespace PlayableCharacters
@@ -12,16 +14,19 @@ namespace PlayableCharacters
         [SerializeField] private PlayerWeaponCollider rightFistCollider;
         [SerializeField] private PlayerWeaponCollider leftFistCollider;
 
-        private bool isDashing = false;
-        private bool isJumping = false;
+        private bool isDashing;
+        private bool isJumping;
+        private EventInstance footSteps;
 
         protected override void Init()
         {
             isDashing = false;
             isJumping = false;
 
-            rightFistCollider.SetDamage(attackDamage);
-            leftFistCollider.SetDamage(attackDamage);
+            rightFistCollider.Init(attackDamage, FMODEvents.Instance.HedgehogHit);
+            leftFistCollider.Init(attackDamage, FMODEvents.Instance.HedgehogHit);
+
+            footSteps = AudioManager.Instance.CreateInstance(FMODEvents.Instance.HedgehogFootsteps);
 
             gameInput.OnDashAction += GameInput_OnDashAction;
             gameInput.OnJumpAction += GameInput_OnJumpAction;
@@ -92,7 +97,20 @@ namespace PlayableCharacters
 
         protected override void UpdateSound()
         {
+            if (playerBody.velocity.magnitude > 0.1f)
+            {
+                footSteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform));
+                footSteps.getPlaybackState(out PLAYBACK_STATE playbackState);
 
+                if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+                {
+                    footSteps.start();
+                }
+            }
+            else
+            {
+                footSteps.stop(STOP_MODE.ALLOWFADEOUT);
+            }
         }
 
         public override void EndAttack()
@@ -149,9 +167,13 @@ namespace PlayableCharacters
             EndAttack();
             isJumping = false;
             isDashing = false;
-            state = State.Idle;
             animator.SetBool("Running", false);
             gameObject.SetActive(false);
+        }
+
+        protected override void PlayDamageSFX()
+        {
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.HedgehogDamage, transform.position);
         }
     }
 }

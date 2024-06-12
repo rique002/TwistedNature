@@ -1,6 +1,7 @@
 using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
+using System.Collections;
 
 public class AudioManager : MonoBehaviour
 {
@@ -23,7 +24,9 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        InitializeBackgroundMusic(FMODEvents.Instance.BackgroundMusic);
+        backgroundMusicEventInstance = CreateInstance(FMODEvents.Instance.BackgroundMusic);
+        backgroundMusicEventInstance.setVolume(0.1f);
+        backgroundMusicEventInstance.start();
     }
 
     private void Update()
@@ -34,29 +37,41 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayOneShot(EventReference sound, Vector3 position)
+    public void PlayOneShot(EventReference sound, Vector3 position, float volume = 1f)
     {
-        RuntimeManager.PlayOneShot(sound, position);
+        EventInstance eventInstance = RuntimeManager.CreateInstance(sound);
+        eventInstance.set3DAttributes(RuntimeUtils.To3DAttributes(position));
+        eventInstance.setVolume(volume);
+        eventInstance.start();
+        eventInstance.release();
+    }
+
+    public IEnumerator PlayTimedShot(EventReference sound, Vector3 position, float time)
+    {
+        EventInstance eventInstance = RuntimeManager.CreateInstance(sound);
+        eventInstance.set3DAttributes(RuntimeUtils.To3DAttributes(position));
+        eventInstance.start();
+        yield return new WaitForSeconds(time);
+        eventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        eventInstance.release();
     }
 
     public EventInstance CreateInstance(EventReference eventReference)
     {
         EventInstance eventInstance = RuntimeManager.CreateInstance(eventReference);
+        eventInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform));
         return eventInstance;
     }
 
-    private void InitializeBackgroundMusic(EventReference musicEventReference)
+    public void StopBackgroundMusic()
     {
-        backgroundMusicEventInstance = RuntimeManager.CreateInstance(musicEventReference);
-        backgroundMusicEventInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform));
-        backgroundMusicEventInstance.start();
-        backgroundMusicEventInstance.setVolume(1);
+        backgroundMusicEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        backgroundMusicEventInstance.release();
     }
 
     private void OnDestroy()
     {
-        backgroundMusicEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        backgroundMusicEventInstance.release();
+        StopBackgroundMusic();
     }
 }
 

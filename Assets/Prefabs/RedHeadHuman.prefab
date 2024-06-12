@@ -397,7 +397,7 @@ MonoBehaviour:
   speed: 2
   fieldOfView: 360
   viewDistance: 25
-  enemyName: RED
+  enemyName: BOSS
   attackDamage: 10
   model: {fileID: 8114514796301696972}
   weaponCollider: {fileID: 6675939342582469709}

@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 public class PlayerWeaponCollider : MonoBehaviour
@@ -5,6 +6,7 @@ public class PlayerWeaponCollider : MonoBehaviour
     [SerializeField] private LayerMask enemyLayer;
     private bool isAttacking;
     private float damage;
+    private EventReference hitSound;
 
     void Start()
     {
@@ -17,14 +19,16 @@ public class PlayerWeaponCollider : MonoBehaviour
         {
             if (other.TryGetComponent<Enemy>(out var enemy))
             {
+                AudioManager.Instance.PlayOneShot(hitSound, transform.position, 0.5f);
                 enemy.ReceiveDamage(damage);
             }
         }
     }
 
-    public void SetDamage(float damage)
+    public void Init(float damage, EventReference hitSound)
     {
         this.damage = damage;
+        this.hitSound = hitSound;
     }
 
     public void StartAttack()

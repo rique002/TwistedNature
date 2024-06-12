@@ -5,6 +5,7 @@ using Image = UnityEngine.UI.Image;
 using UnityEngine.UI;
 using Interactables;
 using UI;
+using FMOD.Studio;
 
 namespace PlayableCharacters
 {
@@ -88,6 +89,7 @@ namespace PlayableCharacters
         protected abstract void HandleAnimations();
         protected abstract void HandleAttack();
         protected abstract void UpdateSound();
+        protected abstract void PlayDamageSFX();
         public abstract void EndAttack();
         public abstract void Deactivate();
 
@@ -123,7 +125,7 @@ namespace PlayableCharacters
             HandleInteractions();
             HandleAnimations();
             HandleStatusEffects();
-            //UpdateSound();
+            UpdateSound();
         }
 
         private void HandleInteractions()
@@ -131,7 +133,8 @@ namespace PlayableCharacters
             // Test For Applying Status Effects
             if (Input.GetKey(KeyCode.DownArrow))
             {
-                AddStatusEffect(StatusEffectType.Poison, 5.0f);
+                // AddStatusEffect(StatusEffectType.Poison, 5.0f);
+                StartCoroutine(AudioManager.Instance.PlayTimedShot(FMODEvents.Instance.GameOverMusic, transform.position, 3.0f));
             }
 
             if (Input.GetKey(KeyCode.UpArrow))
@@ -214,14 +217,14 @@ namespace PlayableCharacters
                 healthPercentage = GetHealthPercentage()
             });
 
-            if (healthPoints < 0.0f)
+            if (healthPoints <= 0.0f)
             {
                 healthPoints = 0.0f;
                 state = State.Dead;
 
                 OnPlayableCharacterKilled?.Invoke(this, EventArgs.Empty);
             }
-            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerDamage, transform.position);
+            PlayDamageSFX();
         }
 
         private void GameInput_OnAttackAction(object sender, EventArgs e)

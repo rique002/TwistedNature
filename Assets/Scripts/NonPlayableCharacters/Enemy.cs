@@ -164,12 +164,12 @@ public class Enemy : MonoBehaviour
     {
         healthPoints -= damage;
         healthBar.SetValue(healthPoints / maxHealthPoints);
-        if (healthPoints < 0.0f)
+        if (healthPoints <= 0.0f)
         {
             healthPoints = 0.0f;
-            OnEnemyKilled?.Invoke(this, EventArgs.Empty);
             animator.SetTrigger("Death");
             state = State.Dead;
+            OnEnemyKilled?.Invoke(this, EventArgs.Empty);
         }
         else if (!damageSoundEvent.IsNull)
         {

@@ -1,24 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8575695176975750633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Audio/Build/Desktop/Master.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/Audio/Build/Desktop/Master.bank
-  Name: Audio/Build/Desktop/Master
-  StudioPath: bank:/Master
-  lastModified: 638533194214718787
-  FileSizes: []
-  Exists: 1
---- !u!114 &-8524976485910755422
+--- !u!114 &-7588960390343602652
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -28,17 +10,43 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX Gerais/Quadrados do puzzle clicar idk
+  m_Name: event:/Inimigos/Sofrer Dano NPC 2
   m_EditorClassIdentifier: 
-  Path: event:/SFX Gerais/Quadrados do puzzle clicar idk
+  Path: event:/Inimigos/Sofrer Dano NPC 2
   Guid:
-    Data1: -1129731751
-    Data2: 1332170314
-    Data3: -2051466342
-    Data4: -772762836
+    Data1: 1181497072
+    Data2: 1110458516
+    Data3: 449783468
+    Data4: -1715964790
   Banks:
-  - {fileID: -1824906820059989922}
-  - {fileID: 4891362570378400581}
+  - {fileID: -1031108539386979596}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1500
+--- !u!114 &-7273154989029695069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX Gerais/LER Quadros
+  m_EditorClassIdentifier: 
+  Path: event:/SFX Gerais/LER Quadros
+  Guid:
+    Data1: 360604892
+    Data2: 1283252875
+    Data3: -1271895369
+    Data4: 1783604936
+  Banks:
+  - {fileID: -5250973362621370106}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -46,70 +54,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-7685951564636578269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Inimigos/Dano do npc
-  m_EditorClassIdentifier: 
-  Path: event:/Inimigos/Dano do npc
-  Guid:
-    Data1: 1034062162
-    Data2: 1290581735
-    Data3: 748805012
-    Data4: 2026930962
-  Banks:
-  - {fileID: -2542185011233407190}
-  - {fileID: 2233972330577743555}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1653
---- !u!114 &-7658098783070039029
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/StreamingAssets/Audio/Build/Desktop/Master.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/StreamingAssets/Audio/Build/Desktop/Master.bank
-  Name: StreamingAssets/Audio/Build/Desktop/Master
-  StudioPath: bank:/Master
-  lastModified: 638533326459996926
-  FileSizes: []
-  Exists: 1
---- !u!114 &-6976955538174028339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Audio/Build/Desktop/Musicas.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/Audio/Build/Desktop/Musicas.bank
-  Name: Audio/Build/Desktop/Musicas
-  StudioPath: bank:/Musicas
-  lastModified: 638533194215016121
-  FileSizes: []
-  Exists: 1
 --- !u!114 &-6850061208700740285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,8 +73,7 @@ MonoBehaviour:
     Data3: -1293430093
     Data4: -1634974371
   Banks:
-  - {fileID: -1824906820059989922}
-  - {fileID: 4891362570378400581}
+  - {fileID: -5250973362621370106}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -138,6 +81,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2000
+--- !u!114 &-6715739009309984518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Inimigos/Sofrer Dano NPC 1
+  m_EditorClassIdentifier: 
+  Path: event:/Inimigos/Sofrer Dano NPC 1
+  Guid:
+    Data1: 306445360
+    Data2: 1196063038
+    Data3: 1637135240
+    Data4: 1397929059
+  Banks:
+  - {fileID: -1031108539386979596}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1500
+--- !u!114 &-6672431875504895093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Inimigos/Dano do NPC 3
+  m_EditorClassIdentifier: 
+  Path: event:/Inimigos/Dano do NPC 3
+  Guid:
+    Data1: 1034062162
+    Data2: 1290581735
+    Data3: 748805012
+    Data4: 2026930962
+  Banks:
+  - {fileID: -1031108539386979596}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1653
 --- !u!114 &-6006053668278235583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,8 +154,7 @@ MonoBehaviour:
     Data3: 197734537
     Data4: 1511414328
   Banks:
-  - {fileID: 3802696715509763169}
-  - {fileID: -5786679584861371948}
+  - {fileID: 8045426385140306196}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -166,24 +162,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2246
---- !u!114 &-5786679584861371948
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/StreamingAssets/Audio/Build/Desktop/Bird.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/StreamingAssets/Audio/Build/Desktop/Bird.bank
-  Name: StreamingAssets/Audio/Build/Desktop/Bird
-  StudioPath: bank:/Bird
-  lastModified: 638533194214702320
-  FileSizes: []
-  Exists: 1
 --- !u!114 &-5606923124098040982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,20 +176,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: "event:/P\xE1ssaro/Dano"
   Guid:
-    Data1: 675923674
-    Data2: 1126332177
-    Data3: -1475687271
-    Data4: -847671432
+    Data1: -1926747003
+    Data2: 1156666458
+    Data3: 2017909689
+    Data4: -1386965134
   Banks:
-  - {fileID: 3802696715509763169}
-  - {fileID: -5786679584861371948}
+  - {fileID: 8045426385140306196}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 2000
+  Length: 3000
 --- !u!114 &-5571128352902261657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,8 +208,7 @@ MonoBehaviour:
     Data3: 1459203201
     Data4: -131838988
   Banks:
-  - {fileID: -6976955538174028339}
-  - {fileID: 3786961523977449623}
+  - {fileID: 5027852270490660162}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -240,7 +216,47 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 20561
---- !u!114 &-3793876572435638797
+--- !u!114 &-5504073149282682313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX Menu.bank
+  m_EditorClassIdentifier: 
+  Path: ../../Downloads/Audio Jogo/Build/Desktop/SFX Menu.bank
+  Name: SFX Menu
+  StudioPath: bank:/SFX Menu
+  lastModified: 638535202870000000
+  FileSizes:
+  - Name: Desktop
+    Value: 31680
+  Exists: 1
+--- !u!114 &-5250973362621370106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX Gerais.bank
+  m_EditorClassIdentifier: 
+  Path: ../../Downloads/Audio Jogo/Build/Desktop/SFX Gerais.bank
+  Name: SFX Gerais
+  StudioPath: bank:/SFX Gerais
+  lastModified: 638535202870000000
+  FileSizes:
+  - Name: Desktop
+    Value: 119520
+  Exists: 1
+--- !u!114 &-4954069379023946131
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -250,24 +266,43 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: "event:/Ouri\xE7o/Sons de falar 2"
+  m_Name: event:/SFX Gerais/Quadrados do puzzle
   m_EditorClassIdentifier: 
-  Path: "event:/Ouri\xE7o/Sons de falar 2"
+  Path: event:/SFX Gerais/Quadrados do puzzle
   Guid:
-    Data1: 1591719923
-    Data2: 1271213469
-    Data3: 928889508
-    Data4: -261696594
+    Data1: -1129731751
+    Data2: 1332170314
+    Data3: -2051466342
+    Data4: -772762836
   Banks:
-  - {fileID: 807284692364123619}
-  - {fileID: 2496488168436153470}
+  - {fileID: -5250973362621370106}
   IsStream: 0
   Is3D: 0
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 1198
+  Length: 0
+--- !u!114 &-4459615571566598401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: "bank:/Ouric\u0327o.bank"
+  m_EditorClassIdentifier: 
+  Path: "../../Downloads/Audio Jogo/Build/Desktop/Ouric\u0327o.bank"
+  Name: "Ouric\u0327o"
+  StudioPath: "bank:/Ouric\u0327o"
+  lastModified: 638535202870000000
+  FileSizes:
+  - Name: Desktop
+    Value: 181248
+  Exists: 1
 --- !u!114 &-3190478950058133953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,8 +322,7 @@ MonoBehaviour:
     Data3: 1927184526
     Data4: 832983255
   Banks:
-  - {fileID: -1824906820059989922}
-  - {fileID: 4891362570378400581}
+  - {fileID: -5250973362621370106}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -296,25 +330,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-2542185011233407190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Audio/Build/Desktop/SFX Inimigos.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/Audio/Build/Desktop/SFX Inimigos.bank
-  Name: Audio/Build/Desktop/SFX Inimigos
-  StudioPath: bank:/SFX Inimigos
-  lastModified: 638533194215114327
-  FileSizes: []
-  Exists: 1
---- !u!114 &-1981095409368272122
+--- !u!114 &-2920627482463992523
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -324,81 +340,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: "event:/P\xE1ssaro/Passos Pedra"
+  m_Name: event:/SFX Gerais/Ganhar um triangulo
   m_EditorClassIdentifier: 
-  Path: "event:/P\xE1ssaro/Passos Pedra"
-  Guid:
-    Data1: -1689030621
-    Data2: 1301711211
-    Data3: -677880945
-    Data4: 249160131
-  Banks:
-  - {fileID: 3802696715509763169}
-  - {fileID: -5786679584861371948}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1500
---- !u!114 &-1824906820059989922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Audio/Build/Desktop/SFX Gerais.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/Audio/Build/Desktop/SFX Gerais.bank
-  Name: Audio/Build/Desktop/SFX Gerais
-  StudioPath: bank:/SFX Gerais
-  lastModified: 638533194215097803
-  FileSizes: []
-  Exists: 1
---- !u!114 &-1688800341732428854
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Audio/Build/Desktop/SFX Menu.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/Audio/Build/Desktop/SFX Menu.bank
-  Name: Audio/Build/Desktop/SFX Menu
-  StudioPath: bank:/SFX Menu
-  lastModified: 638533194215125909
-  FileSizes: []
-  Exists: 1
---- !u!114 &-1544352702766042749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX Gerais/Completar algo
-  m_EditorClassIdentifier: 
-  Path: event:/SFX Gerais/Completar algo
+  Path: event:/SFX Gerais/Ganhar um triangulo
   Guid:
     Data1: -2000044470
     Data2: 1318242388
     Data3: -446467935
     Data4: -1097251582
   Banks:
-  - {fileID: -1824906820059989922}
-  - {fileID: 4891362570378400581}
+  - {fileID: -5250973362621370106}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -406,6 +357,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-1874320422280891131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: ../../Downloads/Audio Jogo/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638535202870000000
+  FileSizes:
+  - Name: Desktop
+    Value: 2494
+  Exists: 1
 --- !u!114 &-1344066435928849447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -425,8 +396,7 @@ MonoBehaviour:
     Data3: 1929657757
     Data4: -1199432397
   Banks:
-  - {fileID: 3802696715509763169}
-  - {fileID: -5786679584861371948}
+  - {fileID: 8045426385140306196}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -434,6 +404,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 500
+--- !u!114 &-1031108539386979596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX Inimigos.bank
+  m_EditorClassIdentifier: 
+  Path: ../../Downloads/Audio Jogo/Build/Desktop/SFX Inimigos.bank
+  Name: SFX Inimigos
+  StudioPath: bank:/SFX Inimigos
+  lastModified: 638535202870000000
+  FileSizes:
+  - Name: Desktop
+    Value: 210432
+  Exists: 1
 --- !u!114 &-570093711838333574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453,8 +443,7 @@ MonoBehaviour:
     Data3: -199540037
     Data4: -237947096
   Banks:
-  - {fileID: -1824906820059989922}
-  - {fileID: 4891362570378400581}
+  - {fileID: -5250973362621370106}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -462,34 +451,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2000
---- !u!114 &-338334220328617563
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Inimigos/Socos
-  m_EditorClassIdentifier: 
-  Path: event:/Inimigos/Socos
-  Guid:
-    Data1: -1516801055
-    Data2: 1233690446
-    Data3: -1237532769
-    Data4: 333771457
-  Banks:
-  - {fileID: -2542185011233407190}
-  - {fileID: 2233972330577743555}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 879
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -503,92 +464,52 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 7546299331015816702}
-  - {fileID: 3802696715509763169}
-  - {fileID: -8575695176975750633}
-  - {fileID: -6976955538174028339}
-  - {fileID: -1824906820059989922}
-  - {fileID: -2542185011233407190}
-  - {fileID: -1688800341732428854}
-  - {fileID: 807284692364123619}
-  - {fileID: -5786679584861371948}
-  - {fileID: -7658098783070039029}
-  - {fileID: 3786961523977449623}
-  - {fileID: 2496488168436153470}
-  - {fileID: 4891362570378400581}
-  - {fileID: 2233972330577743555}
-  - {fileID: 451927239714759272}
+  - {fileID: -1874320422280891131}
+  - {fileID: 1816857105362718040}
+  - {fileID: 5027852270490660162}
+  - {fileID: -4459615571566598401}
+  - {fileID: 8045426385140306196}
+  - {fileID: -5250973362621370106}
+  - {fileID: -1031108539386979596}
+  - {fileID: -5504073149282682313}
   EditorEvents:
-  - {fileID: -1981095409368272122}
-  - {fileID: 6332734077914403737}
-  - {fileID: 7485547444116579049}
   - {fileID: -1344066435928849447}
   - {fileID: -6006053668278235583}
   - {fileID: -5606923124098040982}
-  - {fileID: 8736801921876511637}
   - {fileID: 996473037436352431}
   - {fileID: 1543554476728812467}
   - {fileID: -5571128352902261657}
-  - {fileID: -3793876572435638797}
   - {fileID: -3190478950058133953}
   - {fileID: 4148970399200379476}
-  - {fileID: -1544352702766042749}
   - {fileID: -570093711838333574}
-  - {fileID: -8524976485910755422}
   - {fileID: -6850061208700740285}
-  - {fileID: 7198305429404097783}
-  - {fileID: 4784156392714536110}
-  - {fileID: -7685951564636578269}
   - {fileID: 1659452825641607186}
   - {fileID: 2087946609389514143}
-  - {fileID: -338334220328617563}
-  - {fileID: 3988445734423544158}
   - {fileID: 1017164377749916846}
-  - {fileID: 3548960790653537759}
+  - {fileID: 1870292771938546627}
+  - {fileID: 2915482870148215531}
+  - {fileID: 1844976292029853816}
+  - {fileID: 4795846174662553155}
+  - {fileID: 8709034860866776983}
+  - {fileID: 9008716479343068238}
+  - {fileID: 5161031492669767714}
+  - {fileID: 7348603599174338161}
+  - {fileID: 1847145783639701328}
+  - {fileID: -2920627482463992523}
+  - {fileID: -4954069379023946131}
+  - {fileID: -7273154989029695069}
+  - {fileID: -6715739009309984518}
+  - {fileID: -6672431875504895093}
+  - {fileID: 2349773813846054223}
+  - {fileID: -7588960390343602652}
+  - {fileID: 3767590908553818366}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -8575695176975750633}
-  - {fileID: -7658098783070039029}
+  - {fileID: 1816857105362718040}
   StringsBanks:
-  - {fileID: 7546299331015816702}
-  cacheTime: 638533326460391613
+  - {fileID: -1874320422280891131}
+  cacheTime: 638535202870000000
   cacheVersion: 131618
---- !u!114 &451927239714759272
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/StreamingAssets/Audio/Build/Desktop/SFX Menu.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/StreamingAssets/Audio/Build/Desktop/SFX Menu.bank
-  Name: StreamingAssets/Audio/Build/Desktop/SFX Menu
-  StudioPath: bank:/SFX Menu
-  lastModified: 638533326460391613
-  FileSizes: []
-  Exists: 1
---- !u!114 &807284692364123619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: "bank:/Audio/Build/Desktop/Ouri\xE7o xD.bank"
-  m_EditorClassIdentifier: 
-  Path: "Assets/Audio/Build/Desktop/Ouri\xE7o xD.bank"
-  Name: "Audio/Build/Desktop/Ouri\xE7o xD"
-  StudioPath: "bank:/Ouri\xE7o xD"
-  lastModified: 638533194215042344
-  FileSizes: []
-  Exists: 1
 --- !u!114 &996473037436352431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -608,8 +529,7 @@ MonoBehaviour:
     Data3: 1282501008
     Data4: 1724763903
   Banks:
-  - {fileID: -6976955538174028339}
-  - {fileID: 3786961523977449623}
+  - {fileID: 5027852270490660162}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
@@ -636,8 +556,7 @@ MonoBehaviour:
     Data3: 1908869523
     Data4: 1576138544
   Banks:
-  - {fileID: -1688800341732428854}
-  - {fileID: 451927239714759272}
+  - {fileID: -5504073149282682313}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -664,8 +583,7 @@ MonoBehaviour:
     Data3: 509579944
     Data4: 1679284698
   Banks:
-  - {fileID: -6976955538174028339}
-  - {fileID: 3786961523977449623}
+  - {fileID: 5027852270490660162}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -692,8 +610,7 @@ MonoBehaviour:
     Data3: 209531544
     Data4: -731582105
   Banks:
-  - {fileID: -2542185011233407190}
-  - {fileID: 2233972330577743555}
+  - {fileID: -1031108539386979596}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -701,6 +618,107 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2000
+--- !u!114 &1816857105362718040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../../Downloads/Audio Jogo/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638535202870000000
+  FileSizes:
+  - Name: Desktop
+    Value: 1036
+  Exists: 1
+--- !u!114 &1844976292029853816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: "event:/Ouri\xE7o/Passos Areia"
+  m_EditorClassIdentifier: 
+  Path: "event:/Ouri\xE7o/Passos Areia"
+  Guid:
+    Data1: -288532896
+    Data2: 1202474042
+    Data3: -379278685
+    Data4: -1945729152
+  Banks:
+  - {fileID: -4459615571566598401}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1500
+--- !u!114 &1847145783639701328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: "event:/P\xE1ssaro/Falar P\xE1ssaro"
+  m_EditorClassIdentifier: 
+  Path: "event:/P\xE1ssaro/Falar P\xE1ssaro"
+  Guid:
+    Data1: 1591719923
+    Data2: 1271213469
+    Data3: 928889508
+    Data4: -261696594
+  Banks:
+  - {fileID: 8045426385140306196}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1198
+--- !u!114 &1870292771938546627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: "event:/Ouri\xE7o/Passos Ch\xE3o"
+  m_EditorClassIdentifier: 
+  Path: "event:/Ouri\xE7o/Passos Ch\xE3o"
+  Guid:
+    Data1: -1689030621
+    Data2: 1301711211
+    Data3: -677880945
+    Data4: 249160131
+  Banks:
+  - {fileID: -4459615571566598401}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1500
 --- !u!114 &2087946609389514143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -720,8 +738,7 @@ MonoBehaviour:
     Data3: 1520308865
     Data4: -642985741
   Banks:
-  - {fileID: -2542185011233407190}
-  - {fileID: 2233972330577743555}
+  - {fileID: -1031108539386979596}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -729,43 +746,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2000
---- !u!114 &2233972330577743555
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/StreamingAssets/Audio/Build/Desktop/SFX Inimigos.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/StreamingAssets/Audio/Build/Desktop/SFX Inimigos.bank
-  Name: StreamingAssets/Audio/Build/Desktop/SFX Inimigos
-  StudioPath: bank:/SFX Inimigos
-  lastModified: 638533326460364733
-  FileSizes: []
-  Exists: 1
---- !u!114 &2496488168436153470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: "bank:/StreamingAssets/Audio/Build/Desktop/Ouri\xE7o xD.bank"
-  m_EditorClassIdentifier: 
-  Path: "Assets/StreamingAssets/Audio/Build/Desktop/Ouri\xE7o xD.bank"
-  Name: "StreamingAssets/Audio/Build/Desktop/Ouri\xE7o xD"
-  StudioPath: "bank:/Ouri\xE7o xD"
-  lastModified: 638533326460323035
-  FileSizes: []
-  Exists: 1
---- !u!114 &3548960790653537759
+--- !u!114 &2349773813846054223
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -775,17 +756,70 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/MENU/Ir para cima e para baixo ou lado ou wtv para escolher a cena
+  m_Name: event:/Inimigos/Mais SFX Dano
   m_EditorClassIdentifier: 
-  Path: event:/MENU/Ir para cima e para baixo ou lado ou wtv para escolher a cena
+  Path: event:/Inimigos/Mais SFX Dano
+  Guid:
+    Data1: -1516801055
+    Data2: 1233690446
+    Data3: -1237532769
+    Data4: 333771457
+  Banks:
+  - {fileID: -1031108539386979596}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 879
+--- !u!114 &2915482870148215531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: "event:/Ouri\xE7o/Falar Ouri\xE7o"
+  m_EditorClassIdentifier: 
+  Path: "event:/Ouri\xE7o/Falar Ouri\xE7o"
+  Guid:
+    Data1: 933095209
+    Data2: 1109541498
+    Data3: 747939994
+    Data4: 526059598
+  Banks:
+  - {fileID: -4459615571566598401}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 854
+--- !u!114 &3767590908553818366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MENU/Ir para cima e para baixo ou lado
+  m_EditorClassIdentifier: 
+  Path: event:/MENU/Ir para cima e para baixo ou lado
   Guid:
     Data1: 180549042
     Data2: 1175814897
     Data3: 37861810
     Data4: 103530053
   Banks:
-  - {fileID: -1688800341732428854}
-  - {fileID: 451927239714759272}
+  - {fileID: -5504073149282682313}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -793,70 +827,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &3786961523977449623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/StreamingAssets/Audio/Build/Desktop/Musicas.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/StreamingAssets/Audio/Build/Desktop/Musicas.bank
-  Name: StreamingAssets/Audio/Build/Desktop/Musicas
-  StudioPath: bank:/Musicas
-  lastModified: 638533326460314345
-  FileSizes: []
-  Exists: 1
---- !u!114 &3802696715509763169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Audio/Build/Desktop/Bird.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/Audio/Build/Desktop/Bird.bank
-  Name: Audio/Build/Desktop/Bird
-  StudioPath: bank:/Bird
-  lastModified: 638533194214702320
-  FileSizes: []
-  Exists: 1
---- !u!114 &3988445734423544158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Inimigos/Dano do npc 3
-  m_EditorClassIdentifier: 
-  Path: event:/Inimigos/Dano do npc 3
-  Guid:
-    Data1: 1181497072
-    Data2: 1110458516
-    Data3: 449783468
-    Data4: -1715964790
-  Banks:
-  - {fileID: -2542185011233407190}
-  - {fileID: 2233972330577743555}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1500
 --- !u!114 &4148970399200379476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -876,8 +846,7 @@ MonoBehaviour:
     Data3: 1545818262
     Data4: -294856421
   Banks:
-  - {fileID: -1824906820059989922}
-  - {fileID: 4891362570378400581}
+  - {fileID: -5250973362621370106}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -885,7 +854,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &4784156392714536110
+--- !u!114 &4795846174662553155
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -895,25 +864,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Inimigos/Dano do npc 2
+  m_Name: "event:/Ouri\xE7o/Socos"
   m_EditorClassIdentifier: 
-  Path: event:/Inimigos/Dano do npc 2
+  Path: "event:/Ouri\xE7o/Socos"
   Guid:
-    Data1: 306445360
-    Data2: 1196063038
-    Data3: 1637135240
-    Data4: 1397929059
+    Data1: -1010829204
+    Data2: 1145938084
+    Data3: 980365239
+    Data4: -673826031
   Banks:
-  - {fileID: -2542185011233407190}
-  - {fileID: 2233972330577743555}
+  - {fileID: -4459615571566598401}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 607
---- !u!114 &4891362570378400581
+  Length: 879
+--- !u!114 &5027852270490660162
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -923,15 +891,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/StreamingAssets/Audio/Build/Desktop/SFX Gerais.bank
+  m_Name: "bank:/Mu\u0301sicas.bank"
   m_EditorClassIdentifier: 
-  Path: Assets/StreamingAssets/Audio/Build/Desktop/SFX Gerais.bank
-  Name: StreamingAssets/Audio/Build/Desktop/SFX Gerais
-  StudioPath: bank:/SFX Gerais
-  lastModified: 638533326460330788
-  FileSizes: []
+  Path: "../../Downloads/Audio Jogo/Build/Desktop/Mu\u0301sicas.bank"
+  Name: "Mu\u0301sicas"
+  StudioPath: "bank:/Mu\u0301sicas"
+  lastModified: 638535202870000000
+  FileSizes:
+  - Name: Desktop
+    Value: 6088128
   Exists: 1
---- !u!114 &6332734077914403737
+--- !u!114 &5161031492669767714
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -941,75 +911,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: "event:/P\xE1ssaro/Sons de falar"
+  m_Name: "event:/P\xE1ssaro/Passos Areia"
   m_EditorClassIdentifier: 
-  Path: "event:/P\xE1ssaro/Sons de falar"
+  Path: "event:/P\xE1ssaro/Passos Areia"
   Guid:
-    Data1: 933095209
-    Data2: 1109541498
-    Data3: 747939994
-    Data4: 526059598
+    Data1: -168637313
+    Data2: 1244584056
+    Data3: -253981293
+    Data4: -697180538
   Banks:
-  - {fileID: 3802696715509763169}
-  - {fileID: -5786679584861371948}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 854
---- !u!114 &7198305429404097783
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: "event:/SFX Gerais/Som tipo confuso aten\xE7\xE3o! nao sei decidam voc\xEAs
-    onde usar"
-  m_EditorClassIdentifier: 
-  Path: "event:/SFX Gerais/Som tipo confuso aten\xE7\xE3o! nao sei decidam voc\xEAs
-    onde usar"
-  Guid:
-    Data1: 360604892
-    Data2: 1283252875
-    Data3: -1271895369
-    Data4: 1783604936
-  Banks:
-  - {fileID: -1824906820059989922}
-  - {fileID: 4891362570378400581}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &7485547444116579049
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: "event:/P\xE1ssaro/Passos Relva"
-  m_EditorClassIdentifier: 
-  Path: "event:/P\xE1ssaro/Passos Relva"
-  Guid:
-    Data1: -288532896
-    Data2: 1202474042
-    Data3: -379278685
-    Data4: -1945729152
-  Banks:
-  - {fileID: 3802696715509763169}
-  - {fileID: -5786679584861371948}
+  - {fileID: 8045426385140306196}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1017,27 +928,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1500
---- !u!114 &7546299331015816702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Audio/Build/Desktop/Master.strings.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/Audio/Build/Desktop/Master.strings.bank
-  Name: Audio/Build/Desktop/Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 638533194214725488
-  FileSizes:
-  - Name: 
-    Value: 2388
-  Exists: 1
---- !u!114 &8736801921876511637
+--- !u!114 &7348603599174338161
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1047,17 +938,90 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: "event:/P\xE1ssaro/Salto"
+  m_Name: "event:/P\xE1ssaro/Passos Ch\xE3o"
   m_EditorClassIdentifier: 
-  Path: "event:/P\xE1ssaro/Salto"
+  Path: "event:/P\xE1ssaro/Passos Ch\xE3o"
+  Guid:
+    Data1: -1590885928
+    Data2: 1083583027
+    Data3: 1309229700
+    Data4: 1830924054
+  Banks:
+  - {fileID: 8045426385140306196}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1500
+--- !u!114 &8045426385140306196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: "bank:/Pa\u0301ssaro.bank"
+  m_EditorClassIdentifier: 
+  Path: "../../Downloads/Audio Jogo/Build/Desktop/Pa\u0301ssaro.bank"
+  Name: "Pa\u0301ssaro"
+  StudioPath: "bank:/Pa\u0301ssaro"
+  lastModified: 638535202870000000
+  FileSizes:
+  - Name: Desktop
+    Value: 150176
+  Exists: 1
+--- !u!114 &8709034860866776983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: "event:/Ouri\xE7o/Dano"
+  m_EditorClassIdentifier: 
+  Path: "event:/Ouri\xE7o/Dano"
+  Guid:
+    Data1: 675923674
+    Data2: 1126332177
+    Data3: -1475687271
+    Data4: -847671432
+  Banks:
+  - {fileID: -4459615571566598401}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
+--- !u!114 &9008716479343068238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: "event:/Ouri\xE7o/Salto"
+  m_EditorClassIdentifier: 
+  Path: "event:/Ouri\xE7o/Salto"
   Guid:
     Data1: -1441815837
     Data2: 1317709233
     Data3: -2016258405
     Data4: -376278821
   Banks:
-  - {fileID: 3802696715509763169}
-  - {fileID: -5786679584861371948}
+  - {fileID: -4459615571566598401}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
