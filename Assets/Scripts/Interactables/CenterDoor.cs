@@ -39,17 +39,17 @@ namespace Interactables
         public override void Interact()
         {
             base.Interact();
-            if (!Inventory.Instance.HasTriangle(0))
+            if (Inventory.Instance.HasTriangle(0))
             {
                 triangleCenterAnimator.SetTrigger("Place");
                 triangleCenterPlaced = true;
             }
-            if (!Inventory.Instance.HasTriangle(1))
+            if (Inventory.Instance.HasTriangle(1))
             {
                 triangleLeftAnimator.SetTrigger("Place");
                 triangleLeftPlaced = true;
             }
-            if (!Inventory.Instance.HasTriangle(2))
+            if (Inventory.Instance.HasTriangle(2))
             {
                 triangleRightAnimator.SetTrigger("Place");
                 triangleRightPlaced = true;
